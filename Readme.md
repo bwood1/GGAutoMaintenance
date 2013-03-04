@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+This is Joes TEST
+=======
+Steve's Test
+>>>>>>> 9b23efc36b51d97365c8f0d7c2569e55ad29d38f
+
 The application will inform users based on their mileage what maintenance needs to be
 performed. The default setting for the Car Maintenance Application will be based off the
 waynesgarage.com car maintenance schedule. The user will be able to override any of the
