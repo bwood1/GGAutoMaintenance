@@ -62,8 +62,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="17dp"
         android:onClick="helpMessage"
-        android:text="Help" 
-        />
+        android:text="Help"  />
 
     <TextView
         android:id="@+id/textView1"
