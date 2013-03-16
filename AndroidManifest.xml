@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.ggcautomaintenance.MilesPerGallonActivity"
+            android:label="@string/title_activity_miles_per_gallon"
+            android:parentActivityName="com.example.ggcautomaintenance.Main" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ggcautomaintenance.Main" />
+        </activity>
     </application>
 
 </manifest>

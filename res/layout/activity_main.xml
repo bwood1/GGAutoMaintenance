@@ -43,6 +43,7 @@
         android:layout_above="@+id/buttonShowMaint"
         android:layout_alignLeft="@+id/enterButton"
         android:layout_marginBottom="17dp"
+        android:onClick="mpgButton"
         android:text="Calculate MPG" />
 
     <CheckBox

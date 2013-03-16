@@ -1,8 +1,9 @@
 package com.example.ggcautomaintenance;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +21,22 @@ public class Main extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	}
+	
+	public void mpgButton(View view)		// unable to get this to work to call MPG Calculator Activity
+	{
+		Button button = (Button) findViewById(R.id.buttonCalcMPG);
+		button.setOnClickListener(new View.OnClickListener() {    
+			@Override
+			public void onClick(View v) {
+				//Intent intent = new Intent(Main.this, MilesPerGallonActivity.class);
+	            //Main.this.startActivity(intent);      
+	            //finish();
+			}
+		});  
+	} 
 
 	public void helpMessage(View view)
 	{
-		
 		Button button = (Button) findViewById(R.id.helpButton);
 		button.setOnClickListener(new View.OnClickListener() {    
 			@Override

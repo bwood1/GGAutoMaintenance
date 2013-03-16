@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="CMATitle">GGC Car Maintenance</string>
     <string name="enter">Enter</string>
+    <string name="title_activity_miles_per_gallon">MilesPerGallonActivity</string>
 
 </resources>
