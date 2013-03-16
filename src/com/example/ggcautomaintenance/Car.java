@@ -5,6 +5,7 @@ public class Car {
 	private String carMake;
 	private String carModel;
 	private int odometer;
+	private int lastOdometer;
 
 	public String getCarName() {
 		return carName;
@@ -32,6 +33,10 @@ public class Car {
 
 	public int getOdometer() {
 		return odometer;
+	}
+	
+	public int getLastOdometer() {
+		return lastOdometer;
 	}
 
 	public void setOdometer(int odometer) {
