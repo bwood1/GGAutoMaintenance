@@ -7,25 +7,37 @@ import android.util.Log;
 
 public class MaintRecordTableHelper extends SQLiteOpenHelper {
 
-	public static final String TABLE_COMMENTS = "maintenancerecord";
-	public static final String COLUMN_ID = "_id";
-	public static final String COLUMN_COMMENT = "comment";
+	public static final String TABLE_MAINT_RECORDS_TABLE = "maintenancerecord";
+	public static final String COLUMN_MAINT_RECORD_ID = "MaintRecordId";
+	public static final String COLUMN_MAINT_COMPLETE_DATE = "MaintCompleteDate";
+	public static final String COLUMN_CAR_NAME = "CarName";
+	public static final String COLUMN_MAINT_ID = "MaintId";
+	public static final String COLUMN_ODOMETER = "Odometer";
+	public static final String COLUMN_COST = "Cost";
 
+	private static final String DATABASE_NAME = "carDatabase.db";
 	private static final int DATABASE_VERSION = 1;
 	
 	//Database creation statement
-	private static final String CREATE_MAINTRECORD_TABLE = "create table " + TABLE_COMMENTS + 
-															"(maintrecordid INTEGER PRIMARY KEY AUTOINCREMENT, " +
-															"maintcompletedate DATE, " +
-															"carname TEXT(20), " +
-															"maintid INTEGER, " +
-															"odometer INTEGER, " +
-															"cost, CURRENCY, " +
-															"FOREIGN KEY(carname) REFRENCES car(carname)" +
-															"FOREIGN KEY(maintid) REFRENCES maintenanceitems(maintid);";
+	private static final String CREATE_MAINTRECORD_TABLE = "create table " + 
+											TABLE_MAINT_RECORDS_TABLE + "(" +
+											COLUMN_MAINT_RECORD_ID + 
+												" INTEGER PRIMARY KEY " +"AUTOINCREMENT, " +
+											COLUMN_MAINT_COMPLETE_DATE + " DATE, " +
+											COLUMN_CAR_NAME + " TEXT(20), " +
+											COLUMN_MAINT_ID + " INTEGER, " +
+											COLUMN_ODOMETER + " INTEGER, " +
+											COLUMN_COST + ", CURRENCY, " +
+											"FOREIGN KEY(" + COLUMN_CAR_NAME + ") " +
+												"REFRENCES " + CarTableHelper.TABLE_CAR + 
+													"(" + CarTableHelper.COLUMN_CAR_NAME + 
+														")" +
+											"FOREIGN KEY(" + COLUMN_MAINT_ID + ") " +
+												"REFRENCES " + MaintItemsTableHelper.TABLE_MAINT_ITEMS + 
+													"(" + MaintItemsTableHelper.COLUMN_MAINT_ID +");";
 
 	public MaintRecordTableHelper(Context context) {
-		super(context, CREATE_MAINTRECORD_TABLE, null, DATABASE_VERSION);
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	@Override
@@ -38,8 +50,7 @@ public class MaintRecordTableHelper extends SQLiteOpenHelper {
 		Log.w(MaintRecordTableHelper.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
             + newVersion + ", which will destroy all old data");
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMMENTS);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_MAINT_RECORDS_TABLE);
 		onCreate(db);
 	}
-
 }

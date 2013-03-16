@@ -8,9 +8,13 @@ import android.util.Log;
 public class MPGTableHelper extends SQLiteOpenHelper {
 
 	public static final String TABLE_COMMENTS = "mpg";
-	public static final String COLUMN_ID = "_id";
-	public static final String COLUMN_COMMENT = "comment";
+	public static final String COLUMN_FILL_NUMBER = "FillNumber";
+	public static final String COLUMN_CAR_NAME = "CarName";
+	public static final String COLUMN_ODOMETER = "Odometer";
+	public static final String COLUMN_GALLONS = "Gallons";
+	public static final String COLUMN_COST_PER_GALLON = "CostPerGallon";
 
+	private static final String DATABASE_NAME = "carDatabase.db";
 	private static final int DATABASE_VERSION = 1;
 	
 	//Database creation statement
@@ -23,7 +27,7 @@ public class MPGTableHelper extends SQLiteOpenHelper {
 													"FOREIGN KEY(odometer) REFRENCES car(odometer);";
 
 	public MPGTableHelper(Context context) {
-		super(context, CREATE_MPG_TABLE, null, DATABASE_VERSION);
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	@Override
