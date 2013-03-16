@@ -9,6 +9,12 @@ import android.widget.Button;
 
 public class Main extends Activity {
 
+	String helpMain = 	"* Enter the Current Date in the Odometer. \n" +
+			"* Select the Fill-Up check box if this mileage is being entered when filling-up the tank. \n" +
+			"* Select Enter to save the current mileage. \n" +
+			"* Select Calculate MPG to go to the Calculator Screen. \n" +
+			"* Select Show Maintenance to go to the Maintenance Items List screen.";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -17,13 +23,15 @@ public class Main extends Activity {
 
 	public void helpMessage(View view)
 	{
+		
 		Button button = (Button) findViewById(R.id.helpButton);
 		button.setOnClickListener(new View.OnClickListener() {    
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
-				builder.setTitle("Help!")
-				.setMessage("This is the help text")
+				builder.setIcon(R.drawable.helpicon)
+				.setTitle("Help!")
+				.setMessage(helpMain)
 				.setNeutralButton("OK", null);
 				AlertDialog dialog = builder.create();
 				dialog.show();
