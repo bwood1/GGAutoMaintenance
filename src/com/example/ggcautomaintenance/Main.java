@@ -38,11 +38,10 @@ public class Main extends Activity {
 	{
 		Button button = (Button) findViewById(R.id.buttonCalcMPG);
 		button.setOnClickListener(new View.OnClickListener() {    
-			@Override
+			
 			public void onClick(View v) {
-				//Intent intent = new Intent(Main.this, MilesPerGallonActivity.class);
-	            //Main.this.startActivity(intent);      
-	            //finish();
+				Intent intent = new Intent(v.getContext(), MilesPerGallonActivity.class);
+	            startActivityForResult(intent, 0);            
 			}
 		});  
 	} 

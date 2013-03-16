@@ -21,7 +21,7 @@ public class MilesPerGallonActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miles_per_gallon);
 		// Show the Up button in the action bar.
-		setupActionBar();
+		//setupActionBar();		
 	}
 
 	/**
@@ -74,5 +74,4 @@ public class MilesPerGallonActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 }
