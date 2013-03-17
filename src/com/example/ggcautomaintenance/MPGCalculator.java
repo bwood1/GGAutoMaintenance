@@ -56,9 +56,9 @@ public class MPGCalculator {
 	 * @return totTripMiles - the total miles of the trip.
 	 */
 	public float getTrip() {
-		Car car = new Car();
-		int newMileage = car.getOdometer();
-		int oldMileage = car.getLastOdometer();
+		MPG mpg = new MPG();
+		int newMileage = mpg.getCurrentOdometer();
+		int oldMileage = mpg.getOldOdometer();
 		
 		float totTripMiles = newMileage - oldMileage;
 		

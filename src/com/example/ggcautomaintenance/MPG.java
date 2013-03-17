@@ -32,11 +32,11 @@ public class MPG {
 		this.oldOdometer = odometer;
 	}
 	
-	public int getNewOdometer() {
+	public int getCurrentOdometer() {
 		return currentOdometer;
 	}
 
-	public void setNewOdometer(int newOdometer) {
+	public void setCurrentOdometer(int newOdometer) {
 		this.currentOdometer = newOdometer;
 	}
 	
