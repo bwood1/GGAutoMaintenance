@@ -1,5 +1,6 @@
 package com.example.ggcautomaintenance;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -31,6 +32,20 @@ public class CarTableHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_CAR_TABLE);
+		
+		//create initial values to insert into table
+		ContentValues values = new ContentValues();
+		String carName = "car1";
+		values.put(CarTableHelper.COLUMN_CAR_NAME, carName);
+		String carMake = "make1";
+		values.put(CarTableHelper.COLUMN_MAKE, carMake);
+		String carModel = "model1";
+		values.put(CarTableHelper.COLUMN_MODEL, carModel);
+		int odometer = 0;
+		values.put(CarTableHelper.COLUMN_ODOMETER, odometer);
+		
+		// insert values into table
+//		db.insert(this.TABLE_CAR, null, values);
 	}
 
 	@Override
