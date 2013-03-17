@@ -25,30 +25,34 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000e;
+        public static final int action_settings=0x7f080010;
         public static final int buttonCalcMPG=0x7f080004;
         public static final int buttonShowMaint=0x7f080007;
         public static final int enterButton=0x7f080006;
         public static final int fillBox=0x7f080003;
         public static final int helpButton=0x7f080002;
+        public static final int helpButtonMPG=0x7f080008;
+        public static final int helpButtonShowMaint=0x7f080009;
         public static final int linearLayout1=0x7f080001;
         public static final int odometer=0x7f080000;
         public static final int textView1=0x7f080005;
-        public static final int widget_odometer_spinner_1=0x7f08000d;
-        public static final int widget_odometer_spinner_10=0x7f08000c;
-        public static final int widget_odometer_spinner_100=0x7f08000b;
-        public static final int widget_odometer_spinner_100k=0x7f080008;
-        public static final int widget_odometer_spinner_10k=0x7f080009;
-        public static final int widget_odometer_spinner_1k=0x7f08000a;
+        public static final int widget_odometer_spinner_1=0x7f08000f;
+        public static final int widget_odometer_spinner_10=0x7f08000e;
+        public static final int widget_odometer_spinner_100=0x7f08000d;
+        public static final int widget_odometer_spinner_100k=0x7f08000a;
+        public static final int widget_odometer_spinner_10k=0x7f08000b;
+        public static final int widget_odometer_spinner_1k=0x7f08000c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_miles_per_gallon=0x7f030001;
-        public static final int widget_odometer=0x7f030002;
+        public static final int activity_show_maintenance=0x7f030002;
+        public static final int widget_odometer=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f070000;
         public static final int miles_per_gallon=0x7f070001;
+        public static final int show_maintenance=0x7f070002;
     }
     public static final class string {
         public static final int CMATitle=0x7f050003;
@@ -57,6 +61,7 @@ public final class R {
         public static final int enter=0x7f050004;
         public static final int hello_world=0x7f050002;
         public static final int title_activity_miles_per_gallon=0x7f050005;
+        public static final int title_activity_show_maintenance=0x7f050006;
     }
     public static final class style {
         /** 

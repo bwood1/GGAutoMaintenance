@@ -32,19 +32,31 @@ public class Main extends Activity {
 	        mOdometerValue = savedInstanceState.getInt(KEY_VALUE);
 	        mOdometer.setValue(mOdometerValue);
 	    }
-	}
-	
-	public void mpgButton(View view)		// unable to get this to work to call MPG Calculator Activity
+	}	
+
+	public void mpgButton(View view)		
 	{
 		Button button = (Button) findViewById(R.id.buttonCalcMPG);
 		button.setOnClickListener(new View.OnClickListener() {    
 			
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), MilesPerGallonActivity.class);
-	            startActivityForResult(intent, 0);            
+	            startActivity(intent);            
 			}
 		});  
-	} 
+	}
+	
+	public void showMaintButton(View view)		
+	{
+		Button button = (Button) findViewById(R.id.buttonShowMaint);
+		button.setOnClickListener(new View.OnClickListener() {    
+			
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(), ShowMaintenanceActivity.class);
+	            startActivity(intent);            
+			}
+		});  
+	}
 
 	public void helpMessage(View view)
 	{

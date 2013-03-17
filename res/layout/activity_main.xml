@@ -32,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="17dp"
         android:onClick="helpMessage"
-        android:text="Help"  />
+        android:text="Help" />
 
     <CheckBox
         android:id="@+id/fillBox"
@@ -68,6 +68,7 @@
         android:layout_above="@+id/linearLayout1"
         android:layout_alignLeft="@+id/buttonCalcMPG"
         android:layout_marginBottom="74dp"
+        android:onClick="showMaintButton"
         android:text="Show Maintenance" />
 
     <Button

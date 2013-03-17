@@ -7,5 +7,6 @@
     <string name="CMATitle">GGC Car Maintenance</string>
     <string name="enter">Enter</string>
     <string name="title_activity_miles_per_gallon">MilesPerGallonActivity</string>
+    <string name="title_activity_show_maintenance">ShowMaintenanceActivity</string>
 
 </resources>

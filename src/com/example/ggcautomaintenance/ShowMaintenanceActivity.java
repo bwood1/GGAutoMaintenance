@@ -1,28 +1,28 @@
 package com.example.ggcautomaintenance;
 
+import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.support.v4.app.NavUtils;
 
-public class MilesPerGallonActivity extends Activity {
+public class ShowMaintenanceActivity extends Activity {
 	
-	String helpMain = 	"* For accurate MPG calculations, mileage must be enter when filling up and the gas tank must be completely filled. \n" +
-			"* Screen will include mileage driven since last fill-up by default. \n" +
-			"* You may change the mileage if you so choose. \n" +
-			"* Enter the # of gallons put in tank. \n" +
-			"* Select Calculate and the MPG will be displayed.";
+	String helpMain = 	"* A list of Maintenance Items are displayed. By default the list is sorted by maintenance due next. \n" +
+			"* The list can be sorted alphabetically by selecting Sort Alpha. \n" +
+			"* Select Sort Next Due to go back. \n" +
+			"* The list can be scrolled up and down by swiping up or down. \n +" +
+			"* To see more information or record maintenance on a specific item select the item in the list.";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_miles_per_gallon);
+		setContentView(R.layout.activity_show_maintenance);
 		// Show the Up button in the action bar.
-		//setupActionBar();		
+		//setupActionBar();
 	}
 
 	/**
@@ -37,11 +37,11 @@ public class MilesPerGallonActivity extends Activity {
 	public void helpMessage(View view)
 	{
 		
-		Button button = (Button) findViewById(R.id.helpButtonMPG);
+		Button button = (Button) findViewById(R.id.helpButtonShowMaint);
 		button.setOnClickListener(new View.OnClickListener() {    
 			@Override
 			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(MilesPerGallonActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(ShowMaintenanceActivity.this);
 				builder.setIcon(R.drawable.helpicon)
 				.setTitle("Help!")
 				.setMessage(helpMain)
@@ -55,7 +55,7 @@ public class MilesPerGallonActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.miles_per_gallon, menu);
+		getMenuInflater().inflate(R.menu.show_maintenance, menu);
 		return true;
 	}
 
@@ -75,4 +75,5 @@ public class MilesPerGallonActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 }
