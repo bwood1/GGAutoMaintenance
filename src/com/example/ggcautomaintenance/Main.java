@@ -17,9 +17,9 @@ public class Main extends Activity {
 			"* Select Show Maintenance to go to the Maintenance Items List screen.";
 
 	private static final String KEY_VALUE = "OdometerValue";
-	private Odometer mOdometer;
+	private static Odometer mOdometer;
 	private int mOdometerValue;
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +33,19 @@ public class Main extends Activity {
 	        mOdometer.setValue(mOdometerValue);
 	    }
 	}	
+	
+	public void enterButton(View view)
+	{
+		
+		Button button = (Button) findViewById(R.id.enterButton);
+		button.setOnClickListener(new View.OnClickListener() {			
+			public void onClick(View v) {
+				
+				setCurrentMileage();
+				
+			}
+		});				
+	}
 
 	public void mpgButton(View view)		
 	{
@@ -91,11 +104,11 @@ public class Main extends Activity {
 	}
 
 	public void getCurrentMileage() {
-
+		
 	}
 
-	public void setCurrentMileage() {
-
+	public static int setCurrentMileage() {
+		return mOdometer.getValue();
 	}
 
 	public void setFillupMileage() {

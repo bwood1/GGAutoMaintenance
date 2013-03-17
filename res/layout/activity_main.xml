@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/fillBox"
         android:layout_alignLeft="@+id/odometer"
+        android:onClick="enterButton"
         android:text="@string/enter" />
 
     <Button

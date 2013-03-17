@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MilesPerGallonActivity extends Activity {
 	
@@ -21,6 +22,8 @@ public class MilesPerGallonActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miles_per_gallon);
+		TextView text = (TextView) findViewById(R.id.currentMileageTF);
+		text.setText("" + Main.setCurrentMileage());
 		// Show the Up button in the action bar.
 		//setupActionBar();		
 	}
