@@ -2,15 +2,17 @@ package com.example.ggcautomaintenance;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class MilesPerGallonActivity extends Activity {
+public class MilesPerGallonActivity extends Activity {	
 	
 	String helpMain = 	"* For accurate MPG calculations, mileage must be enter when filling up and the gas tank must be completely filled. \n" +
 			"* Screen will include mileage driven since last fill-up by default. \n" +
@@ -35,6 +37,34 @@ public class MilesPerGallonActivity extends Activity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
+	}
+	
+	public void mpgCalcButton(View view)		
+	{		
+		Button button = (Button) findViewById(R.id.calcMPGButton);
+		button.setOnClickListener(new View.OnClickListener() {    
+			
+			public void onClick(View v) {				
+				
+				float mpg = getMPG();
+				TextView mpgDisplay = (TextView)findViewById(R.id.MPGDisplay);
+				mpgDisplay.setText("" + mpg + " MPG");
+			}
+		});  
+	}
+	
+	public float getMPG() {
+		
+		EditText editMilesDriven = (EditText)findViewById(R.id.currentMileageTF);
+		EditText editGallonsFilled = (EditText)findViewById(R.id.numGallonsFilledDisplay);
+		
+		float milesDriven = Float.valueOf(editMilesDriven.getText().toString());
+		float gallonsFilled = Float.valueOf(editGallonsFilled.getText().toString());
+		MPGCalculator mpgCalc = new MPGCalculator(milesDriven, gallonsFilled);
+		float mpg = mpgCalc.getMPG();
+		
+		return mpg;
+		
 	}
 	
 	public void helpMessage(View view)
