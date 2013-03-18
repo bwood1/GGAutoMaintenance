@@ -19,14 +19,70 @@
 
     <TextView
         android:id="@+id/miidDisplay"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView1"
         android:padding="3dp"
         android:background="@drawable/roundback"
+        android:gravity="center"
         android:text="___"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textDateOfNextService"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textMilesTillNextService"
+        android:layout_centerHorizontal="true"
+        android:padding="3dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:text="DONS \n11/11/1111" />
+
+    <TextView
+        android:id="@+id/textMilesTillNextService"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewDateofLastService"
+        android:layout_centerHorizontal="true"
+        android:padding="3dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:text="MTNS \n888888" />
+
+    <TextView
+        android:id="@+id/textViewDateofLastService"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewMileageOfLastService"
+        android:layout_centerHorizontal="true"
+        android:padding="3dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:text="DOLS \n11/11/1111" />
+
+    <TextView
+        android:id="@+id/textViewMileageOfLastService"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewMilesDrivenSinceServ"
+        android:layout_centerHorizontal="true"
+        android:padding="3dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:text="MOLS \n888888" />
+
+    <TextView
+        android:id="@+id/textViewMilesDrivenSinceServ"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/recordMaintButton"
+        android:layout_centerHorizontal="true"
+        android:padding="3dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:text="MDSS \n888888" />
     
     <Button
         android:id="@+id/recordMaintButton"
