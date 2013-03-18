@@ -3,6 +3,7 @@ package com.example.ggcautomaintenance;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class ShowMaintenanceActivity extends Activity {
-	
+
 	String helpMain = 	"* A list of Maintenance Items are displayed. By default the list is sorted by maintenance due next. \n" +
 			"* The list can be sorted alphabetically by selecting Sort Alpha. \n" +
 			"* Select Sort Next Due to go back. \n" +
@@ -29,9 +30,8 @@ public class ShowMaintenanceActivity extends Activity {
 		setContentView(R.layout.activity_show_maintenance);
 		// Show the Up button in the action bar.
 		//setupActionBar();
-		
-		ListView listView1 = (ListView) findViewById(R.id.listView1);
 
+		ListView listView1 = (ListView) findViewById(R.id.listView1);
 
 		MaintItems[] items = {
 				new MaintItems(1, "Oil Change", 3000, 12),
@@ -45,22 +45,23 @@ public class ShowMaintenanceActivity extends Activity {
 				new MaintItems(9, "Wash Car", 3000, 12),
 				new MaintItems(10, "Change Belts", 12000, 104),
 		};
-		
+
 		ArrayAdapter<MaintItems> adapter = new ArrayAdapter<MaintItems>(this,
-                android.R.layout.simple_list_item_1, items);
-    
-    listView1.setAdapter(adapter);
-    listView1.setOnItemClickListener(new OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                long id) {
-            
-            String item = ((TextView)view).getText().toString();
-            
-            Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
-            
-        }
-    });
+				android.R.layout.simple_list_item_1, items);
+
+		listView1.setAdapter(adapter);
+		listView1.setOnItemClickListener(new OnItemClickListener() {
+			//@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+
+				String item = ((TextView)view).getText().toString();
+				Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
+				
+				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
+	            startActivity(intent);
+			}
+		});
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class ShowMaintenanceActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 	}
-	
+
 	public void helpMessage(View view)
 	{
 		Button button = (Button) findViewById(R.id.helpButtonShowMaint);

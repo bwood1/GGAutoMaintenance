@@ -8,5 +8,6 @@
     <string name="enter">Enter</string>
     <string name="title_activity_miles_per_gallon">MilesPerGallonActivity</string>
     <string name="title_activity_show_maintenance">ShowMaintenanceActivity</string>
+    <string name="title_activity_miid">MIIDActivity</string>
 
 </resources>

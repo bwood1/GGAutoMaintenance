@@ -38,6 +38,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ggcautomaintenance.Main" />
         </activity>
+        <activity
+            android:name="com.example.ggcautomaintenance.MIIDActivity"
+            android:label="@string/title_activity_miid"
+            android:parentActivityName="com.example.ggcautomaintenance.ShowMaintenanceActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ggcautomaintenance.ShowMaintenanceActivity" />
+        </activity>
     </application>
 
 </manifest>
