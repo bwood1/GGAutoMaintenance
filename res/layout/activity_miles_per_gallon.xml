@@ -27,6 +27,7 @@
         android:padding="2dp"
         android:background="@drawable/roundback"
         android:text="0 MPG"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -38,6 +39,7 @@
         android:layout_marginTop="41dp"
         android:padding="2dp"
         android:background="@drawable/roundback"
+        android:gravity="center"
         android:ems="10" >
 
         <requestFocus />
@@ -75,6 +77,7 @@
         android:background="@drawable/roundback"
         android:ems="10"
         android:text="0"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" >
         
         <requestFocus />
