@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 
 public class ShowMaintenanceActivity extends Activity {
+	private MaintItemsTableDataSource datasource;
 
 	// Text for the help dialog
 	String helpMain = 	"* A list of Maintenance Items are displayed. By default the list is sorted by maintenance due next. \n" +
@@ -29,24 +30,32 @@ public class ShowMaintenanceActivity extends Activity {
 
 		ListView listView1 = (ListView) findViewById(R.id.listView1);
 
-		// Temporary maintenance items array. ******** Need to pull from real data source *****************************
-		final MaintItems[] items = {
-				new MaintItems(1, "Oil Change", 3000, 12),
-				new MaintItems(2, "Air Filter", 12000, 104),
-				new MaintItems(3, "Wiper Blades", 12000, 104),
-				new MaintItems(4, "Tire Rotation", 5000, 24),
-				new MaintItems(5, "Wheel Balance", 10000, 48),
-				new MaintItems(6, "AntiFreeze Replacement", 12000, 52),
-				new MaintItems(7, "Clean Windows", 1000, 4),
-				new MaintItems(8, "Change Sparkplugs", 48000, 208),
-				new MaintItems(9, "Wash Car", 3000, 12),
-				new MaintItems(10, "Change Belts", 12000, 104),
-		};
+//		// Temporary maintenance items array. ******** Need to pull from real data source *****************************
+//		final MaintItems[] items = {
+//				new MaintItems(1, "Oil Change", 3000, 12),
+//				new MaintItems(2, "Air Filter", 12000, 104),
+//				new MaintItems(3, "Wiper Blades", 12000, 104),
+//				new MaintItems(4, "Tire Rotation", 5000, 24),
+//				new MaintItems(5, "Wheel Balance", 10000, 48),
+//				new MaintItems(6, "AntiFreeze Replacement", 12000, 52),
+//				new MaintItems(7, "Clean Windows", 1000, 4),
+//				new MaintItems(8, "Change Sparkplugs", 48000, 208),
+//				new MaintItems(9, "Wash Car", 3000, 12),
+//				new MaintItems(10, "Change Belts", 12000, 104),
+//		};
+		
+		datasource = new MaintItemsTableDataSource(this);
+		datasource.open();
+		
+		final MaintItems[] items =   datasource.getAllMaintenanceItems();
+		
+//		items = mith.getAllMaintenanceItems();
 		
 		listView1 = (ListView)findViewById(R.id.listView1);
 	    listView1.setAdapter(new MaintItemsArrayAdapter(this, items));
 
 		listView1.setOnItemClickListener(new OnItemClickListener() {
+			
 			//@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
