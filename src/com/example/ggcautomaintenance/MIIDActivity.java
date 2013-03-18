@@ -7,9 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
 public class MIIDActivity extends Activity {
+	
+	private String value;
 	
 	// Text for the help dialog
 	String helpMain = 	"* Information is displayed about the specific maintenance item. \n" +
@@ -22,6 +25,14 @@ public class MIIDActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miid);
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		    value = extras.getString("specificItem");
+		}
+		
+		TextView maintIDDisplay = (TextView)findViewById(R.id.miidDisplay);
+		maintIDDisplay.setText("" + value);
 	}
 	
 	/**

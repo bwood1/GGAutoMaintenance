@@ -30,7 +30,7 @@ public class ShowMaintenanceActivity extends Activity {
 		ListView listView1 = (ListView) findViewById(R.id.listView1);
 
 		// Temporary maintenance items array. ******** Need to pull from real data source *****************************
-		MaintItems[] items = {
+		final MaintItems[] items = {
 				new MaintItems(1, "Oil Change", 3000, 12),
 				new MaintItems(2, "Air Filter", 12000, 104),
 				new MaintItems(3, "Wiper Blades", 12000, 104),
@@ -50,8 +50,12 @@ public class ShowMaintenanceActivity extends Activity {
 			//@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				
+				String miid = "Maintenance ID " + items[position].getMaintId() + " \n"
+						+ items[position].getMaintDescription() + " \n"
+						+ items[position].getMileageInterval() + " miles \n"
+						+ items[position].getTimeInterval() + " weeks";
 				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
+				intent.putExtra("specificItem", miid);
 	            startActivity(intent);
 			}
 		});

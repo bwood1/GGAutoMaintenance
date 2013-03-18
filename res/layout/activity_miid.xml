@@ -9,12 +9,13 @@
     tools:context=".MIIDActivity" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Maintenance Item Description" />
+        android:text="Maintenance Item Description"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/helpButtonMIID"
@@ -24,5 +25,14 @@
         android:layout_centerHorizontal="true"
         android:onClick="helpMessage"
         android:text="Help" />
+
+    <TextView
+        android:id="@+id/miidDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView1"
+        android:text="___"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
