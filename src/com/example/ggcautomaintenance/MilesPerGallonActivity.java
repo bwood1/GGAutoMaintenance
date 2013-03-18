@@ -24,8 +24,10 @@ public class MilesPerGallonActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miles_per_gallon);
-		TextView text = (TextView) findViewById(R.id.currentMileageTF);
-		text.setText("" + Main.setCurrentMileage());
+		Main.setCurrentMileage();
+		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
+		text.setText("" + Main.getMilesDriven());
+		Main.setOldMileage();
 	}
 
 	/**

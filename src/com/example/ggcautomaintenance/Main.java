@@ -2,11 +2,8 @@ package com.example.ggcautomaintenance;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -25,6 +22,8 @@ public class Main extends Activity {
 	private static final String KEY_VALUE = "OdometerValue";
 	private static Odometer mOdometer;
 	private int mOdometerValue;
+	private static int oldOdometer;
+	private static int currentOdometer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,13 +119,25 @@ public class Main extends Activity {
 		mOdometerValue = mOdometer.getValue();	
 		outState.putInt(KEY_VALUE, mOdometerValue);
 	}
-
-	public void getCurrentMileage() {
-
+	
+	public static int getOldMileage() {
+		return oldOdometer;
+	}
+	
+	public static void setOldMileage()	{
+		oldOdometer = getCurrentMileage();
 	}
 
-	public static int setCurrentMileage() {
-		return mOdometer.getValue();
+	public static int getCurrentMileage() {
+		return currentOdometer;
+	}
+
+	public static void setCurrentMileage() {
+		currentOdometer = mOdometer.getValue();
+	}
+	
+	public static int getMilesDriven() {
+		return getCurrentMileage() - getOldMileage();
 	}
 
 	public void setFillupMileage() {
