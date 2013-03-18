@@ -40,10 +40,12 @@
     
     <ListView
         android:id="@+id/listView1"
-        android:layout_below="@+id/nextDueButton"
-        android:layout_height="360dp"
         android:layout_width="300dp"
-        android:fadeScrollbars="false" />
+        android:layout_height="360dp"
+        android:layout_below="@+id/nextDueButton"
+        android:background="@drawable/roundback"
+        android:fadeScrollbars="false"
+        android:padding="3dp" />
 
     <Button
         android:id="@+id/helpButtonShowMaint"

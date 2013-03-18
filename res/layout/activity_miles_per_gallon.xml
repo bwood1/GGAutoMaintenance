@@ -24,6 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/calcMPGButton"
         android:layout_centerHorizontal="true"
+        android:padding="2dp"
+        android:background="@drawable/roundback"
         android:text="0 MPG"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -34,6 +36,8 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="41dp"
+        android:padding="2dp"
+        android:background="@drawable/roundback"
         android:ems="10" >
 
         <requestFocus />
@@ -67,6 +71,8 @@
         android:layout_alignLeft="@+id/MPGDisplay"
         android:layout_alignRight="@+id/MPGDisplay"
         android:layout_marginBottom="29dp"
+        android:padding="3dp"
+        android:background="@drawable/roundback"
         android:ems="10"
         android:text="0"
         android:textAppearance="?android:attr/textAppearanceLarge" >
