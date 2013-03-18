@@ -17,22 +17,35 @@
         android:text="Maintenance Item Description"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/helpButtonMIID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="helpMessage"
-        android:text="Help" />
-
     <TextView
         android:id="@+id/miidDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView1"
+        android:padding="2dp"
+        android:background="@drawable/roundback"
         android:text="___"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <Button
+        android:id="@+id/recordMaintButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_above="@+id/helpButtonMIID"
+        android:layout_centerHorizontal="true"
+        android:onClick=""
+        android:text="Record Maintenance" />
+    
+    <Button
+        android:id="@+id/helpButtonMIID"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="helpMessage"
+        android:text="Help" />
 
 </RelativeLayout>

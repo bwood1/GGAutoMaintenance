@@ -20,8 +20,9 @@
 
     <Button
         android:id="@+id/alphaButton"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignBottom="@+id/nextDueButton"
         android:layout_toRightOf="@+id/helpButtonShowMaint"
         android:text="Sort Alpha"
@@ -29,8 +30,9 @@
 
     <Button
         android:id="@+id/nextDueButton"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/textView1"
         android:layout_toLeftOf="@+id/helpButtonShowMaint"
         android:text="Sort Next Due"
@@ -45,8 +47,9 @@
 
     <Button
         android:id="@+id/helpButtonShowMaint"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="helpMessage"

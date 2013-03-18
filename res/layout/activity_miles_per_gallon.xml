@@ -8,16 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MilesPerGallonActivity" >
 
-    <Button
-        android:id="@+id/helpButtonMPG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="27dp"
-        android:onClick="helpMessage"
-        android:text="Help" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -92,5 +82,16 @@
         android:layout_centerHorizontal="true"
         android:text="Miles Driven"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/helpButtonMPG"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="27dp"
+        android:onClick="helpMessage"
+        android:text="Help" />
 
 </RelativeLayout>
