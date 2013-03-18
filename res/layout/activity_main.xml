@@ -23,26 +23,6 @@
         android:orientation="vertical" >
     </LinearLayout>
 
-    <Button
-        android:id="@+id/helpButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp"
-        android:onClick="helpMessage"
-        android:text="Help" />
-
-    <CheckBox
-        android:id="@+id/fillBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonCalcMPG"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="19dp"
-        android:text="This is a fill-up" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -54,13 +34,32 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
+        android:id="@+id/buttonCalcMPG"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonShowMaint"
+        android:layout_centerHorizontal="true"
+        android:onClick="mpgButton"
+        android:text="Calculate MPG" />
+
+    <Button
         android:id="@+id/enterButton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fillBox"
         android:layout_alignBottom="@+id/fillBox"
-        android:layout_alignLeft="@+id/odometer"
+        android:layout_alignLeft="@+id/buttonCalcMPG"
         android:onClick="enterButton"
         android:text="@string/enter" />
+
+    <CheckBox
+        android:id="@+id/fillBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonCalcMPG"
+        android:layout_alignRight="@+id/buttonCalcMPG"
+        android:layout_marginBottom="19dp"
+        android:text="This is a fill-up" />
 
     <Button
         android:id="@+id/buttonShowMaint"
@@ -68,18 +67,18 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout1"
         android:layout_alignLeft="@+id/buttonCalcMPG"
-        android:layout_marginBottom="74dp"
+        android:layout_marginBottom="60dp"
         android:onClick="showMaintButton"
         android:text="Show Maintenance" />
 
     <Button
-        android:id="@+id/buttonCalcMPG"
-        android:layout_width="250dp"
+        android:id="@+id/helpButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonShowMaint"
-        android:layout_alignLeft="@+id/enterButton"
-        android:layout_marginBottom="17dp"
-        android:onClick="mpgButton"
-        android:text="Calculate MPG" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="helpMessage"
+        android:text="Help" />
 
 </RelativeLayout>

@@ -8,23 +8,48 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ShowMaintenanceActivity" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Maintenance Items"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/alphaButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/nextDueButton"
+        android:layout_toRightOf="@+id/helpButtonShowMaint"
+        android:text="Sort Alpha"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/nextDueButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_toLeftOf="@+id/helpButtonShowMaint"
+        android:text="Sort Next Due"
+        android:textSize="12sp" />
+    
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_below="@+id/nextDueButton"
+        android:layout_height="360dp"
+        android:layout_width="300dp" />
+
     <Button
         android:id="@+id/helpButtonShowMaint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="92dp"
         android:onClick="helpMessage"
-        android:text="Help" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
-        android:text="Show Maintenance GUI"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Help"
+        android:textSize="12sp" />
 
 </RelativeLayout>

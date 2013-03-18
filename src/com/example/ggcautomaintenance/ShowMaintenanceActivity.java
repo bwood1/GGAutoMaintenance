@@ -36,7 +36,6 @@ public class ShowMaintenanceActivity extends Activity {
 	
 	public void helpMessage(View view)
 	{
-		
 		Button button = (Button) findViewById(R.id.helpButtonShowMaint);
 		button.setOnClickListener(new View.OnClickListener() {    
 			@Override
@@ -75,5 +74,4 @@ public class ShowMaintenanceActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 }
