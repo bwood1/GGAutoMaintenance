@@ -6,7 +6,13 @@ import android.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class ShowMaintenanceActivity extends Activity {
@@ -23,6 +29,38 @@ public class ShowMaintenanceActivity extends Activity {
 		setContentView(R.layout.activity_show_maintenance);
 		// Show the Up button in the action bar.
 		//setupActionBar();
+		
+		ListView listView1 = (ListView) findViewById(R.id.listView1);
+
+
+		MaintItems[] items = {
+				new MaintItems(1, "Oil Change", 3000, 12),
+				new MaintItems(2, "Air Filter", 12000, 104),
+				new MaintItems(3, "Wiper Blades", 12000, 104),
+				new MaintItems(4, "Tire Rotation", 5000, 24),
+				new MaintItems(5, "Wheel Balance", 10000, 48),
+				new MaintItems(6, "AntiFreeze Replacement", 12000, 52),
+				new MaintItems(7, "Clean Windows", 1000, 4),
+				new MaintItems(8, "Change Sparkplugs", 48000, 208),
+				new MaintItems(9, "Wash Car", 3000, 12),
+				new MaintItems(10, "Change Belts", 12000, 104),
+		};
+		
+		ArrayAdapter<MaintItems> adapter = new ArrayAdapter<MaintItems>(this,
+                android.R.layout.simple_list_item_1, items);
+    
+    listView1.setAdapter(adapter);
+    listView1.setOnItemClickListener(new OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                long id) {
+            
+            String item = ((TextView)view).getText().toString();
+            
+            Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
+            
+        }
+    });
 	}
 
 	/**

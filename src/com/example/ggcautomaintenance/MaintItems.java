@@ -6,6 +6,18 @@ public class MaintItems {
 	private int mileageInterval;
 	private int timeInterval;
 	
+	public MaintItems() {
+		super();
+	}
+	
+	public MaintItems(int maintID, String maintDescription, int mileageInterval, int timeInterval) {
+		super();
+		this.maintId = maintID;
+		this.maintDescription = maintDescription;
+		this.mileageInterval = mileageInterval;
+		this.timeInterval = timeInterval;		
+	}
+	
 	public int getMaintId() {
 		return maintId;
 	}
@@ -37,5 +49,9 @@ public class MaintItems {
 	public void setTimeInterval(int timeInterval) {
 		this.timeInterval = timeInterval;
 	}
-
+	
+	@Override
+	public String toString() {
+		return this.maintId + "." + this.maintDescription + "." + this.mileageInterval + "." + this.timeInterval;
+	}
 }
