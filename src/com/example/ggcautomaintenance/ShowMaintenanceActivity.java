@@ -9,15 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class ShowMaintenanceActivity extends Activity {
 
+	// Text for the help dialog
 	String helpMain = 	"* A list of Maintenance Items are displayed. By default the list is sorted by maintenance due next. \n" +
 			"* The list can be sorted alphabetically by selecting Sort Alpha. \n" +
 			"* Select Sort Next Due to go back. \n" +
@@ -28,11 +26,10 @@ public class ShowMaintenanceActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_maintenance);
-		// Show the Up button in the action bar.
-		//setupActionBar();
 
 		ListView listView1 = (ListView) findViewById(R.id.listView1);
 
+		// Temporary maintenance items array. ******** Need to pull from real data source *****************************
 		MaintItems[] items = {
 				new MaintItems(1, "Oil Change", 3000, 12),
 				new MaintItems(2, "Air Filter", 12000, 104),
@@ -45,18 +42,14 @@ public class ShowMaintenanceActivity extends Activity {
 				new MaintItems(9, "Wash Car", 3000, 12),
 				new MaintItems(10, "Change Belts", 12000, 104),
 		};
+		
+		listView1 = (ListView)findViewById(R.id.listView1);
+	    listView1.setAdapter(new MaintItemsArrayAdapter(this, items));
 
-		ArrayAdapter<MaintItems> adapter = new ArrayAdapter<MaintItems>(this,
-				android.R.layout.simple_list_item_1, items);
-
-		listView1.setAdapter(adapter);
 		listView1.setOnItemClickListener(new OnItemClickListener() {
 			//@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-
-				String item = ((TextView)view).getText().toString();
-				Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
 				
 				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
 	            startActivity(intent);
@@ -65,14 +58,9 @@ public class ShowMaintenanceActivity extends Activity {
 	}
 
 	/**
-	 * Set up the {@link android.app.ActionBar}.
+	 * Method to display help popup
+	 * @param view
 	 */
-	private void setupActionBar() {
-
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-
-	}
-
 	public void helpMessage(View view)
 	{
 		Button button = (Button) findViewById(R.id.helpButtonShowMaint);

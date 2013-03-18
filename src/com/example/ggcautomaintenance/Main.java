@@ -10,6 +10,7 @@ import android.widget.Button;
 
 public class Main extends Activity {
 
+	// Text for the help dialog
 	String helpMain = 	"* Enter the Current Date in the Odometer. \n" +
 			"* Select the Fill-Up check box if this mileage is being entered when filling-up the tank. \n" +
 			"* Select Enter to save the current mileage. \n" +
@@ -71,6 +72,10 @@ public class Main extends Activity {
 		});  
 	}
 
+	/**
+	 * Method to display help popup
+	 * @param view
+	 */
 	public void helpMessage(View view)
 	{
 		Button button = (Button) findViewById(R.id.helpButton);

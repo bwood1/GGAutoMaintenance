@@ -76,10 +76,10 @@
         android:layout_alignBottom="@+id/numGallonsFilled"
         android:layout_alignLeft="@+id/MPGDisplay"
         android:layout_alignRight="@+id/MPGDisplay"
-        android:layout_marginBottom="29dp"        
+        android:layout_marginBottom="29dp"
+        android:ems="10"
         android:text="0"
-        android:textAppearance="?android:attr/textAppearanceLarge" 
-        android:ems="10" >
+        android:textAppearance="?android:attr/textAppearanceLarge" >
         
         <requestFocus />
     </EditText>    

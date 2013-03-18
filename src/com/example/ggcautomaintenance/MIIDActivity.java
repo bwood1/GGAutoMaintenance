@@ -11,6 +11,7 @@ import android.support.v4.app.NavUtils;
 
 public class MIIDActivity extends Activity {
 	
+	// Text for the help dialog
 	String helpMain = 	"* Information is displayed about the specific maintenance item. \n" +
 			"* To record maintenance performed select Record Maintenance. \n" +
 			"* A popup will display. \n" +
@@ -21,22 +22,14 @@ public class MIIDActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miid);
-		// Show the Up button in the action bar.
-		// setupActionBar();
-	}
-
-	/**
-	 * Set up the {@link android.app.ActionBar}.
-	 */
-	private void setupActionBar() {
-
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-
 	}
 	
+	/**
+	 * Method to display help popup
+	 * @param view
+	 */
 	public void helpMessage(View view)
 	{
-		
 		Button button = (Button) findViewById(R.id.helpButtonMIID);
 		button.setOnClickListener(new View.OnClickListener() {    
 			@Override

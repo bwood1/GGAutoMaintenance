@@ -2,7 +2,6 @@ package com.example.ggcautomaintenance;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -13,7 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MilesPerGallonActivity extends Activity {	
-	
+
+	// Text for the help dialog
 	String helpMain = 	"* For accurate MPG calculations, mileage must be enter when filling up and the gas tank must be completely filled. \n" +
 			"* Screen will include mileage driven since last fill-up by default. \n" +
 			"* You may change the mileage if you so choose. \n" +
@@ -26,50 +26,49 @@ public class MilesPerGallonActivity extends Activity {
 		setContentView(R.layout.activity_miles_per_gallon);
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);
 		text.setText("" + Main.setCurrentMileage());
-		// Show the Up button in the action bar.
-		//setupActionBar();		
 	}
 
 	/**
-	 * Set up the {@link android.app.ActionBar}.
+	 * Method for mpg Calc Button, initiates MPG calculation and displays results
+	 * @param view
 	 */
-	private void setupActionBar() {
-
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-
-	}
-	
 	public void mpgCalcButton(View view)		
 	{		
 		Button button = (Button) findViewById(R.id.calcMPGButton);
 		button.setOnClickListener(new View.OnClickListener() {    
-			
+
 			public void onClick(View v) {				
-				
+
 				float mpg = getMPG();
 				TextView mpgDisplay = (TextView)findViewById(R.id.MPGDisplay);
 				mpgDisplay.setText("" + mpg + " MPG");
 			}
 		});  
 	}
-	
+
+	/**
+	 * Method used to ..........
+	 * @return mpg (miles per gallon)
+	 */
 	public float getMPG() {
-		
 		EditText editMilesDriven = (EditText)findViewById(R.id.currentMileageTF);
 		EditText editGallonsFilled = (EditText)findViewById(R.id.numGallonsFilledDisplay);
-		
+
 		float milesDriven = Float.valueOf(editMilesDriven.getText().toString());
 		float gallonsFilled = Float.valueOf(editGallonsFilled.getText().toString());
 		MPGCalculator mpgCalc = new MPGCalculator(milesDriven, gallonsFilled);
 		float mpg = mpgCalc.getMPG();
-		
+
 		return mpg;
-		
 	}
-	
+
+	/**
+	 * Method to display help popup
+	 * @param view
+	 */
 	public void helpMessage(View view)
 	{
-		
+
 		Button button = (Button) findViewById(R.id.helpButtonMPG);
 		button.setOnClickListener(new View.OnClickListener() {    
 			@Override
