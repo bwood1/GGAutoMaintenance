@@ -34,6 +34,8 @@ public class MaintItemsTableDataSource {
 		public MaintItems addNewMaintItem(int maintId, String maintDescription, 
 												int mileageInterval, int timeInterval) {
 			//TODO stuff to add new MaintItem to table
+			
+			
 			return new MaintItems();
 		}
 		
