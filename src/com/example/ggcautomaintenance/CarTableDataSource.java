@@ -38,35 +38,36 @@ public class CarTableDataSource {
 	}
 
 	//Create a new car
-	public Car createCar(String carName, String carMake,
+	public void addCarToDatabase(String carName, String carMake,
 			String carModel, int odometer) {
-		//TODO stuff to add a new car to the database
+		//create a ContentValues to hold the information for the new car
 		ContentValues values = new ContentValues();
 		values.put(CarTableHelper.COLUMN_CAR_NAME, carName);
 		values.put(CarTableHelper.COLUMN_MAKE, carMake);
 		values.put(CarTableHelper.COLUMN_MODEL, carModel);
 		values.put(CarTableHelper.COLUMN_ODOMETER, odometer);
 
-		Cursor cursor = database.query(CarTableHelper.TABLE_CAR, 
-				allColumns,	null, null, null, null, null);
-
-		cursor.moveToFirst();
-		Car newCar = cursorToCar(cursor);
-		cursor.close();
-		return newCar;
+		//add car to table
+		database.insert(CarTableHelper.TABLE_CAR, null, values);
 	}
 
-	//Delete a car (shouldn't need to use this but creating
-	//stub anyways
-	public void deleteCar(Car car) {
-		String carName = car.getCarName();
-		System.out.println("Car deleted with name: " + carName);
-		database.delete(CarTableHelper.TABLE_CAR, 
-				CarTableHelper.COLUMN_CAR_NAME + " = " + carName, 
-				null);
+	//Delete the car table (shouldn't need to use this but creating
+	//stub anyways for testing purposes)
+	public void deleteCarTable(String tableName) {
+//		/*this way sucks
+//		String carName = car.getCarName();
+//		System.out.println("Car deleted with name: " + carName);
+//		database.delete(CarTableHelper.TABLE_CAR, 
+//				CarTableHelper.COLUMN_CAR_NAME + " = " + carName, 
+//				null);
+//		 */
+ 
+		//this is much better
+		database.delete("car", null, null);
 	}
 
 	//Get all cars from table
+	//(Dont think this will be needed either)
 	public List<Car> getAllCars() {
 		List<Car> cars = new ArrayList<Car>();
 		//TODO stuff to get all cars from table
@@ -86,8 +87,11 @@ public class CarTableDataSource {
 		return cars; //and done
 	}
 
-	//Get the odometer reading for the specified car
-	public int getOdometer(String carName) {
+	/**
+	 * gets the odometer reading from the database
+	 * @return the odomter reading
+	 */
+	public int getOdometer() {
 		//TODO stuff to get the odometer reading
 		String[] temp = new String[1];
 		temp[0] = CarTableHelper.COLUMN_ODOMETER;
@@ -105,18 +109,22 @@ public class CarTableDataSource {
 		return car.getOdometer(); 	//FINALLY!!!
 	}
 
-	//updates the odometer
-	public void setOdometer(String carName, int odometer) {
+	/**
+	 * updates the odometer reading with the value passed in
+	 * @param odometer - the new odometer reading
+	 */
+	public void setOdometer(int odometer) {
 		// create content values for new odometer reading
 		ContentValues values = new ContentValues();
 		values.put(CarTableHelper.COLUMN_ODOMETER, odometer);
-
+		
 		//update database
 		database.update(CarTableHelper.TABLE_CAR, 
 				values, null, null);
 	}
 
-	//Not sure what this does yet but I think its important
+	//When you do a query it returns a cursor. 
+	//must convert to Car
 	private Car cursorToCar(Cursor cursor) {
 		Car car = new Car();
 		car.setCarName(cursor.getString(0));
@@ -126,6 +134,8 @@ public class CarTableDataSource {
 		return car;
 	}
 
+	//When you do a query it returns a cursor. 
+	//must convert to Integer
 	private int cursorToInt(Cursor cursor) {
 		Integer integer = new Integer(0);
 		integer = cursor.getInt(0);
