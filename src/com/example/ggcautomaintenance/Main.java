@@ -187,6 +187,7 @@ public class Main extends Activity {
 			MaintItemsTableDataSource db = null;
 			checkDB = db.open();
 			checkDB.close();
+			System.out.println("Database exists");
 			return true;
 		} catch (NullPointerException e) {
 			//database doesnt exist

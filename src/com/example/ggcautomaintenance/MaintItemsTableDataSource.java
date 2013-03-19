@@ -84,12 +84,13 @@ public class MaintItemsTableDataSource {
 	}
 
 	// Getting All Maintenance items
-	public MaintItems[] getAllMaintenanceItems() {
+	public MaintItems[] getAllMaintenanceItemsAlphabetical() {
 		MaintItems[] maintItemsArray = new MaintItems[22/*need to make into a variable if scope changes*/];
 
 		//			List<MaintItems> maintItemsList = new ArrayList<MaintItems>();
 		// Select All Query
-		String selectQuery = "SELECT  * FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS;
+		String selectQuery = "SELECT  * FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS + 
+								" ORDER BY " + MaintItemsTableHelper.COLUMN_MAINT_DESCRIPTION;
 
 		//			SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);

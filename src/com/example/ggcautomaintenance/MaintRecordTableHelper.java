@@ -14,6 +14,8 @@ public class MaintRecordTableHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_MAINT_ID = "MaintId";
 	public static final String COLUMN_ODOMETER = "Odometer";
 	public static final String COLUMN_COST = "Cost";
+	public static final String COLUMN_MAINT_DUE_DATE = "MaintDueDate";
+	public static final String COLUMN_MAINT_DUE_MILEAGE = "MaintDueMileage";
 
 	private static final String DATABASE_NAME = "carDatabase.db";
 	private static final int DATABASE_VERSION = 1;
@@ -28,6 +30,8 @@ public class MaintRecordTableHelper extends SQLiteOpenHelper {
 											COLUMN_MAINT_ID + " INTEGER, " +
 											COLUMN_ODOMETER + " INTEGER, " +
 											COLUMN_COST + ", CURRENCY, " +
+											COLUMN_MAINT_DUE_DATE + ", DATE, " + 
+											COLUMN_MAINT_DUE_MILEAGE + ", INTEGER, " +
 											"FOREIGN KEY(" + COLUMN_CAR_NAME + ") " +
 												"REFRENCES " + CarTableHelper.TABLE_CAR + 
 													"(" + CarTableHelper.COLUMN_CAR_NAME + 

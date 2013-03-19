@@ -81,7 +81,7 @@ public class MPGTableDataSource {
 		return mpg.getOldOdometer();
 	}
 
-	public void setCurrentMileaga(int odometer) {
+	public void setCurrentMileage(int odometer) {
 		ContentValues values = new ContentValues();
 		values.put(MPGTableHelper.COLUMN_ODOMETER, odometer);
 
@@ -95,23 +95,51 @@ public class MPGTableDataSource {
 
 	//Get current mileage
 	public int getCurrentMileage() {
-		int newMileage = 0;
+//		int currentMileage = 0;
 		//TODO stuff to get the current fill up mileage from the car table
-		return newMileage;
+		String[] columns = new String[1];
+		columns[0] = String.valueOf(MPGTableHelper.COLUMN_ODOMETER);
+		
+		String[] args = new String[1];
+		args[0] = "2";
+		
+		Cursor cursor = database.query(MPGTableHelper.TABLE_COMMENTS, columns, 
+				MPGTableHelper.COLUMN_FILL_NUMBER, args, null, null, null);
+		
+		cursor.moveToFirst();
+		Integer currentMileage = cursorToInt(cursor);
+		
+		return currentMileage;
 	}
 
 	//add a new mpg to the table
-	public MPG addMPG(int fillNumber, String carName, int oldOdomter, 
+	public void addMPG(int fillNumber, String carName, int oldOdometer, 
 			int gallons, double costPerGallon) {
 		//TODO stuff to add a new fill up to the database
-		return new MPG();
+		
+		ContentValues values = new ContentValues();
+		values.put(MPGTableHelper.COLUMN_FILL_NUMBER, fillNumber);
+		values.put(MPGTableHelper.COLUMN_CAR_NAME, carName);
+		values.put(MPGTableHelper.COLUMN_ODOMETER, oldOdometer);
+		values.put(MPGTableHelper.COLUMN_GALLONS, gallons);
+		values.put(MPGTableHelper.COLUMN_COST_PER_GALLON, costPerGallon);
+		
+		database.insert(MPGTableHelper.TABLE_COMMENTS, null, values);
 	}
 
 	//will update the old MPG with the new data
-	public MPG updateMPG(int fillNumber, String carName, int oldOdometer,
+	public void updateMPG(int fillNumber, String carName, int oldOdometer,
 			int gallons, double costPerGallon) {
 		//TODO stuff to update the MPG entry in the database
-		return new MPG();
+		
+		ContentValues values = new ContentValues();
+		values.put(MPGTableHelper.COLUMN_FILL_NUMBER, fillNumber);
+		values.put(MPGTableHelper.COLUMN_CAR_NAME, carName);
+		values.put(MPGTableHelper.COLUMN_ODOMETER, oldOdometer);
+		values.put(MPGTableHelper.COLUMN_GALLONS, gallons);
+		values.put(MPGTableHelper.COLUMN_COST_PER_GALLON, costPerGallon);
+		
+		database.update(MPGTableHelper.TABLE_COMMENTS, values, null, null);
 	}
 
 	//When you do a query it returns a cursor. 
