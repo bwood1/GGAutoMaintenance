@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#E9E9E9"
     tools:context=".MainActivity" >
     
     <com.example.ggcautomaintenance.Odometer
@@ -23,53 +24,14 @@
         android:orientation="vertical" >
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/enterButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="28dp"
-        android:text="@string/CMATitle"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <Button
         android:id="@+id/buttonCalcMPG"
-        android:layout_width="250dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonShowMaint"
         android:layout_centerHorizontal="true"
         android:onClick="mpgButton"
         android:text="Calculate MPG" />
-
-    <Button
-        android:id="@+id/enterButton"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/fillBox"
-        android:layout_alignBottom="@+id/fillBox"
-        android:layout_alignLeft="@+id/buttonCalcMPG"
-        android:onClick="enterButton"
-        android:text="@string/enter" />
-
-    <CheckBox
-        android:id="@+id/fillBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonCalcMPG"
-        android:layout_alignRight="@+id/buttonCalcMPG"
-        android:layout_marginBottom="19dp"
-        android:text="This is a fill-up" />
-
-    <Button
-        android:id="@+id/buttonShowMaint"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout1"
-        android:layout_alignLeft="@+id/buttonCalcMPG"
-        android:layout_marginBottom="60dp"
-        android:onClick="showMaintButton"
-        android:text="Show Maintenance" />
 
     <Button
         android:id="@+id/helpButton"
@@ -80,5 +42,43 @@
         android:layout_centerHorizontal="true"
         android:onClick="helpMessage"
         android:text="Help" />
+
+    <Button
+        android:id="@+id/buttonShowMaint"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/helpButton"
+        android:layout_alignLeft="@+id/buttonCalcMPG"
+        android:layout_marginBottom="15dp"
+        android:onClick="showMaintButton"
+        android:text="Show Maintenance" />
+
+    <Button
+        android:id="@+id/enterButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/odometer"
+        android:layout_marginTop="21dp"
+        android:layout_toLeftOf="@+id/linearLayout1"
+        android:onClick="enterButton"
+        android:text="@string/enter" />
+
+    <CheckBox
+        android:id="@+id/fillBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/enterButton"
+        android:layout_alignBottom="@+id/enterButton"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:text="This is a fill-up" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="270dp"
+        android:layout_below="@+id/enterButton"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/carmaintenancelogo2" />
 
 </RelativeLayout>
