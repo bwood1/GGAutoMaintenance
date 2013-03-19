@@ -43,6 +43,7 @@
         android:layout_width="300dp"
         android:layout_height="360dp"
         android:layout_below="@+id/nextDueButton"
+        android:listSelector="@drawable/row_background"
         android:background="@drawable/roundback"
         android:fadeScrollbars="false"
         android:padding="3dp" />
