@@ -35,8 +35,6 @@ public class ShowMaintenanceActivity extends Activity {
 		
 		final MaintItems[] items =   datasource.getAllMaintenanceItemsAlphabetical();
 		
-//		items = mith.getAllMaintenanceItems();
-		
 		listView1 = (ListView)findViewById(R.id.listView1);
 	    listView1.setAdapter(new MaintItemsArrayAdapter(this, items));
 

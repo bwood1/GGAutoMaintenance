@@ -13,6 +13,7 @@ import android.support.v4.app.NavUtils;
 public class MIIDActivity extends Activity {
 	
 	private String value;
+	OptionSelectionPopup OSPopup;
 	
 	// Text for the help dialog
 	String helpMain = 	"* Information is displayed about the specific maintenance item. \n" +
@@ -55,6 +56,38 @@ public class MIIDActivity extends Activity {
 			}
 		});  
 	} 
+	
+	//Fires the Option Selection Prompt when Record Maintenance Button is pressed
+		public void recordMaintButton(View view)
+		{
+			final Button button = (Button) findViewById(R.id.recordMaintButton);
+			button.setOnClickListener(new View.OnClickListener() {    
+				@Override
+				public void onClick(View v) {
+					OSPopup = new OptionSelectionPopup(v.getContext());
+					OSPopup.show(v);
+					OSPopup.update();
+					
+				}
+			}); 
+		}
+		
+		/*Listener for record maintenance button on Option Selection Prompt
+		 * 
+		 ****  AS OF 3/18/13  ****
+		 *Only closes prompt window
+		 * 
+		*/
+	    public void record(View view)
+	    {
+	    	Button button = (Button) view.findViewById(R.id.recordMaintOSP);
+			button.setOnClickListener(new View.OnClickListener() {    
+				
+				public void onClick(View v) {
+					OSPopup.dismiss();
+				}
+			});
+		}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
