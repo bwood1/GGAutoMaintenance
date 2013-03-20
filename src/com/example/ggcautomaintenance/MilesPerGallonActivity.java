@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MilesPerGallonActivity extends Activity {	
+	private MPGTableDataSource mpgDatabaseConnector;
 
 	// Text for the help dialog
 	String helpMain = 	"* For accurate MPG calculations, mileage must be enter when filling up and the gas tank must be completely filled. \n" +
@@ -22,19 +23,31 @@ public class MilesPerGallonActivity extends Activity {
 	
 	Button mpgCalcButton;
 	Button helpButton;
+	Odometer odom = new Odometer(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_miles_per_gallon);
+		setContentView(R.layout.activity_miles_per_gallon);		
 		
 		mpgCalcButton = (Button) findViewById(R.id.calcMPGButton);
 		helpButton = (Button) findViewById(R.id.helpButtonMPG);
 		
-		Main.setCurrentMileage();
+		mpgDatabaseConnector = new MPGTableDataSource(this);
+		mpgDatabaseConnector.open();
+		
+		mpgDatabaseConnector.setCurrentMileage(odom.getValue());
+		
+		//Main.setCurrentMileage();
+		
+		Main main = new Main();
+		
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
-		text.setText("" + Main.getMilesDriven());
-		Main.setOldMileage();
+		text.setText("" + main.getMilesDriven());
+		
+		mpgDatabaseConnector.setOldMileage(mpgDatabaseConnector.getCurrentMileage());
+		//Main.setOldMileage();
+		mpgDatabaseConnector.close();
 	}
 
 	/**

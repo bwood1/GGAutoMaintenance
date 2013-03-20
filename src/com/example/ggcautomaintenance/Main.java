@@ -11,6 +11,7 @@ import android.widget.Button;
 
 public class Main extends Activity {
 	private MaintItemsTableDataSource datasource;
+	private MPGTableDataSource mpgDataSource;
 
 	// Text for the help dialog
 	String helpMain = 	"* Enter the Current Date in the Odometer. \n" +
@@ -120,8 +121,13 @@ public class Main extends Activity {
 		currentOdometer = mOdometer.getValue();
 	}
 	
-	public static int getMilesDriven() {
-		return getCurrentMileage() - getOldMileage();
+	public int getMilesDriven() {
+		mpgDataSource = new MPGTableDataSource(this);
+		mpgDataSource.open();
+		int milesDriven = mpgDataSource.getCurrentMileage() - 
+				mpgDataSource.getOldMileage();
+		mpgDataSource.close();
+		return milesDriven;
 	}
 
 	public void setFillupMileage() {

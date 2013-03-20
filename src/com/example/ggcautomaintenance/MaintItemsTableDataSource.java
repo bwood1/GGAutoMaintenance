@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 
 public class MaintItemsTableDataSource {
 
 	//Database fields
 	private SQLiteDatabase db;
 	private MaintItemsTableHelper maintItemsDbHelper;
+	
 	private String[] allColumns = {
 			MaintItemsTableHelper.COLUMN_MAINT_ID,
 			MaintItemsTableHelper.COLUMN_MAINT_DESCRIPTION,
@@ -32,7 +34,7 @@ public class MaintItemsTableDataSource {
 	public void close() {
 		maintItemsDbHelper.close();
 	}
-	
+
 	public void dropMaintItemsTable() {
 		db.delete(MaintItemsTableHelper.TABLE_MAINT_ITEMS, null, null);
 	}
@@ -83,14 +85,54 @@ public class MaintItemsTableDataSource {
 		return maintItem;
 	}
 
-	// Getting All Maintenance items
+	// Getting All Maintenance items sorted alphabetically
 	public MaintItems[] getAllMaintenanceItemsAlphabetical() {
 		MaintItems[] maintItemsArray = new MaintItems[22/*need to make into a variable if scope changes*/];
 
 		//			List<MaintItems> maintItemsList = new ArrayList<MaintItems>();
 		// Select All Query
-		String selectQuery = "SELECT  * FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS + 
-								" ORDER BY " + MaintItemsTableHelper.COLUMN_MAINT_DESCRIPTION;
+		String selectQuery = "SELECT MaintenanceItems.MaintID, MaintenanceItems.MaintDescription, " +
+				"MaintenanceItems.MileageInterval, MaintenanceItems.TimeInterval, maintrecord.MaintDueDate " +
+				"FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS + " NATURAL JOIN " + MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE  +
+				" ORDER BY 2";
+
+		//			SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		int i = 0;
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				MaintItems maintItem = new MaintItems();
+				maintItem.setMaintId(Integer.parseInt(cursor.getString(0)));
+				maintItem.setMaintDescription(cursor.getString(1));
+				maintItem.setMileageInterval(Integer.parseInt(cursor.getString(2)));
+				maintItem.setTimeInterval(Integer.parseInt(cursor.getString(3)));
+				// Adding contact to list
+				//					maintItemsList.add(maintItem);
+				maintItemsArray[i] = maintItem;
+				i++;
+			} while (cursor.moveToNext());
+		}
+
+		// return contact list
+		return maintItemsArray;
+	}
+
+	// Getting All Maintenance items sorted alphabetically
+	public MaintItems[] getAllMaintenanceItemsDueDate() {
+		MaintItems[] maintItemsArray = new MaintItems[22/*need to make into a variable if scope changes*/];
+
+		//			List<MaintItems> maintItemsList = new ArrayList<MaintItems>();
+		// Select All Query
+		String selectQuery = "SELECT MaintenanceItems.MaintID, MaintenanceItems.MaintDescription, " +
+				"MaintenanceItems.MileageInterval, MaintenanceItems.TimeInterval, maintrecord.MaintDueDate " +
+				"FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS + " NATURAL JOIN " + MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE  +
+				" ORDER BY 5";
+		
+//		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+//		queryBuilder.setTables(MaintItemsTableHelper.TABLE_MAINT_ITEMS + ", " + MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE);
 
 		//			SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
@@ -150,6 +192,12 @@ public class MaintItemsTableDataSource {
 				MaintItemsTableHelper.COLUMN_MAINT_ID + " = ?",
 				new String[] { String.valueOf(maintItem.getMaintId()) });
 		//			db.close();
+	}
+	
+	public String cursorToString(Cursor cursor) {
+		String outputString = new String();
+		outputString = cursor.getString(0);
+		return outputString;
 	}
 
 }

@@ -16,6 +16,7 @@ public class CarTableDataSource {
 	//Database fields
 	private SQLiteDatabase database;
 	private CarTableHelper carDbHelper;
+	
 	private String[] allColumns = {
 			CarTableHelper.COLUMN_CAR_NAME,
 			CarTableHelper.COLUMN_MAKE, 
@@ -28,8 +29,9 @@ public class CarTableDataSource {
 	}
 
 	//Open database
-	public void open() throws SQLException {
+	public SQLiteDatabase open() throws SQLException {
 		database = carDbHelper.getWritableDatabase();
+		return database;
 	}
 
 	//Close database

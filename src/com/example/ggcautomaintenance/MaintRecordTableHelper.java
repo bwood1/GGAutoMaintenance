@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class MaintRecordTableHelper extends SQLiteOpenHelper {
 
-	public static final String TABLE_MAINT_RECORDS_TABLE = "maintenancerecord";
+	public static final String TABLE_MAINT_RECORDS_TABLE = "maintrecord";
 	public static final String COLUMN_MAINT_RECORD_ID = "MaintRecordId";
 	public static final String COLUMN_MAINT_COMPLETE_DATE = "MaintCompleteDate";
 	public static final String COLUMN_CAR_NAME = "CarName";
@@ -18,27 +18,20 @@ public class MaintRecordTableHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_MAINT_DUE_MILEAGE = "MaintDueMileage";
 
 	private static final String DATABASE_NAME = "carDatabase.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	
 	//Database creation statement
-	private static final String CREATE_MAINTRECORD_TABLE = "create table " + 
-											TABLE_MAINT_RECORDS_TABLE + "(" +
-											COLUMN_MAINT_RECORD_ID + 
-												" INTEGER PRIMARY KEY " +"AUTOINCREMENT, " +
-											COLUMN_MAINT_COMPLETE_DATE + " DATE, " +
+	private static final String CREATE_MAINTRECORD_TABLE = "CREATE TABLE " + TABLE_MAINT_RECORDS_TABLE + "(" +
+											COLUMN_MAINT_RECORD_ID + " INTEGER PRIMARY KEY, " +
+											COLUMN_MAINT_COMPLETE_DATE + " TEXT, " +
 											COLUMN_CAR_NAME + " TEXT(20), " +
 											COLUMN_MAINT_ID + " INTEGER, " +
 											COLUMN_ODOMETER + " INTEGER, " +
 											COLUMN_COST + ", CURRENCY, " +
-											COLUMN_MAINT_DUE_DATE + ", DATE, " + 
-											COLUMN_MAINT_DUE_MILEAGE + ", INTEGER, " +
-											"FOREIGN KEY(" + COLUMN_CAR_NAME + ") " +
-												"REFRENCES " + CarTableHelper.TABLE_CAR + 
-													"(" + CarTableHelper.COLUMN_CAR_NAME + 
-														")" +
-											"FOREIGN KEY(" + COLUMN_MAINT_ID + ") " +
-												"REFRENCES " + MaintItemsTableHelper.TABLE_MAINT_ITEMS + 
-													"(" + MaintItemsTableHelper.COLUMN_MAINT_ID +");";
+											COLUMN_MAINT_DUE_DATE + ", TEXT, " + 
+											COLUMN_MAINT_DUE_MILEAGE + ", INTEGER);";
+	
+	
 
 	public MaintRecordTableHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,6 +40,7 @@ public class MaintRecordTableHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_MAINTRECORD_TABLE);
+		System.out.println("maint record create executed");
 	}
 
 	@Override

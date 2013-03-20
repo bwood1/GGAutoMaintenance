@@ -14,6 +14,7 @@ public class MaintRecordTableDataSource {
 	//Database fields
 	private SQLiteDatabase database;
 	private MaintRecordTableHelper maintRecordDbHelper;
+	
 	private String[] allColumns = {
 			MaintRecordTableHelper.COLUMN_MAINT_RECORD_ID,
 			MaintRecordTableHelper.COLUMN_MAINT_COMPLETE_DATE,
@@ -30,14 +31,21 @@ public class MaintRecordTableDataSource {
 	}
 
 	//Open database
-	public void open() throws SQLException {
+	public SQLiteDatabase open() throws SQLException {
 		database = maintRecordDbHelper.getWritableDatabase();
+		return database;
 	}
 
 	//Close database
 	public void close() {
 		maintRecordDbHelper.close();
 	}
+
+	public void dropMaintRecordsTable() {
+		System.out.println("Delete values in maint records");
+		database.delete(MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE, null, null);
+	}
+
 
 	/**
 	 * Adds a new maint record to the table
@@ -66,9 +74,24 @@ public class MaintRecordTableDataSource {
 		values.put(MaintRecordTableHelper.COLUMN_MAINT_DUE_DATE, maintDueDate);
 		values.put(MaintRecordTableHelper.COLUMN_MAINT_DUE_MILEAGE, maintDueMileage);
 
+		//		String string = "January 2, 2010";
+		//		Date date = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(string);
+		//		System.out.println(date); // Sat Jan 02 00:00:00 BOT 2010
+
+		//TODO delete this
+		/*
+		 * ignore this i dont think its going to work
+		 */
+		//		database.rawQuery("INSERT INTO " + MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE + " (" + 
+		//		MaintRecordTableHelper.COLUMN_MAINT_RECORD_ID + ", " + MaintRecordTableHelper.COLUMN_MAINT_COMPLETE_DATE + ", " + 
+		//		MaintRecordTableHelper.COLUMN_CAR_NAME + ", " + MaintRecordTableHelper.COLUMN_MAINT_ID + ", " + 
+		//		MaintRecordTableHelper.COLUMN_ODOMETER + ", " + MaintRecordTableHelper.COLUMN_COST + ", " + 
+		//		MaintRecordTableHelper.COLUMN_MAINT_DUE_DATE + ", " + MaintRecordTableHelper.COLUMN_MAINT_DUE_MILEAGE + ") " +
+		//				"VALUES(" + maintRecordId + ", ", 
+		//		selectionArgs)
+
 		//add maint record to database
-		database.insert(MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE, 
-				null, values);
+		database.insert(MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE, null, values);
 
 	}
 
@@ -138,7 +161,7 @@ public class MaintRecordTableDataSource {
 		database.update(MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE, 
 				values, MaintRecordTableHelper.COLUMN_MAINT_ID, maintIdArray);
 	}
-	
+
 	//gets the next maintenance date due for the specified maintid
 	public String getNextMaintDueDate (int maintId) {
 		String[] maintDueColumn = new String[1];
@@ -149,17 +172,17 @@ public class MaintRecordTableDataSource {
 				maintDueColumn, MaintRecordTableHelper.COLUMN_MAINT_ID, selectionArgs, 
 				null, null, null);
 		cursor.moveToFirst();
-		
+
 		return cursorToString(cursor);
 	}
-	
+
 	public String cursorToString(Cursor cursor) {
 		String outputString = new String();
 		outputString = cursor.getString(0);
 		return outputString;
 	}
 
-	
+
 	public MaintRecords cursorToMaintRecords(Cursor cursor) {
 		MaintRecords maintRecords = new MaintRecords();
 		maintRecords.setMaintRecordId(cursor.getInt(0));

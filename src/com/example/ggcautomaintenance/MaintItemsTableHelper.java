@@ -13,14 +13,14 @@ import android.util.Log;
 
 public class MaintItemsTableHelper extends SQLiteOpenHelper {
 
-	public static final String TABLE_MAINT_ITEMS = "MaintenanceRecord";
+	public static final String TABLE_MAINT_ITEMS = "MaintenanceItems";
 	public static final String COLUMN_MAINT_ID = "MaintID";
 	public static final String COLUMN_MAINT_DESCRIPTION = "MaintDescription";
 	public static final String COLUMN_MILEAGE_INTERVAL = "MileageInterval";
 	public static final String COLUMN_TIME_INTERVAL = "TimeInterval"; 
 
 	private static final String DATABASE_NAME = "carDatabase.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 //	private SQLiteDatabase db;
 //	private MaintItemsTableHelper maintItemsDbHelper;
@@ -33,6 +33,30 @@ public class MaintItemsTableHelper extends SQLiteOpenHelper {
 			COLUMN_MILEAGE_INTERVAL + " INTEGER, " + 
 			COLUMN_TIME_INTERVAL + " INTEGER);";
 	
+	private static final String CREATE_CAR_TABLE = "CREATE TABLE " + CarTableHelper.TABLE_CAR +  "(" +
+			CarTableHelper.COLUMN_CAR_NAME + " TEXT(20) not null, " +
+			CarTableHelper.COLUMN_MAKE + " TEXT(15), " +
+			CarTableHelper.COLUMN_MODEL + " TEXT(20), " +
+			CarTableHelper.COLUMN_ODOMETER + " INTEGER, " +
+			"PRIMARY KEY(CarName));";
+	
+	private static final String CREATE_MPG_TABLE = "CREATE TABLE " + MPGTableHelper.TABLE_COMMENTS + "(" + 
+			MPGTableHelper.COLUMN_FILL_NUMBER + " INTEGER PRIMARY KEY, " +
+			MPGTableHelper.COLUMN_CAR_NAME + " TEXT(20), " +
+			MPGTableHelper.COLUMN_ODOMETER +  " INTEGER, " +
+			MPGTableHelper.COLUMN_GALLONS + " INTEGER, " +
+			MPGTableHelper.COLUMN_COST_PER_GALLON + " CURRENCY);";
+	
+	private static final String CREATE_MAINTRECORD_TABLE = "CREATE TABLE " + MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE + "(" +
+			MaintRecordTableHelper.COLUMN_MAINT_RECORD_ID + " INTEGER PRIMARY KEY, " +
+			MaintRecordTableHelper.COLUMN_MAINT_COMPLETE_DATE + " TEXT, " +
+			MaintRecordTableHelper.COLUMN_CAR_NAME + " TEXT(20), " +
+			MaintRecordTableHelper.COLUMN_MAINT_ID + " INTEGER, " +
+			MaintRecordTableHelper.COLUMN_ODOMETER + " INTEGER, " +
+			MaintRecordTableHelper.COLUMN_COST + ", CURRENCY, " +
+			MaintRecordTableHelper.COLUMN_MAINT_DUE_DATE + ", TEXT, " + 
+			MaintRecordTableHelper.COLUMN_MAINT_DUE_MILEAGE + ", INTEGER);";
+	
 	//CREATE TABLE MaintItems(maintId INTEGER PRIMARY KEY, maintdescription TEXT(20), mileageinterval INTEGER, timeinterval INTEGER);
 
 	public MaintItemsTableHelper(Context context) {
@@ -42,6 +66,10 @@ public class MaintItemsTableHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_MAINT_ITEMS_TABLE);
+		db.execSQL(CREATE_CAR_TABLE);
+		db.execSQL(CREATE_MPG_TABLE);
+		db.execSQL(CREATE_MAINTRECORD_TABLE);
+		System.out.println("database execution statement run");
 	}
 
 	@Override
@@ -50,7 +78,7 @@ public class MaintItemsTableHelper extends SQLiteOpenHelper {
 		Log.w(MaintItemsTableHelper.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
 						+ newVersion + ", which will destory all old data");
-		db.execSQL("DROP TABLE IF EXISTS " + CREATE_MAINT_ITEMS_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS MaintenanceRecord");
 		onCreate(db);
 	}
 

@@ -15,7 +15,7 @@ public class CarTableHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_ODOMETER = "Odometer";
 
 	private static final String DATABASE_NAME = "carDatabase.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	
 	//Database creation statement
 	private static final String CREATE_CAR_TABLE = "CREATE TABLE " + TABLE_CAR +  "(" +

@@ -24,8 +24,9 @@ public class MPGTableDataSource {
 	}
 
 	//Open database
-	public void open() throws SQLException {
+	public SQLiteDatabase open() throws SQLException {
 		database = mpgDbHelper.getWritableDatabase();
+		return database;
 	}
 
 	//Close database
@@ -63,23 +64,58 @@ public class MPGTableDataSource {
 	}
 
 	//Get old MPG
-	public int getOldMileage(int oldFillNum) {
-		//TODO stuff to get the previous fill up mileage
+		public int getOldMileage() {
+			//TODO stuff to get the previous fill up mileage
 
-		//Create a cursor to hold the data 
-		//till we can convert to int
-		Cursor cursor = database.rawQuery("SELECT odometer" +
-				"FROM mpg" +
-				"WHERE fillnumber=" + oldFillNum + ";", 
-				null);
+			String[] columns = new String[1];
+			columns[0] = MPGTableHelper.COLUMN_ODOMETER;
 
-		cursor.moveToFirst();
-		MPG mpg = new MPG();
-		Integer integer = cursorToInt(cursor);
-		mpg.setOldOdometer(integer);
-		cursor.close();
-		return mpg.getOldOdometer();
-	}
+			String[] whereArgs = new String[1];
+			whereArgs[0] = "1";
+
+			//Create a cursor to hold the data 
+			//till we can convert to int
+			Cursor cursor = database.query(MPGTableHelper.TABLE_COMMENTS, 
+					columns, MPGTableHelper.COLUMN_FILL_NUMBER, 
+					whereArgs, null, null, null);
+
+			cursor.moveToFirst();
+			Integer integer = cursorToInt(cursor);
+			cursor.close();
+			
+			return integer;
+		}
+	
+//	//Get old MPG
+//	public int getOldMileage(int oldFillNum) {
+//		//TODO stuff to get the previous fill up mileage
+//
+//		//Create a cursor to hold the data 
+//		//till we can convert to int
+//		Cursor cursor = database.rawQuery("SELECT odometer" +
+//				"FROM mpg" +
+//				"WHERE fillnumber=" + oldFillNum + ";", 
+//				null);
+//
+//		cursor.moveToFirst();
+//		MPG mpg = new MPG();
+//		Integer integer = cursorToInt(cursor);
+//		mpg.setOldOdometer(integer);
+//		cursor.close();
+//		return mpg.getOldOdometer();
+//	}
+		
+		public void setOldMileage(int oldOdometer) {
+			ContentValues values = new ContentValues();
+			values.put(MPGTableHelper.COLUMN_ODOMETER, oldOdometer);
+
+			String[] whereArgs = new String[1];
+			whereArgs[0] = "1";
+			//update table
+			database.update(MPGTableHelper.TABLE_COMMENTS, 
+					values, MPGTableHelper.COLUMN_FILL_NUMBER ,
+					whereArgs);
+		}
 
 	public void setCurrentMileage(int odometer) {
 		ContentValues values = new ContentValues();

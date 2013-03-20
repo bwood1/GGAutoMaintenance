@@ -15,7 +15,7 @@ public class MPGTableHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_COST_PER_GALLON = "CostPerGallon";
 
 	private static final String DATABASE_NAME = "carDatabase.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	
 	//Database creation statement
 	private static final String CREATE_MPG_TABLE = "CREATE TABLE " + TABLE_COMMENTS + 
