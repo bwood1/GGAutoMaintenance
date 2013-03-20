@@ -23,7 +23,7 @@ public class MilesPerGallonActivity extends Activity {
 	
 	Button mpgCalcButton;
 	Button helpButton;
-	Odometer odom = new Odometer(this);
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +32,20 @@ public class MilesPerGallonActivity extends Activity {
 		
 		mpgCalcButton = (Button) findViewById(R.id.calcMPGButton);
 		helpButton = (Button) findViewById(R.id.helpButtonMPG);
+		Odometer odom = new Odometer(this);
 		
 		mpgDatabaseConnector = new MPGTableDataSource(this);
 		mpgDatabaseConnector.open();
 		
+		System.out.println("The odometer value is: " + odom.getValue());
+		
 		mpgDatabaseConnector.setCurrentMileage(odom.getValue());
 		
-		//Main.setCurrentMileage();
 		
 		Main main = new Main();
+		//main.setCurrentMileage();
+		
+		
 		
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
 		text.setText("" + main.getMilesDriven());

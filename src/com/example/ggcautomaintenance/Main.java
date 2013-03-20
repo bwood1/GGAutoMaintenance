@@ -127,6 +127,9 @@ public class Main extends Activity {
 		int milesDriven = mpgDataSource.getCurrentMileage() - 
 				mpgDataSource.getOldMileage();
 		mpgDataSource.close();
+		// int milesDriven = getCurrentMileage() - getOldMileage();
+		
+		
 		return milesDriven;
 	}
 
