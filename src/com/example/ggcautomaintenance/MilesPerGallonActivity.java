@@ -19,11 +19,18 @@ public class MilesPerGallonActivity extends Activity {
 			"* You may change the mileage if you so choose. \n" +
 			"* Enter the # of gallons put in tank. \n" +
 			"* Select Calculate and the MPG will be displayed.";
+	
+	Button mpgCalcButton;
+	Button helpButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miles_per_gallon);
+		
+		mpgCalcButton = (Button) findViewById(R.id.calcMPGButton);
+		helpButton = (Button) findViewById(R.id.helpButtonMPG);
+		
 		Main.setCurrentMileage();
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
 		text.setText("" + Main.getMilesDriven());
@@ -35,17 +42,10 @@ public class MilesPerGallonActivity extends Activity {
 	 * @param view
 	 */
 	public void mpgCalcButton(View view)		
-	{		
-		Button button = (Button) findViewById(R.id.calcMPGButton);
-		button.setOnClickListener(new View.OnClickListener() {    
-
-			public void onClick(View v) {				
-
-				float mpg = getMPG();
-				TextView mpgDisplay = (TextView)findViewById(R.id.MPGDisplay);
-				mpgDisplay.setText("" + mpg + " MPG");
-			}
-		});  
+	{
+		float mpg = getMPG();
+		TextView mpgDisplay = (TextView)findViewById(R.id.MPGDisplay);
+		mpgDisplay.setText("" + mpg + " MPG");
 	}
 
 	/**
@@ -70,20 +70,13 @@ public class MilesPerGallonActivity extends Activity {
 	 */
 	public void helpMessage(View view)
 	{
-
-		Button button = (Button) findViewById(R.id.helpButtonMPG);
-		button.setOnClickListener(new View.OnClickListener() {    
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(MilesPerGallonActivity.this);
-				builder.setIcon(R.drawable.helpicon)
-				.setTitle("Help!")
-				.setMessage(helpMain)
-				.setNeutralButton("OK", null);
-				AlertDialog dialog = builder.create();
-				dialog.show();
-			}
-		});  
+		AlertDialog.Builder builder = new AlertDialog.Builder(MilesPerGallonActivity.this);
+		builder.setIcon(R.drawable.helpicon)
+		.setTitle("Help!")
+		.setMessage(helpMain)
+		.setNeutralButton("OK", null);
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	} 
 
 	@Override

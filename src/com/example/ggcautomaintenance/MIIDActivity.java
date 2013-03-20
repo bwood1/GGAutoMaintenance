@@ -21,11 +21,19 @@ public class MIIDActivity extends Activity {
 			"* A popup will display. \n" +
 			"* The current date and mileage can be accepted by selecting the Checkbox or a date and mileage can be entered. \n" +
 			"* Select Record Service to save this record.";
+	
+	Button helpButton;
+	Button recMaintButton;
+	Button ospRecordButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miid);
+		
+		helpButton = (Button) findViewById(R.id.helpButtonMIID);
+		recMaintButton = (Button) findViewById(R.id.recordMaintButton);
+    	ospRecordButton = (Button) findViewById(R.id.recordMaintOSP);
 		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -42,34 +50,21 @@ public class MIIDActivity extends Activity {
 	 */
 	public void helpMessage(View view)
 	{
-		Button button = (Button) findViewById(R.id.helpButtonMIID);
-		button.setOnClickListener(new View.OnClickListener() {    
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(MIIDActivity.this);
-				builder.setIcon(R.drawable.helpicon)
-				.setTitle("Help!")
-				.setMessage(helpMain)
-				.setNeutralButton("OK", null);
-				AlertDialog dialog = builder.create();
-				dialog.show();
-			}
-		});  
+		AlertDialog.Builder builder = new AlertDialog.Builder(MIIDActivity.this);
+		builder.setIcon(R.drawable.helpicon)
+		.setTitle("Help!")
+		.setMessage(helpMain)
+		.setNeutralButton("OK", null);
+		AlertDialog dialog = builder.create();
+		dialog.show(); 
 	} 
 	
 	//Fires the Option Selection Prompt when Record Maintenance Button is pressed
 		public void recordMaintButton(View view)
 		{
-			final Button button = (Button) findViewById(R.id.recordMaintButton);
-			button.setOnClickListener(new View.OnClickListener() {    
-				@Override
-				public void onClick(View v) {
-					OSPopup = new OptionSelectionPopup(v.getContext());
-					OSPopup.show(v);
-					OSPopup.update();
-					
-				}
-			}); 
+			OSPopup = new OptionSelectionPopup(view.getContext());
+			OSPopup.show(view);
+			OSPopup.update();
 		}
 		
 		/*Listener for record maintenance button on Option Selection Prompt
@@ -80,13 +75,7 @@ public class MIIDActivity extends Activity {
 		*/
 	    public void record(View view)
 	    {
-	    	Button button = (Button) view.findViewById(R.id.recordMaintOSP);
-			button.setOnClickListener(new View.OnClickListener() {    
-				
-				public void onClick(View v) {
-					OSPopup.dismiss();
-				}
-			});
+			OSPopup.dismiss();
 		}
 
 	@Override

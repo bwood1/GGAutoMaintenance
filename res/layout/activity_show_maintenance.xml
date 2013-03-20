@@ -27,6 +27,7 @@
         android:layout_alignBottom="@+id/nextDueButton"
         android:layout_toRightOf="@+id/helpButtonShowMaint"
         android:text="Sort Alpha"
+        android:onClick="alphaButton"
         android:textSize="12sp" />
 
     <Button
@@ -37,6 +38,7 @@
         android:layout_below="@+id/textView1"
         android:layout_toLeftOf="@+id/helpButtonShowMaint"
         android:text="Sort Next Due"
+        android:onClick="nextDueButton"
         android:textSize="12sp" />
     
     <ListView

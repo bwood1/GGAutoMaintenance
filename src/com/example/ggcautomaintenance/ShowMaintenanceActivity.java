@@ -22,22 +22,29 @@ public class ShowMaintenanceActivity extends Activity {
 			"* Select Sort Next Due to go back. \n" +
 			"* The list can be scrolled up and down by swiping up or down. \n +" +
 			"* To see more information or record maintenance on a specific item select the item in the list.";
+	
+	Button helpButton;
+	Button alphaButton;
+	Button nextDueButton;
+	
+	ListView listView1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_maintenance);
-
-		ListView listView1 = (ListView) findViewById(R.id.listView1);
+		
+		helpButton = (Button) findViewById(R.id.helpButtonShowMaint);
+		alphaButton = (Button) findViewById(R.id.alphaButton);
+		nextDueButton = (Button) findViewById(R.id.nextDueButton);
 		
 		datasource = new MaintItemsTableDataSource(this);
 		datasource.open();
 		
 		final MaintItems[] items =   datasource.getAllMaintenanceItemsAlphabetical();
 		
-		listView1 = (ListView)findViewById(R.id.listView1);
+		listView1 = (ListView) findViewById(R.id.listView1);
 	    listView1.setAdapter(new MaintItemsArrayAdapter(this, items));
-
 		listView1.setOnItemClickListener(new OnItemClickListener() {
 			
 			//@Override
@@ -60,20 +67,24 @@ public class ShowMaintenanceActivity extends Activity {
 	 */
 	public void helpMessage(View view)
 	{
-		Button button = (Button) findViewById(R.id.helpButtonShowMaint);
-		button.setOnClickListener(new View.OnClickListener() {    
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(ShowMaintenanceActivity.this);
-				builder.setIcon(R.drawable.helpicon)
-				.setTitle("Help!")
-				.setMessage(helpMain)
-				.setNeutralButton("OK", null);
-				AlertDialog dialog = builder.create();
-				dialog.show();
-			}
-		});  
-	} 
+		AlertDialog.Builder builder = new AlertDialog.Builder(ShowMaintenanceActivity.this);
+		builder.setIcon(R.drawable.helpicon)
+		.setTitle("Help!")
+		.setMessage(helpMain)
+		.setNeutralButton("OK", null);
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	public void alphaButton(View view)
+	{
+		//alphaButton sort code goes here.
+	}
+	
+	public void nextDueButton(View view)
+	{
+		//nextDueButton sort code goes here.
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

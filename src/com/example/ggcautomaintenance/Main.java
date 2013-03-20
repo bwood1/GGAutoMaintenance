@@ -24,6 +24,11 @@ public class Main extends Activity {
 	private int mOdometerValue;
 	private static int oldOdometer;
 	private static int currentOdometer;
+	
+	Button mpgButton;
+	Button showMButton;
+	Button helpButton;
+	Button enterButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,11 @@ public class Main extends Activity {
 		datasource.open();
 		datasource.dropMaintItemsTable();
 		datasource.close();
+		
+		mpgButton = (Button) findViewById(R.id.buttonCalcMPG);
+		showMButton = (Button) findViewById(R.id.buttonShowMaint);
+		helpButton = (Button) findViewById(R.id.helpButton);
+		enterButton = (Button) findViewById(R.id.enterButton);
 		
 		if(!checkDataBase())
 			createMaintItemsTable();
@@ -49,39 +59,19 @@ public class Main extends Activity {
 
 	public void enterButton(View view)
 	{
-
-		Button button = (Button) findViewById(R.id.enterButton);
-		button.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-
-				setCurrentMileage();
-
-			}
-		});				
+		setCurrentMileage();		
 	}
 
 	public void mpgButton(View view)		
 	{
-		Button button = (Button) findViewById(R.id.buttonCalcMPG);
-		button.setOnClickListener(new View.OnClickListener() {    
-
-			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), MilesPerGallonActivity.class);
-				startActivity(intent);            
-			}
-		});  
+		Intent intent = new Intent(view.getContext(), MilesPerGallonActivity.class);
+		startActivity(intent);            
 	}
 
 	public void showMaintButton(View view)		
 	{
-		Button button = (Button) findViewById(R.id.buttonShowMaint);
-		button.setOnClickListener(new View.OnClickListener() {    
-
-			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), ShowMaintenanceActivity.class);
-				startActivity(intent);            
-			}
-		});  
+		Intent intent = new Intent(view.getContext(), ShowMaintenanceActivity.class);
+		startActivity(intent);
 	}
 
 	/**
@@ -90,19 +80,13 @@ public class Main extends Activity {
 	 */
 	public void helpMessage(View view)
 	{
-		Button button = (Button) findViewById(R.id.helpButton);
-		button.setOnClickListener(new View.OnClickListener() {    
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
-				builder.setIcon(R.drawable.helpicon)
-				.setTitle("Help!")
-				.setMessage(helpMain)
-				.setNeutralButton("OK", null);
-				AlertDialog dialog = builder.create();
-				dialog.show();
-			}
-		});  
+		AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
+		builder.setIcon(R.drawable.helpicon)
+		.setTitle("Help!")
+		.setMessage(helpMain)
+		.setNeutralButton("OK", null);
+		AlertDialog dialog = builder.create();
+		dialog.show();  
 	} 
 
 	@Override
