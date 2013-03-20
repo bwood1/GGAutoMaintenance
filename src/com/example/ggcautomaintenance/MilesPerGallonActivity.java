@@ -48,7 +48,7 @@ public class MilesPerGallonActivity extends Activity {
 		if (mpg == 0) {
 			mpgDisplay.setText("Enter Miles Driven");
 		}
-		else if (mpg > 100) {
+		else if (mpg > 10000) {
 			mpgDisplay.setText("Enter Gallons Filled");
 		}
 		else {
