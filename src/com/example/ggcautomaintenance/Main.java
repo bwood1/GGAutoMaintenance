@@ -45,8 +45,8 @@ public class Main extends Activity {
 		mpgDataSource.open();
 		/*(int fillNumber, String carName, 
 			int odometer, int gallons, double costPerGal)*/
-		mpgDataSource.addNewFill(1, " ", 0, 0, 0.0);
-		mpgDataSource.addNewFill(2, " ", 0, 0, 0.0);
+		//mpgDataSource.addNewFill(1, " ", 0, 0, 0.0);
+		//mpgDataSource.addNewFill(2, " ", 0, 0, 0.0);
 		
 		
 		
