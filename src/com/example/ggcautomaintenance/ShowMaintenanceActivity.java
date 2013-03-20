@@ -27,7 +27,14 @@ public class ShowMaintenanceActivity extends Activity {
 	Button alphaButton;
 	Button nextDueButton;
 	
-	ListView listView1;
+	ListView listViewNext;
+	ListView listViewAlpha;
+	
+	MaintItems[] alphaItems;
+	MaintItems[] nextItems;
+	
+	MaintItemsArrayAdapter nextAdapter;
+	MaintItemsArrayAdapter alphaAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,24 +48,19 @@ public class ShowMaintenanceActivity extends Activity {
 		datasource = new MaintItemsTableDataSource(this);
 		datasource.open();
 		
-		final MaintItems[] items =   datasource.getAllMaintenanceItemsAlphabetical();
 		
-		listView1 = (ListView) findViewById(R.id.listView1);
-	    listView1.setAdapter(new MaintItemsArrayAdapter(this, items));
-		listView1.setOnItemClickListener(new OnItemClickListener() {
-			
-			//@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long id) {
-				String miid = "Maintenance ID " + items[position].getMaintId() + " \n"
-						+ items[position].getMaintDescription() + " \n"
-						+ items[position].getMileageInterval() + " miles \n"
-						+ items[position].getTimeInterval() + " weeks";
-				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
-				intent.putExtra("specificItem", miid);
-	            startActivity(intent);
-			}
-		});
+		alphaItems = datasource.getAllMaintenanceItemsAlphabetical();
+		nextItems =  datasource.getAllMaintenanceItemsDueDate();
+		
+		//initialize both sorted views
+		listViewNext = (ListView) findViewById(R.id.listViewNext);
+		listViewAlpha = (ListView) findViewById(R.id.listViewAlpha);
+		
+		nextAdapter = new MaintItemsArrayAdapter(this, nextItems);
+		alphaAdapter = new MaintItemsArrayAdapter(this, alphaItems);
+		
+		alphaViewListViewClicker();
+		nextViewListViewClicker();		
 	}
 
 	/**
@@ -79,11 +81,61 @@ public class ShowMaintenanceActivity extends Activity {
 	public void alphaButton(View view)
 	{
 		//alphaButton sort code goes here.
+		//visibility value "0" is visible view and value "2" is invisible and takes no space		
+		listViewNext.setVisibility(View.GONE);
+		listViewNext.refreshDrawableState();
+		listViewAlpha.setVisibility(View.VISIBLE);
+		listViewAlpha.refreshDrawableState();
 	}
 	
 	public void nextDueButton(View view)
 	{
 		//nextDueButton sort code goes here.
+		//visibility value "0" is visible view and value "2" is invisible and takes no space		
+		listViewAlpha.setVisibility(View.GONE);
+		listViewAlpha.refreshDrawableState();
+		listViewNext.setVisibility(View.VISIBLE);
+		listViewNext.refreshDrawableState();
+	}
+	
+	void alphaViewListViewClicker()
+	{
+		listViewAlpha.setAdapter(alphaAdapter);
+		listViewAlpha.setOnItemClickListener(new OnItemClickListener() {
+			
+			//@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				String miid = "Maintenance ID " + alphaItems[position].getMaintId() + " \n"				
+						+ alphaItems[position].getMaintDescription() + " \n"
+						+ alphaItems[position].getMileageInterval() + " miles \n"
+						+ alphaItems[position].getTimeInterval() + " weeks"
+						/*+ alphaItems[position].getMaintDueDate() + "Due"*/;
+				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
+				intent.putExtra("specificItem", miid);
+	            startActivity(intent);
+			}
+		});
+	}
+	
+	void nextViewListViewClicker()
+	{
+		listViewNext.setAdapter(nextAdapter);
+		listViewNext.setOnItemClickListener(new OnItemClickListener() {
+			
+			//@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				String miid = "Maintenance ID " + nextItems[position].getMaintId() + " \n"
+						+ nextItems[position].getMaintDescription() + " \n"
+						+ nextItems[position].getMileageInterval() + " miles \n"
+						+ nextItems[position].getTimeInterval() + " weeks"
+						/*+ nextItems[position].getMaintDueDate() + "Due"*/;
+				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
+				intent.putExtra("specificItem", miid);
+	            startActivity(intent);
+			}
+		});
 	}
 
 	@Override

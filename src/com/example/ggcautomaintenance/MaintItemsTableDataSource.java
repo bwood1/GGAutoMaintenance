@@ -69,18 +69,23 @@ public class MaintItemsTableDataSource {
 	public MaintItems getMaintenanceItem(int id) {
 		//			SQLiteDatabase db = this.getReadableDatabase();
 
-		Cursor cursor = db.query(MaintItemsTableHelper.TABLE_MAINT_ITEMS, new String[] { 
+		Cursor cursor = db.query(MaintItemsTableHelper.TABLE_MAINT_ITEMS, 
+				new String[] { 
 				MaintItemsTableHelper.COLUMN_MAINT_ID,
 				MaintItemsTableHelper.COLUMN_MAINT_DESCRIPTION, 
 				MaintItemsTableHelper.COLUMN_MILEAGE_INTERVAL, 
-				MaintItemsTableHelper.COLUMN_TIME_INTERVAL }, 
+				MaintItemsTableHelper.COLUMN_TIME_INTERVAL},
+				
 				MaintItemsTableHelper.COLUMN_MAINT_ID + "=?",
 				new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null)
 			cursor.moveToFirst();
 
-		MaintItems maintItem = new MaintItems(Integer.parseInt(cursor.getString(0)),
-				cursor.getString(1), Integer.parseInt(cursor.getString(2)), Integer.parseInt(cursor.getString(3)));
+		MaintItems maintItem = new MaintItems(
+				Integer.parseInt(cursor.getString(0)),
+				cursor.getString(1), 
+				Integer.parseInt(cursor.getString(2)), 
+				Integer.parseInt(cursor.getString(3)));
 		// return contact
 		return maintItem;
 	}
@@ -91,9 +96,9 @@ public class MaintItemsTableDataSource {
 
 		//			List<MaintItems> maintItemsList = new ArrayList<MaintItems>();
 		// Select All Query
-		String selectQuery = "SELECT MaintenanceItems.MaintID, MaintenanceItems.MaintDescription, " +
-				"MaintenanceItems.MileageInterval, MaintenanceItems.TimeInterval, maintrecord.MaintDueDate " +
-				"FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS + " NATURAL JOIN " + MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE  +
+		String selectQuery = "SELECT MaintID, MaintDescription, " +
+				"MileageInterval, TimeInterval "/*maintrecord.MaintDueDate */ +
+				"FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS +
 				" ORDER BY 2";
 
 		//			SQLiteDatabase db = this.getWritableDatabase();
@@ -126,10 +131,10 @@ public class MaintItemsTableDataSource {
 
 		//			List<MaintItems> maintItemsList = new ArrayList<MaintItems>();
 		// Select All Query
-		String selectQuery = "SELECT MaintenanceItems.MaintID, MaintenanceItems.MaintDescription, " +
-				"MaintenanceItems.MileageInterval, MaintenanceItems.TimeInterval, maintrecord.MaintDueDate " +
-				"FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS + " NATURAL JOIN " + MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE  +
-				" ORDER BY 5";
+		String selectQuery = "SELECT MaintID, MaintDescription, " +
+				"MileageInterval, TimeInterval " /*maintrecord.MaintDueDate */ +
+				"FROM " + MaintItemsTableHelper.TABLE_MAINT_ITEMS  +
+				" ORDER BY 4";
 		
 //		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 //		queryBuilder.setTables(MaintItemsTableHelper.TABLE_MAINT_ITEMS + ", " + MaintRecordTableHelper.TABLE_MAINT_RECORDS_TABLE);

@@ -33,13 +33,13 @@ public final class R {
     }
     public static final class id {
         public static final int MPGDisplay=0x7f080011;
-        public static final int action_settings=0x7f080028;
+        public static final int action_settings=0x7f080029;
         public static final int alphaButton=0x7f080018;
         public static final int buttonCalcMPG=0x7f080002;
         public static final int buttonShowMaint=0x7f080003;
         public static final int calcMPGButton=0x7f080012;
         public static final int currentMileageTF=0x7f080013;
-        public static final int dateLabel=0x7f08001e;
+        public static final int dateLabel=0x7f08001f;
         public static final int enterButton=0x7f080005;
         public static final int fillBox=0x7f080006;
         public static final int helpButton=0x7f080004;
@@ -47,18 +47,19 @@ public final class R {
         public static final int helpButtonMPG=0x7f080017;
         public static final int helpButtonShowMaint=0x7f08001a;
         public static final int imageView1=0x7f080007;
-        public static final int inputDateField=0x7f08001d;
-        public static final int inputMileageField=0x7f08001f;
+        public static final int inputDateField=0x7f08001e;
+        public static final int inputMileageField=0x7f080020;
         public static final int linearLayout1=0x7f080001;
-        public static final int listView1=0x7f08001b;
+        public static final int listViewAlpha=0x7f08001c;
+        public static final int listViewNext=0x7f08001b;
         public static final int miidDisplay=0x7f080009;
-        public static final int mileageLabel=0x7f080020;
+        public static final int mileageLabel=0x7f080021;
         public static final int nextDueButton=0x7f080019;
         public static final int numGallonsFilled=0x7f080014;
         public static final int numGallonsFilledDisplay=0x7f080016;
         public static final int odometer=0x7f080000;
         public static final int recordMaintButton=0x7f08000f;
-        public static final int recordMaintOSP=0x7f080021;
+        public static final int recordMaintOSP=0x7f080022;
         public static final int textDateOfNextService=0x7f08000a;
         public static final int textMilesTillNextService=0x7f08000b;
         public static final int textView1=0x7f080008;
@@ -66,13 +67,13 @@ public final class R {
         public static final int textViewMileageOfLastService=0x7f08000d;
         public static final int textViewMilesDrivenSinceServ=0x7f08000e;
         public static final int totMilesDriven=0x7f080015;
-        public static final int useCurrentBox=0x7f08001c;
-        public static final int widget_odometer_spinner_1=0x7f080027;
-        public static final int widget_odometer_spinner_10=0x7f080026;
-        public static final int widget_odometer_spinner_100=0x7f080025;
-        public static final int widget_odometer_spinner_100k=0x7f080022;
-        public static final int widget_odometer_spinner_10k=0x7f080023;
-        public static final int widget_odometer_spinner_1k=0x7f080024;
+        public static final int useCurrentBox=0x7f08001d;
+        public static final int widget_odometer_spinner_1=0x7f080028;
+        public static final int widget_odometer_spinner_10=0x7f080027;
+        public static final int widget_odometer_spinner_100=0x7f080026;
+        public static final int widget_odometer_spinner_100k=0x7f080023;
+        public static final int widget_odometer_spinner_10k=0x7f080024;
+        public static final int widget_odometer_spinner_1k=0x7f080025;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

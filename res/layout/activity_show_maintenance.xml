@@ -42,14 +42,27 @@
         android:textSize="12sp" />
     
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listViewNext"
         android:layout_width="300dp"
         android:layout_height="360dp"
         android:layout_below="@+id/nextDueButton"
         android:listSelector="@drawable/row_background"
         android:background="@drawable/roundback"
         android:fadeScrollbars="false"
+        android:visibility="visible"
         android:padding="3dp" />
+    
+    <ListView 
+        android:id="@+id/listViewAlpha"
+        android:layout_width="300dp"
+        android:layout_height="360dp"
+        android:layout_below="@+id/nextDueButton"
+        android:listSelector="@drawable/row_background"
+        android:background="@drawable/roundback"
+        android:fadeScrollbars="false"
+        android:visibility="gone"
+        android:padding="3dp" />
+        
 
     <Button
         android:id="@+id/helpButtonShowMaint"
