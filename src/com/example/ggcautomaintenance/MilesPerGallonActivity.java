@@ -23,7 +23,7 @@ public class MilesPerGallonActivity extends Activity {
 	
 	Button mpgCalcButton;
 	Button helpButton;
-	Main main = new Main();
+	//Main main = new Main();
 	
 
 	@Override
@@ -36,15 +36,15 @@ public class MilesPerGallonActivity extends Activity {
 		
 		//mpgDatabaseConnector = new MPGTableDataSource(this);
 		//mpgDatabaseConnector.open();
-//		main.setCurrentMileage();
+		Main.setCurrentMileage();
 		
 		//mpgDatabaseConnector.setCurrentMileage(main.getCurrentMileage());
 		//System.out.println("The odometer value is: " + main.getCurrentMileage());		
 		
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
-		text.setText("" + main.getMilesDriven());
+		text.setText("" + Main.getMilesDriven());
 		
-		main.setOldMileage();
+		Main.setOldMileage();
 		//mpgDatabaseConnector.setOldMileage(mpgDatabaseConnector.getCurrentMileage());
 		
 		//mpgDatabaseConnector.close();

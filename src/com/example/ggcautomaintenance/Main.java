@@ -117,43 +117,43 @@ public class Main extends Activity {
 	 * Gets the old mileage from the mpg table
 	 * @return - the old mileage
 	 */
-	public int getOldMileage() {
-		return mpgDataSource.getOldMileage();
-//		return oldOdometer;
+	public static int getOldMileage() {
+		//return mpgDataSource.getOldMileage();
+		return oldOdometer;
 	}
 	
 	/**
 	 * sets the old odometer reading in the mpg table
 	 */
-	public void setOldMileage()	{
-		mpgDataSource.setOldMileage(mpgDataSource.getCurrentMileage());
-//		oldOdometer = getCurrentMileage();
+	public static void setOldMileage()	{
+		//mpgDataSource.setOldMileage(mpgDataSource.getCurrentMileage());
+		oldOdometer = getCurrentMileage();
 	}
 
 	/**
 	 * Gets the current mileage from the MPG Table
 	 * @return - current mileage
 	 */
-	public int getCurrentMileage() {
-		return mpgDataSource.getCurrentMileage();
+	public static int getCurrentMileage() {
+		//return mpgDataSource.getCurrentMileage();
 		
-//		return currentOdometer;
+		return currentOdometer;
 	}
 
 	/**
 	 * Sets the database according to the odometer dial on 
 	 * the home screen
 	 */
-	public void setCurrentMileage() {
-		System.out.println("The odometer value is : " + 
-				mOdometer.getValue());
-		mpgDataSource.setCurrentMileage(mOdometer.getValue());
+	public static void setCurrentMileage() {
+		//System.out.println("The odometer value is : " + 
+		//		mOdometer.getValue());
+		//mpgDataSource.setCurrentMileage(mOdometer.getValue());
 		
 		
-//		currentOdometer = mOdometer.getValue();
+		currentOdometer = mOdometer.getValue();
 	}
 	
-	public int getMilesDriven() {
+	public static int getMilesDriven() {
 		//mpgDataSource = new MPGTableDataSource(this);
 		//mpgDataSource.open();
 		//int milesDriven = mpgDataSource.getCurrentMileage() - 
