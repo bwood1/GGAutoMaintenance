@@ -41,6 +41,15 @@ public class Main extends Activity {
 		datasource.dropMaintItemsTable();
 		datasource.close();
 		
+		mpgDataSource = new MPGTableDataSource(this);
+		mpgDataSource.open();
+		/*(int fillNumber, String carName, 
+			int odometer, int gallons, double costPerGal)*/
+		mpgDataSource.addNewFill(1, " ", 0, 0, 0.0);
+		mpgDataSource.addNewFill(2, " ", 0, 0, 0.0);
+		
+		
+		
 		mpgButton = (Button) findViewById(R.id.buttonCalcMPG);
 		showMButton = (Button) findViewById(R.id.buttonShowMaint);
 		helpButton = (Button) findViewById(R.id.helpButton);
@@ -104,31 +113,53 @@ public class Main extends Activity {
 		mOdometerValue = mOdometer.getValue();	
 		outState.putInt(KEY_VALUE, mOdometerValue);
 	}
-	
-	public static int getOldMileage() {
-		return oldOdometer;
+	/**
+	 * Gets the old mileage from the mpg table
+	 * @return - the old mileage
+	 */
+	public int getOldMileage() {
+		return mpgDataSource.getOldMileage();
+//		return oldOdometer;
 	}
 	
-	public static void setOldMileage()	{
-		oldOdometer = getCurrentMileage();
+	/**
+	 * sets the old odometer reading in the mpg table
+	 */
+	public void setOldMileage()	{
+		mpgDataSource.setOldMileage(mpgDataSource.getCurrentMileage());
+//		oldOdometer = getCurrentMileage();
 	}
 
-	public static int getCurrentMileage() {
-		return currentOdometer;
+	/**
+	 * Gets the current mileage from the MPG Table
+	 * @return - current mileage
+	 */
+	public int getCurrentMileage() {
+		return mpgDataSource.getCurrentMileage();
+		
+//		return currentOdometer;
 	}
 
-	public static void setCurrentMileage() {
-		currentOdometer = mOdometer.getValue();
+	/**
+	 * Sets the database according to the odometer dial on 
+	 * the home screen
+	 */
+	public void setCurrentMileage() {
+		System.out.println("The odometer value is : " + 
+				mOdometer.getValue());
+		mpgDataSource.setCurrentMileage(mOdometer.getValue());
+		
+		
+//		currentOdometer = mOdometer.getValue();
 	}
 	
 	public int getMilesDriven() {
-		mpgDataSource = new MPGTableDataSource(this);
-		mpgDataSource.open();
-		int milesDriven = mpgDataSource.getCurrentMileage() - 
-				mpgDataSource.getOldMileage();
-		mpgDataSource.close();
-		// int milesDriven = getCurrentMileage() - getOldMileage();
-		
+		//mpgDataSource = new MPGTableDataSource(this);
+		//mpgDataSource.open();
+		//int milesDriven = mpgDataSource.getCurrentMileage() - 
+		//		mpgDataSource.getOldMileage();
+		//mpgDataSource.close();
+		int milesDriven = getCurrentMileage() - getOldMileage();		
 		
 		return milesDriven;
 	}

@@ -19,12 +19,11 @@ public class MPGTableHelper extends SQLiteOpenHelper {
 	
 	//Database creation statement
 	private static final String CREATE_MPG_TABLE = "CREATE TABLE " + TABLE_COMMENTS + 
-													"(fillnumber INTEGER PRIMARY KEY AUTOINCREMENT, " +
+													"(fillnumber INTEGER PRIMARY KEY, " +
 													"carname TEXT(20), " +
 													"odometer INTEGER, " +
 													"gallons INTEGER, " +
-													"costpergallon CURRENCY, " +
-													"FOREIGN KEY(odometer) REFRENCES car(odometer);";
+													"costpergallon CURRENCY);";
 
 	public MPGTableHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

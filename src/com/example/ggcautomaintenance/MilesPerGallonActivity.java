@@ -23,6 +23,7 @@ public class MilesPerGallonActivity extends Activity {
 	
 	Button mpgCalcButton;
 	Button helpButton;
+	Main main = new Main();
 	
 
 	@Override
@@ -31,28 +32,22 @@ public class MilesPerGallonActivity extends Activity {
 		setContentView(R.layout.activity_miles_per_gallon);		
 		
 		mpgCalcButton = (Button) findViewById(R.id.calcMPGButton);
-		helpButton = (Button) findViewById(R.id.helpButtonMPG);
-		Odometer odom = new Odometer(this);
+		helpButton = (Button) findViewById(R.id.helpButtonMPG);	
 		
-		mpgDatabaseConnector = new MPGTableDataSource(this);
-		mpgDatabaseConnector.open();
+		//mpgDatabaseConnector = new MPGTableDataSource(this);
+		//mpgDatabaseConnector.open();
+//		main.setCurrentMileage();
 		
-		System.out.println("The odometer value is: " + odom.getValue());
-		
-		mpgDatabaseConnector.setCurrentMileage(odom.getValue());
-		
-		
-		Main main = new Main();
-		//main.setCurrentMileage();
-		
-		
+		//mpgDatabaseConnector.setCurrentMileage(main.getCurrentMileage());
+		//System.out.println("The odometer value is: " + main.getCurrentMileage());		
 		
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
 		text.setText("" + main.getMilesDriven());
 		
-		mpgDatabaseConnector.setOldMileage(mpgDatabaseConnector.getCurrentMileage());
-		//Main.setOldMileage();
-		mpgDatabaseConnector.close();
+		main.setOldMileage();
+		//mpgDatabaseConnector.setOldMileage(mpgDatabaseConnector.getCurrentMileage());
+		
+		//mpgDatabaseConnector.close();
 	}
 
 	/**
