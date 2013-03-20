@@ -10,80 +10,27 @@
     tools:context=".MIIDActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:text="Maintenance Item Description"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/miidDisplay"
+        android:id="@+id/textViewMilesDrivenSinceService"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/textViewMileageOfLastService"
+        android:layout_marginBottom="10dp"
         android:padding="3dp"
         android:background="@drawable/roundback"
         android:gravity="center"
-        android:text="___"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textDateOfNextService"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textMilesTillNextService"
-        android:layout_centerHorizontal="true"
-        android:padding="3dp"
-        android:background="@drawable/roundback"
-        android:gravity="center"
-        android:text="DONS \n11/11/1111" />
-
-    <TextView
-        android:id="@+id/textMilesTillNextService"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewDateofLastService"
-        android:layout_centerHorizontal="true"
-        android:padding="3dp"
-        android:background="@drawable/roundback"
-        android:gravity="center"
-        android:text="MTNS \n888888" />
-
-    <TextView
-        android:id="@+id/textViewDateofLastService"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewMileageOfLastService"
-        android:layout_centerHorizontal="true"
-        android:padding="3dp"
-        android:background="@drawable/roundback"
-        android:gravity="center"
-        android:text="DOLS \n11/11/1111" />
-
-    <TextView
-        android:id="@+id/textViewMileageOfLastService"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewMilesDrivenSinceServ"
-        android:layout_centerHorizontal="true"
-        android:padding="3dp"
-        android:background="@drawable/roundback"
-        android:gravity="center"
-        android:text="MOLS \n888888" />
-
-    <TextView
-        android:id="@+id/textViewMilesDrivenSinceServ"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/recordMaintButton"
-        android:layout_centerHorizontal="true"
-        android:padding="3dp"
-        android:background="@drawable/roundback"
-        android:gravity="center"
-        android:text="MDSS \n888888" />
+        android:text="Miles Driven since Service\n888888" />
     
     <Button
         android:id="@+id/recordMaintButton"
@@ -104,5 +51,73 @@
         android:layout_centerHorizontal="true"
         android:onClick="helpMessage"
         android:text="Help" />
+
+    <TextView
+        android:id="@+id/textViewDateOfNextService"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewMilesTillNextService"
+        android:layout_below="@+id/textViewMaintName"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="Date of Next Service\n11/11/1111" />
+
+    <TextView
+        android:id="@+id/textViewMilesTillNextService"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewDateofLastService"
+        android:layout_below="@+id/textViewDateOfNextService"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="Miles till Next Service\n888888" />
+
+    <TextView
+        android:id="@+id/textViewDateofLastService"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewMileageOfLastService"
+        android:layout_below="@+id/textViewMilesTillNextService"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="Date of Last Service\n11/11/1111" />
+
+    <TextView
+        android:id="@+id/textViewMileageOfLastService"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewMilesDrivenSinceService"
+        android:layout_below="@+id/textViewDateofLastService"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="Mileage of Last Service\n888888" />
+
+    <TextView
+        android:id="@+id/textViewMaintName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewDateOfNextService"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="Maintenance Item \nName" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/recordMaintButton"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/wrenchesmedium" />
 
 </RelativeLayout>

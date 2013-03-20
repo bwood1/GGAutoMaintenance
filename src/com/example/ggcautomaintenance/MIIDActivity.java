@@ -3,6 +3,7 @@ package com.example.ggcautomaintenance;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,8 +41,15 @@ public class MIIDActivity extends Activity {
 		    value = extras.getString("specificItem");
 		}
 		
-		TextView maintIDDisplay = (TextView)findViewById(R.id.miidDisplay);
-		maintIDDisplay.setText("" + value);
+		
+		TextView textViewMaintName = (TextView)findViewById(R.id.textViewMaintName);
+		textViewMaintName.setText(extras.getString("MaintDesc"));
+		
+		TextView textViewMilesDrivenSinceService = (TextView)findViewById(R.id.textViewMilesDrivenSinceService);
+		textViewMilesDrivenSinceService.setText(extras.getString("MaintDesc"));
+		
+		//TextView maintIDDisplay = (TextView)findViewById(R.id.miidDisplay);
+		//maintIDDisplay.setText("" + value);
 	}
 	
 	/**

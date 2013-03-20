@@ -106,13 +106,11 @@ public class ShowMaintenanceActivity extends Activity {
 			//@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				String miid = "Maintenance ID " + alphaItems[position].getMaintId() + " \n"				
-						+ alphaItems[position].getMaintDescription() + " \n"
-						+ alphaItems[position].getMileageInterval() + " miles \n"
-						+ alphaItems[position].getTimeInterval() + " weeks"
-						/*+ alphaItems[position].getMaintDueDate() + "Due"*/;
+				
 				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
-				intent.putExtra("specificItem", miid);
+				intent.putExtra("MaintDesc", alphaItems[position].getMaintDescription());
+				intent.putExtra("MileageInt", alphaItems[position].getMileageInterval());
+				intent.putExtra("TimeInteval", alphaItems[position].getTimeInterval());
 	            startActivity(intent);
 			}
 		});
