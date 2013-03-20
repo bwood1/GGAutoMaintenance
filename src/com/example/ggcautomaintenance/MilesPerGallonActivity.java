@@ -45,7 +45,15 @@ public class MilesPerGallonActivity extends Activity {
 	{
 		float mpg = getMPG();
 		TextView mpgDisplay = (TextView)findViewById(R.id.MPGDisplay);
-		mpgDisplay.setText("" + mpg + " MPG");
+		if (mpg == 0) {
+			mpgDisplay.setText("Enter Miles Driven");
+		}
+		else if (mpg > 100) {
+			mpgDisplay.setText("Enter Gallons Filled");
+		}
+		else {
+			mpgDisplay.setText("" + mpg + " MPG");
+		}		
 	}
 
 	/**
@@ -53,15 +61,22 @@ public class MilesPerGallonActivity extends Activity {
 	 * @return mpg (miles per gallon)
 	 */
 	public float getMPG() {
+		float mpg;
 		EditText editMilesDriven = (EditText)findViewById(R.id.currentMileageTF);
 		EditText editGallonsFilled = (EditText)findViewById(R.id.numGallonsFilledDisplay);
-
+		
 		float milesDriven = Float.valueOf(editMilesDriven.getText().toString());
 		float gallonsFilled = Float.valueOf(editGallonsFilled.getText().toString());
-		MPGCalculator mpgCalc = new MPGCalculator(milesDriven, gallonsFilled);
-		float mpg = mpgCalc.getMPG();
-
-		return mpg;
+		
+		if (milesDriven == 0 && gallonsFilled == 0) {
+			mpg = 0;
+			return mpg;
+		}
+		else {
+			MPGCalculator mpgCalc = new MPGCalculator(milesDriven, gallonsFilled);		
+			mpg = mpgCalc.getMPG();
+			return mpg;
+		}		
 	}
 
 	/**
