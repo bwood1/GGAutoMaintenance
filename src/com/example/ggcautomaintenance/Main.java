@@ -6,9 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -39,29 +37,29 @@ public class Main extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		CarMaintTableHelper myDbHelper = new CarMaintTableHelper(this);
-//        myDbHelper = new CarMaintTableHelper(this);
- 
-        try {
-        	myDbHelper.createDataBase();
- 
- 	} catch (IOException ioe) {
- 
- 		throw new Error("Unable to create database");
- 
- 	}
- 
- 	try {
- 
- 		myDbHelper.openDataBase();
- 
- 	}catch(SQLException sqle){
- 
- 		throw sqle;
- 
- 	}
-		
+		//        myDbHelper = new CarMaintTableHelper(this);
+
+		try {
+			myDbHelper.createDataBase();
+
+		} catch (IOException ioe) {
+
+			throw new Error("Unable to create database");
+
+		}
+
+		try {
+
+			myDbHelper.openDataBase();
+
+		}catch(SQLException sqle){
+
+			throw sqle;
+
+		}
+
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
 
@@ -72,11 +70,7 @@ public class Main extends Activity {
 
 		mOdometer = (Odometer) findViewById(R.id.odometer);
 
-		if(savedInstanceState != null)
-		{
-			mOdometerValue = savedInstanceState.getInt(KEY_VALUE);
-			mOdometer.setValue(mOdometerValue);
-		}
+		mOdometer.setValue(dataSource.getOldMileage());
 	}	
 
 	public void enterButton(View view)
@@ -182,6 +176,6 @@ public class Main extends Activity {
 	public void getNextMaintenance() {
 
 	}
-	
-	
+
+
 }
