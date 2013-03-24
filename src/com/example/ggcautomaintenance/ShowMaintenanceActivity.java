@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 
 public class ShowMaintenanceActivity extends Activity {
-	private MaintItemsTableDataSource datasource;
+	private CarMaintDataSource datasource;
 
 	// Text for the help dialog
 	String helpMain = 	"* A list of Maintenance Items are displayed. By default the list is sorted by maintenance due next. \n" +
@@ -45,7 +45,7 @@ public class ShowMaintenanceActivity extends Activity {
 		alphaButton = (Button) findViewById(R.id.alphaButton);
 		nextDueButton = (Button) findViewById(R.id.nextDueButton);
 		
-		datasource = new MaintItemsTableDataSource(this);
+		datasource = new CarMaintDataSource(this);
 		datasource.open();
 		
 		
@@ -108,14 +108,16 @@ public class ShowMaintenanceActivity extends Activity {
 					long id) {
 				
 				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
+				intent.putExtra("MaintId", alphaItems[position].getMaintId());
 				intent.putExtra("MaintDesc", alphaItems[position].getMaintDescription());
-				intent.putExtra("MileageInt", alphaItems[position].getMileageInterval());
-				intent.putExtra("TimeInteval", alphaItems[position].getTimeInterval());
 	            startActivity(intent);
 			}
 		});
 	}
 	
+	/**
+	 * listener for the click
+	 */
 	void nextViewListViewClicker()
 	{
 		listViewNext.setAdapter(nextAdapter);
@@ -124,13 +126,10 @@ public class ShowMaintenanceActivity extends Activity {
 			//@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				String miid = "Maintenance ID " + nextItems[position].getMaintId() + " \n"
-						+ nextItems[position].getMaintDescription() + " \n"
-						+ nextItems[position].getMileageInterval() + " miles \n"
-						+ nextItems[position].getTimeInterval() + " weeks"
-						/*+ nextItems[position].getMaintDueDate() + "Due"*/;
+				
 				Intent intent = new Intent(view.getContext(), MIIDActivity.class);
-				intent.putExtra("specificItem", miid);
+				intent.putExtra("MaintId", nextItems[position].getMaintId());
+				intent.putExtra("MaintDesc", nextItems[position].getMaintDescription());
 	            startActivity(intent);
 			}
 		});

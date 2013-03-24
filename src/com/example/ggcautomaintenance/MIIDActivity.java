@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,9 +13,11 @@ import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
 public class MIIDActivity extends Activity {
-	
+	public static CarMaintDataSource carMaintDataSource;
 	private String value;
 	OptionSelectionPopup OSPopup;
+	
+	MIID miid;
 	
 	// Text for the help dialog
 	String helpMain = 	"* Information is displayed about the specific maintenance item. \n" +
@@ -26,30 +29,48 @@ public class MIIDActivity extends Activity {
 	Button helpButton;
 	Button recMaintButton;
 	Button ospRecordButton;
+	
+	int maintId;
+	String maintType;
+	String maintDesc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miid);
 		
+		carMaintDataSource = new CarMaintDataSource(this);
+		carMaintDataSource.open();
+		
 		helpButton = (Button) findViewById(R.id.helpButtonMIID);
 		recMaintButton = (Button) findViewById(R.id.recordMaintButton);
     	ospRecordButton = (Button) findViewById(R.id.recordMaintOSP);
 		
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-		    value = extras.getString("specificItem");
-		}
+    	Bundle extras = getIntent().getExtras();
 		
+		maintDesc = extras.getString("MaintDesc");
+		maintId = extras.getInt("MaintId");
+		Log.d("Steve Printed This", "" + maintId);
+		
+		miid = new MIID(maintId, carMaintDataSource);
 		
 		TextView textViewMaintName = (TextView)findViewById(R.id.textViewMaintName);
-		textViewMaintName.setText(extras.getString("MaintDesc"));
+		textViewMaintName.setText(maintDesc);
 		
 		TextView textViewMilesDrivenSinceService = (TextView)findViewById(R.id.textViewMilesDrivenSinceService);
-		textViewMilesDrivenSinceService.setText(extras.getString("MaintDesc"));
+		textViewMilesDrivenSinceService.setText("Miles Driven Since Service \n" + miid.getMilesSince());
 		
-		//TextView maintIDDisplay = (TextView)findViewById(R.id.miidDisplay);
-		//maintIDDisplay.setText("" + value);
+		TextView textViewDateOfNextService = (TextView)findViewById(R.id.textViewDateOfNextService);
+		textViewDateOfNextService.setText("Date of Next Service \n" + miid.getDateNextDue());	//carMaintDataSource.getNextMaintDueDate(maintId));	
+		
+		TextView textViewMilesTillNextService = (TextView)findViewById(R.id.textViewMilesTillNextService);
+		textViewMilesTillNextService.setText("Miles Until Next Service \n" + miid.getMilesTill());
+		
+		TextView textViewDateofLastService = (TextView)findViewById(R.id.textViewDateofLastService);
+		textViewDateofLastService.setText("Date of Last Service \n" + miid.getDateLastServ());
+		
+		TextView textViewMileageOfLastService = (TextView)findViewById(R.id.textViewMileageOfLastService);
+		textViewMileageOfLastService.setText("Mileage of Last Service \n" + miid.getMilesLast());
 	}
 	
 	/**

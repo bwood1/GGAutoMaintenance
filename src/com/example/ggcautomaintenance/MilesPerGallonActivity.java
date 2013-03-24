@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MilesPerGallonActivity extends Activity {	
-	private MPGTableDataSource mpgDatabaseConnector;
+	//private MPGTableDataSource mpgDatabaseConnector;****************************************
 
 	// Text for the help dialog
 	String helpMain = 	"* For accurate MPG calculations, mileage must be enter when filling up and the gas tank must be completely filled. \n" +
