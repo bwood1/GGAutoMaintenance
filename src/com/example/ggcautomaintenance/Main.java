@@ -12,6 +12,7 @@ import android.widget.Button;
 
 public class Main extends Activity {
 	private CarMaintDataSource dataSource;
+	private CarMaintTableHelper maintHelper;
 
 	// Text for the help dialog
 	String helpMain = "* Enter the Current Date in the Odometer.\n" +
@@ -35,25 +36,14 @@ public class Main extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
-		dataSource.dropMaintItemsTable();
-		dataSource.close();
 
 		mpgButton = (Button) findViewById(R.id.buttonCalcMPG);
 		showMButton = (Button) findViewById(R.id.buttonShowMaint);
 		helpButton = (Button) findViewById(R.id.helpButton);
 		enterButton = (Button) findViewById(R.id.enterButton);
-
-		if(!checkDataBase()) {
-			Log.d("Steve Printed This", "begin creating tables");
-			dataSource.open();
-			createMaintItemsTable();
-			createMaintRecordsTable();
-			createMPGTable();
-			//createCarTable();
-		}
 
 		mOdometer = (Odometer) findViewById(R.id.odometer);
 
@@ -66,6 +56,7 @@ public class Main extends Activity {
 
 	public void enterButton(View view)
 	{
+		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
 		dataSource.setCurrentMileage(currentOdometer);	
 		dataSource.close();
@@ -166,100 +157,6 @@ public class Main extends Activity {
 	public void getNextMaintenance() {
 
 	}
-
-	// Load the Maintenance items table data
-	private void createMaintItemsTable() {
-		dataSource = new CarMaintDataSource(this);
-		dataSource.open();
-
-		dataSource.addMaintenanceItem(1, "Battery", 70000, 60);
-		dataSource.addMaintenanceItem(2, "Brake Fluid", 30000, 24);
-		dataSource.addMaintenanceItem(3, "Brake Inspection", 15000, 12);
-		dataSource.addMaintenanceItem(4, "Cabin Air Filter", 15000, 18);
-		dataSource.addMaintenanceItem(5, "Engine Air Filter", 10000, 12);
-		dataSource.addMaintenanceItem(6, "Front Brake Pads", 50000, 36);
-		dataSource.addMaintenanceItem(7, "Oil Change", 3000, 4);
-		dataSource.addMaintenanceItem(8, "Power Steering Fluid", 60000, 48);
-		dataSource.addMaintenanceItem(9, "Radiator Fluid", 30000, 24);
-		dataSource.addMaintenanceItem(10, "Rear Brakes", 50000, 36);
-		dataSource.addMaintenanceItem(11, "Spark Plugs", 30000, 24);
-		dataSource.addMaintenanceItem(12, "State Inspection", 15000, 12);
-		dataSource.addMaintenanceItem(13, "Timing Belt", 60000, 48);
-		dataSource.addMaintenanceItem(14, "Tire Rotation", 10000, 12);
-		dataSource.addMaintenanceItem(15, "Transmission Fluid", 20000, 18);
-		dataSource.addMaintenanceItem(16, "Valve Adjustment", 30000, 24);
-		dataSource.addMaintenanceItem(17, "Wheel Alignment", 30000, 24);
-		dataSource.addMaintenanceItem(18, "Windshield Wiper", 15000, 12);
-		dataSource.addMaintenanceItem(19, "Accesory Belts", 40000, 48);
-		dataSource.addMaintenanceItem(20, "Idle Air Control", 30000, 24);
-		dataSource.addMaintenanceItem(21, "Brake Flush", 30000, 24);
-		dataSource.addMaintenanceItem(22, "Engine Thermostat", 30000, 36);
-		
-		dataSource.close();
-	}
-
-	// Load the Maintenance Records table data
-	private void createMaintRecordsTable(){
-		dataSource = new CarMaintDataSource(this);
-		dataSource.open();
-		dataSource.addMaintRecordToDatabase(1, "2008/1/1", "car1", 1, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(2, "2008/1/1", "car1", 2, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(3, "2008/1/1", "car1", 3, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(4, "2008/1/1", "car1", 4, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(5, "2008/1/1", "car1", 5, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(6, "2008/1/1", "car1", 6, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(7, "2008/1/1", "car1", 7, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(8, "2008/1/1", "car1", 8, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(9, "2008/1/1", "car1", 9, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(10, "2008/1/1", "car1", 10, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(11, "2008/1/1", "car1", 11, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(12, "2008/1/1", "car1", 12, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(13, "2008/1/1", "car1", 13, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(14, "2008/1/1", "car1", 14, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(15, "2008/1/1", "car1", 15, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(16, "2008/1/1", "car1", 16, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(17, "2008/1/1", "car1", 17, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(18, "2008/1/1", "car1", 18, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(19, "2008/1/1", "car1", 19, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(20, "2008/1/1", "car1", 20, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(21, "2008/1/1", "car1", 21, 0, 0.0, "2008/3/1", 1);
-		dataSource.addMaintRecordToDatabase(22, "2008/1/1", "car1", 22, 0, 0.0, "2008/3/1", 1);
-		dataSource.close();
-	}
-
-	// Load the MPG table data
-	private void createMPGTable() {
-		dataSource = new CarMaintDataSource(this);
-		dataSource.open();
-		dataSource.addMPGToDatabase(1, "", 0, 0, 0.0);
-		dataSource.addMPGToDatabase(2, "", 0, 0, 0.0);
-		
-		dataSource.close();
-	}
-
-	/*	// Load the Car table data
-	private void createCarTable(){
-
-		dataSource = new CarMaintDataSource(this);
-		dataSource.open();
-
-		dataSource.close();
-	}
-	 */
 	
-	//checks to see if Maintenance Items Table has been created
-	private boolean checkDataBase() {
-		SQLiteDatabase checkDB = null;
-		try {
-			CarMaintDataSource db = null;
-			checkDB = db.open();
-			checkDB.close();
-			Log.d("Steve Printed This", "Database exists");
-			return true;
-		} catch (NullPointerException e) {
-			//database doesn't exist
-			Log.d("Steve Printed This", "Database does not exists");
-			return false;
-		}	
-	}   
+	
 }
