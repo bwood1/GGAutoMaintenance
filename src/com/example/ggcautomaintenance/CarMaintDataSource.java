@@ -115,7 +115,7 @@ public class CarMaintDataSource {
 		MaintItems[] maintItemsArray = new MaintItems[22/*need to make into a variable if scope changes*/];
 
 		// Select All Query
-		String selectQuery = "SELECT MaintID, MaintDescription, " +
+		String selectQuery = "SELECT _id, MaintDescription, " +
 				"MileageInterval, TimeInterval "/*maintrecord.MaintDueDate */ +
 				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS +
 				" ORDER BY 2";
@@ -150,7 +150,7 @@ public class CarMaintDataSource {
 		MaintItems[] maintItemsArray = new MaintItems[22/*need to make into a variable if scope changes*/];
 
 		// Select All Query
-		String selectQuery = "SELECT MaintID, MaintDescription, " +
+		String selectQuery = "SELECT _id, MaintDescription, " +
 				"MileageInterval, TimeInterval " /*maintrecord.MaintDueDate */ +
 				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS  +
 				" ORDER BY 4";
@@ -335,7 +335,7 @@ public class CarMaintDataSource {
 	 * @return
 	 */
 	public String getNextMaintDueDate (int maintId) {
-		String query = "SELECT MaintDueDate FROM MaintRecord WHERE MaintId IS " + maintId;
+		String query = "SELECT MaintDueDate FROM MaintRecord WHERE _id IS " + maintId;
 		Cursor cursor = db.rawQuery(query, null);
 		cursor.moveToFirst();
 
@@ -349,7 +349,7 @@ public class CarMaintDataSource {
 	 */
 	public int getMaintDueMileage(int maintId)
 	{
-		String query = "SELECT maintduemileage FROM maintrecord WHERE MaintId IS " +
+		String query = "SELECT maintduemileage FROM maintrecord WHERE _id IS " +
 				maintId;
 
 		Cursor cursor = db.rawQuery(query, null);
@@ -367,7 +367,7 @@ public class CarMaintDataSource {
 	 * @return
 	 */
 	public String getNextMaintCompleteDate (int maintId) {
-		String query = "SELECT maintCompleteDate FROM maintrecord WHERE MaintId IS " + maintId;
+		String query = "SELECT maintCompleteDate FROM maintrecord WHERE _id IS " + maintId;
 
 		Cursor test = db.rawQuery(query, null);
 		test.moveToFirst();
@@ -382,7 +382,7 @@ public class CarMaintDataSource {
 	 */
 	public int getOdometer(int maintId)
 	{
-		String query = "SELECT odometer FROM maintrecord WHERE MaintId IS " + maintId;
+		String query = "SELECT odometer FROM maintrecord WHERE _id IS " + maintId;
 
 		Cursor cursor = db.rawQuery(query, null);
 		cursor.moveToFirst();
@@ -482,18 +482,26 @@ public class CarMaintDataSource {
 
 		String[] whereArgs = new String[1];
 		whereArgs[0] = "1";
-
-		//Create a cursor to hold the data 
-		//till we can convert to int
-		Cursor cursor = db.query(CarMaintTableHelper.TABLE_MPG, 
-				columns, CarMaintTableHelper.MPG_FILL_NUMBER, 
-				whereArgs, null, null, null);
-
+		
+		String query = "SELECT odometer FROM mpg WHERE _id IS 1";
+		
+		Cursor cursor = db.rawQuery(query, null);
 		cursor.moveToFirst();
-		int integer = cursorToInt(cursor);
-		cursor.close();
+		
+		int mileage = cursorToInt(cursor);
+		return mileage;
 
-		return integer;
+//		//Create a cursor to hold the data 
+//		//till we can convert to int
+//		Cursor cursor = db.query(CarMaintTableHelper.TABLE_MPG, 
+//				columns, CarMaintTableHelper.MPG_FILL_NUMBER + "=1", 
+//				whereArgs, null, null, null);
+//
+//		cursor.moveToFirst();
+//		int integer = cursorToInt(cursor);
+//		cursor.close();
+//
+//		return integer;
 	}
 
 	/**
@@ -541,7 +549,7 @@ public class CarMaintDataSource {
 		String[] args = new String[1];
 		args[0] = "2";
 		
-		String query = "SELECT odometer FROM mpg WHERE fillNumber IS 2";
+		String query = "SELECT odometer FROM mpg WHERE _id IS 2";
 
 		Cursor test = db.rawQuery(query, null);
 		

@@ -34,20 +34,27 @@ public class MilesPerGallonActivity extends Activity {
 		mpgCalcButton = (Button) findViewById(R.id.calcMPGButton);
 		helpButton = (Button) findViewById(R.id.helpButtonMPG);	
 		
-		//mpgDatabaseConnector = new MPGTableDataSource(this);
-		//mpgDatabaseConnector.open();
-		Main.setCurrentMileage();
+		carMaintDataSource = new CarMaintDataSource(this);
+		carMaintDataSource.open();
 		
 		//mpgDatabaseConnector.setCurrentMileage(main.getCurrentMileage());
 		//System.out.println("The odometer value is: " + main.getCurrentMileage());		
 		
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
-		text.setText("" + Main.getMilesDriven());
+		text.setText("" + getMilesDriven());
+		
+		carMaintDataSource.setOldMileage(carMaintDataSource.getCurrentMileage());
 		
 		Main.setOldMileage();
 		//mpgDatabaseConnector.setOldMileage(mpgDatabaseConnector.getCurrentMileage());
 		
 		//mpgDatabaseConnector.close();
+	}
+	
+	private int getMilesDriven() {
+		int milesDriven;
+		milesDriven = carMaintDataSource.getCurrentMileage() - carMaintDataSource.getOldMileage();
+		return milesDriven;
 	}
 
 	/**
