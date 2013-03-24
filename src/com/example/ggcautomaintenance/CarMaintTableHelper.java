@@ -16,14 +16,14 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 	
 	// Static Variables for Maintenance Items Table
 		public static final String TABLE_MAINT_ITEMS = "MaintenanceItems";
-		public static final String MI_MAINT_ID = "MaintID";
+		public static final String MI_MAINT_ID = "_id";
 		public static final String MI_MAINT_DESCRIPTION = "MaintDescription";
 		public static final String MI_MILEAGE_INTERVAL = "MileageInterval";
 		public static final String MI_TIME_INTERVAL = "TimeInterval";
 
 		// Static Variable for Maintenance Records Table
 		public static final String TABLE_MAINT_RECORDS = "MaintRecord";
-		public static final String MR_MAINT_RECORD_ID = "MaintRecordID";
+		public static final String MR_MAINT_RECORD_ID = "_id";
 		public static final String MR_MAINT_COMPLETE_DATE = "MaintCompleteDate";
 		public static final String MR_CAR_NAME = "CarName";
 		public static final String MR_MAINT_ID = "MaintID";
@@ -33,8 +33,8 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 		public static final String MR_MAINT_DUE_MILEAGE = "MaintDueMileage";
 
 		// Static Variables for MPG Table
-		public static final String TABLE_MPG = "MPG";
-		public static final String MPG_FILL_NUMBER = "FillNumber";
+		public static final String TABLE_MPG = "mpg";
+		public static final String MPG_FILL_NUMBER = "_id";
 		public static final String MPG_CAR_NAME = "CarName";
 		public static final String MPG_ODOMETER = "Odometer";
 		public static final String MPG_GALLONS = "Gallons";
@@ -57,7 +57,7 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
      */
     public CarMaintTableHelper(Context context) {
  
-    	super(context, DB_NAME, null, 1);
+    	super(context, DB_NAME, null, 5);
         this.myContext = context;
     }	
  
@@ -77,7 +77,6 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
         	this.getReadableDatabase();
  
         	try {
- 
     			copyDataBase();
  
     		} catch (IOException e) {
