@@ -14,10 +14,10 @@ public class Main extends Activity {
 	private CarMaintDataSource dataSource;
 
 	// Text for the help dialog
-	String helpMain = 	"* Enter the Current Date in the Odometer. \n" +
-			"* Select the Fill-Up check box if this mileage is being entered when filling-up the tank. \n" +
-			"* Select Enter to save the current mileage. \n" +
-			"* Select Calculate MPG to go to the Calculator Screen. \n" +
+	String helpMain = "* Enter the Current Date in the Odometer.\n" +
+			"* Select the Fill-Up check box if this mileage is being entered when filling-up the tank.\n" +
+			"* Select Enter to save the current mileage.\n" +
+			"* Select Calculate MPG to go to the Calculator Screen.\n" +
 			"* Select Show Maintenance to go to the Maintenance Items List screen.";
 
 	private static final String KEY_VALUE = "OdometerValue";
@@ -66,7 +66,9 @@ public class Main extends Activity {
 
 	public void enterButton(View view)
 	{
-		setCurrentMileage();		
+		dataSource.open();
+		dataSource.setCurrentMileage(currentOdometer);	
+		dataSource.close();
 	}
 
 	public void mpgButton(View view)		

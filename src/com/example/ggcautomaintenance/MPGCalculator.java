@@ -10,8 +10,12 @@ package com.example.ggcautomaintenance;
  */
 public class MPGCalculator {
 	
+	public CarMaintDataSource dataSource;
 	private static float totalMilesDriven;
 	private static float numberOfGallons;
+	private static int currentOdometer;	
+	public static Odometer odometer;
+	public static int odometerValue;
 	
 	/**
 	 * Null Constructor MPGCalculator
@@ -20,15 +24,16 @@ public class MPGCalculator {
 		totalMilesDriven = 0;
 		numberOfGallons = 0;
 	}
-	
+
 	/**
 	 * Constructor MPGCalculator
 	 * @param totMilesDriven - the total number of miles driven
 	 * @param numOfGallons - the total number of gallons to fill tank
 	 */
-	public MPGCalculator(float totMilesDriven, float numOfGallons) {
+	public MPGCalculator(float totMilesDriven, float numOfGallons, CarMaintDataSource dataSourceConstructor) {
 		totalMilesDriven = totMilesDriven;
 		numberOfGallons = numOfGallons;
+		this.dataSource = dataSourceConstructor;
 	}
 	
 	
@@ -44,24 +49,39 @@ public class MPGCalculator {
 	}
 	
 	/**
-	 * displayHelp method returns a popup message to the user
-	 * @return message - popup message to user
+	 * Gets the old mileage from the mpg table
+	 * @return - the old mileage
 	 */
-	public void displayHelp() {
-		
+	public int getOldMileage() {
+		return dataSource.getOldMileage();
 	}
 	
 	/**
-	 * getTrip method returns the total trip taken since last update
-	 * @return totTripMiles - the total miles of the trip.
+	 * sets the old odometer reading in the mpg table
 	 */
-	public float getTrip() {
-		MPG mpg = new MPG();
-		int newMileage = mpg.getCurrentOdometer();
-		int oldMileage = mpg.getOldOdometer();
-		
-		float totTripMiles = newMileage - oldMileage;
-		
-		return totTripMiles;
+	public void setOldMileage()	{
+		dataSource.setOldMileage(dataSource.getCurrentMileage());
+	}		
+
+	/**
+	 * Gets the current mileage from the MPG Table
+	 * @return - current mileage
+	 */
+	public int getCurrentMileage() {
+		return dataSource.getCurrentMileage();
+	}
+
+	/**
+	 * Sets the database according to the odometer dial on 
+	 * the home screen
+	 */
+	public void setCurrentMileage() {
+		dataSource.setCurrentMileage(currentOdometer);
+	}
+
+	public int getMilesDriven() {
+		int milesDriven = getCurrentMileage() - getOldMileage();		
+
+		return milesDriven;
 	}
 }

@@ -506,10 +506,9 @@ public class CarMaintDataSource {
 
 		String[] whereArgs = new String[1];
 		whereArgs[0] = "1";
-		//update table
+		
 		db.update(CarMaintTableHelper.TABLE_MPG, 
-				values, CarMaintTableHelper.MPG_FILL_NUMBER ,
-				whereArgs);
+				values, CarMaintTableHelper.MPG_FILL_NUMBER	+ "=1" ,null);
 	}
 
 	/**
@@ -523,11 +522,11 @@ public class CarMaintDataSource {
 		String[] whereArgs = new String[1];
 		whereArgs[0] = "2";
 
-		//update table
-		db.update(CarMaintTableHelper.TABLE_MPG, 
-				values, CarMaintTableHelper.MPG_FILL_NUMBER ,
-				whereArgs);
-		System.out.println("Current Mileage has been updated");
+		String query = "UPDATE mpg SET " + CarMaintTableHelper.MPG_ODOMETER + "=" + odometer + 
+				" WHERE " + CarMaintTableHelper.MPG_FILL_NUMBER + "=2";
+		
+		db.update(CarMaintTableHelper.TABLE_MPG, values, 
+				CarMaintTableHelper.MPG_FILL_NUMBER + "=2", null);
 	}
 
 	//Get current mileage
@@ -541,14 +540,14 @@ public class CarMaintDataSource {
 
 		String[] args = new String[1];
 		args[0] = "2";
+		
+		String query = "SELECT odometer FROM mpg WHERE fillNumber IS 2";
 
-		Cursor cursor = db.query(CarMaintTableHelper.TABLE_MPG, columns, 
-				CarMaintTableHelper.MPG_FILL_NUMBER, args, null, null, null);
-
-		cursor.moveToFirst();
-		int currentMileage = cursorToInt(cursor);
-
-		return currentMileage;
+		Cursor test = db.rawQuery(query, null);
+		
+		test.moveToFirst();
+		int testMileage = cursorToInt(test);
+		return testMileage;
 	}
 
 	//will update the old MPG with the new data
