@@ -17,10 +17,10 @@ public class ShowMaintenanceActivity extends Activity {
 	private CarMaintDataSource datasource;
 
 	// Text for the help dialog
-	String helpMain = 	"* A list of Maintenance Items are displayed. By default the list is sorted by maintenance due next. \n" +
-			"* The list can be sorted alphabetically by selecting Sort Alpha. \n" +
-			"* Select Sort Next Due to go back. \n" +
-			"* The list can be scrolled up and down by swiping up or down. \n +" +
+	String helpMain = 	"* A list of Maintenance Items are displayed. By default the list is sorted by maintenance due next.\n" +
+			"* The list can be sorted alphabetically by selecting Sort Alpha.\n" +
+			"* Select Sort Next Due to go back.\n" +
+			"* The list can be scrolled up and down by swiping up or down.\n" +
 			"* To see more information or record maintenance on a specific item select the item in the list.";
 	
 	Button helpButton;
@@ -47,7 +47,6 @@ public class ShowMaintenanceActivity extends Activity {
 		
 		datasource = new CarMaintDataSource(this);
 		datasource.open();
-		
 		
 		alphaItems = datasource.getAllMaintenanceItemsAlphabetical();
 		nextItems =  datasource.getAllMaintenanceItemsDueDate();

@@ -3,7 +3,6 @@ package com.example.ggcautomaintenance;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,7 +35,6 @@ public class Main extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Log.d("Steve Printed This", "onCreate");
 
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
@@ -49,6 +47,7 @@ public class Main extends Activity {
 		enterButton = (Button) findViewById(R.id.enterButton);
 
 		if(!checkDataBase()) {
+			Log.d("Steve Printed This", "begin creating tables");
 			dataSource.open();
 			createMaintItemsTable();
 			createMaintRecordsTable();
@@ -143,10 +142,6 @@ public class Main extends Activity {
 	 * the home screen
 	 */
 	public static void setCurrentMileage() {
-		//System.out.println("The odometer value is : " + 
-		//		mOdometer.getValue());
-		//mpgDataSource.setCurrentMileage(mOdometer.getValue());
-
 
 		currentOdometer = mOdometer.getValue();
 	}
@@ -172,8 +167,6 @@ public class Main extends Activity {
 
 	// Load the Maintenance items table data
 	private void createMaintItemsTable() {
-		Log.d("Steve Printed This", "Begin CreateMaintItemsTable");
-
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
 
@@ -201,13 +194,10 @@ public class Main extends Activity {
 		dataSource.addMaintenanceItem(22, "Engine Thermostat", 30000, 36);
 		
 		dataSource.close();
-		
-		Log.d("Steve Printed This", "End CreateMaintItemsTable");
 	}
 
 	// Load the Maintenance Records table data
 	private void createMaintRecordsTable(){
-		Log.d("Steve Printed This", "Begin CreateMaintRecordsTable");;
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
 		dataSource.addMaintRecordToDatabase(1, "2008/1/1", "car1", 1, 0, 0.0, "2008/3/1", 1);
@@ -233,19 +223,16 @@ public class Main extends Activity {
 		dataSource.addMaintRecordToDatabase(21, "2008/1/1", "car1", 21, 0, 0.0, "2008/3/1", 1);
 		dataSource.addMaintRecordToDatabase(22, "2008/1/1", "car1", 22, 0, 0.0, "2008/3/1", 1);
 		dataSource.close();
-		Log.d("Steve Printed This", "End CreateMaintRecordsTable");;
 	}
 
 	// Load the MPG table data
 	private void createMPGTable() {
-		Log.d("Steve Printed This", "Begin MPGTable");
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
 		dataSource.addMPGToDatabase(1, "", 0, 0, 0.0);
 		dataSource.addMPGToDatabase(2, "", 0, 0, 0.0);
 		
-		dataSource.close();	
-		Log.d("Steve Printed This", "End MPGTable");
+		dataSource.close();
 	}
 
 	/*	// Load the Car table data
@@ -257,6 +244,7 @@ public class Main extends Activity {
 		dataSource.close();
 	}
 	 */
+	
 	//checks to see if Maintenance Items Table has been created
 	private boolean checkDataBase() {
 		SQLiteDatabase checkDB = null;
@@ -271,7 +259,5 @@ public class Main extends Activity {
 			Log.d("Steve Printed This", "Database does not exists");
 			return false;
 		}	
-	}
-
-	    
+	}   
 }

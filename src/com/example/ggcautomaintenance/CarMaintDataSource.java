@@ -2,13 +2,11 @@ package com.example.ggcautomaintenance;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class CarMaintDataSource {
 
@@ -250,7 +248,6 @@ public class CarMaintDataSource {
 
 		//add maint record to database
 		db.insert(CarMaintTableHelper.TABLE_MAINT_RECORDS, null, values);
-		Log.d("Steve Printed This", "addMaintRecordToDatabase");
 	}
 
 	//Get a single maint record from the database
@@ -411,8 +408,6 @@ public class CarMaintDataSource {
 		return maintRecords;
 	}
 
-
-
 	/*********************************************************************************************************
 	 **************************************** begin MPG SECTION ***********************************************/
 
@@ -473,7 +468,6 @@ public class CarMaintDataSource {
 
 		//replace the first entry of the table with new fill up
 		db.insert(CarMaintTableHelper.TABLE_MPG, null, values);
-
 	}
 
 	//Get old MPG
@@ -556,8 +550,6 @@ public class CarMaintDataSource {
 
 		return currentMileage;
 	}
-
-
 
 	//will update the old MPG with the new data
 	/**

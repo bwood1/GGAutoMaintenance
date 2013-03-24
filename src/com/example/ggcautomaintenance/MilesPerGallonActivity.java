@@ -15,10 +15,10 @@ public class MilesPerGallonActivity extends Activity {
 	//private MPGTableDataSource mpgDatabaseConnector;****************************************
 
 	// Text for the help dialog
-	String helpMain = 	"* For accurate MPG calculations, mileage must be enter when filling up and the gas tank must be completely filled. \n" +
-			"* Screen will include mileage driven since last fill-up by default. \n" +
-			"* You may change the mileage if you so choose. \n" +
-			"* Enter the # of gallons put in tank. \n" +
+	String helpMain = 	"* For accurate MPG calculations, mileage must be enter when filling up and the gas tank must be completely filled.\n" +
+			"* Screen will include mileage driven since last fill-up by default.\n" +
+			"* You may change the mileage if you so choose.\n" +
+			"* Enter the # of gallons put in tank.\n" +
 			"* Select Calculate and the MPG will be displayed.";
 	
 	Button mpgCalcButton;

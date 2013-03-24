@@ -3,7 +3,6 @@ package com.example.ggcautomaintenance;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,16 +13,16 @@ import android.support.v4.app.NavUtils;
 
 public class MIIDActivity extends Activity {
 	public static CarMaintDataSource carMaintDataSource;
-	private String value;
+	//private String value;
 	OptionSelectionPopup OSPopup;
 	
 	MIID miid;
 	
 	// Text for the help dialog
-	String helpMain = 	"* Information is displayed about the specific maintenance item. \n" +
-			"* To record maintenance performed select Record Maintenance. \n" +
-			"* A popup will display. \n" +
-			"* The current date and mileage can be accepted by selecting the Checkbox or a date and mileage can be entered. \n" +
+	String helpMain = "* Information is displayed about the specific maintenance item.\n" +
+			"* To record maintenance performed select Record Maintenance.\n" +
+			"* A popup will display.\n" +
+			"* The current date and mileage can be accepted by selecting the Checkbox or a date and mileage can be entered.\n" +
 			"* Select Record Service to save this record.";
 	
 	Button helpButton;
