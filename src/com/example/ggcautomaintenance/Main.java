@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 public class Main extends Activity {
 	private CarMaintDataSource dataSource;
@@ -75,10 +76,13 @@ public class Main extends Activity {
 
 	public void enterButton(View view)
 	{
-		dataSource = new CarMaintDataSource(this);
-		dataSource.open();
-		dataSource.setCurrentMileage(mOdometer.getValue());	
-		dataSource.close();
+		CheckBox fillup = (CheckBox) findViewById(R.id.fillBox);
+		if (fillup.isChecked()) {
+			dataSource = new CarMaintDataSource(this);
+			dataSource.open();
+			dataSource.setCurrentMileage(mOdometer.getValue());	
+			dataSource.close();
+		}
 	}
 
 	public void mpgButton(View view)		
