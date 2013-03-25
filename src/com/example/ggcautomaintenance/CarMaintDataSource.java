@@ -378,8 +378,7 @@ public class CarMaintDataSource {
 	 * @param maintId
 	 * @return
 	 */
-	public int getMaintDueMileage(int maintId)
-	{
+	public int getMaintDueMileage(int maintId) {
 		String query = "SELECT maintduemileage FROM maintrecord WHERE _id IS " +
 				maintId;
 
@@ -389,6 +388,16 @@ public class CarMaintDataSource {
 		int odometer;
 		odometer = cursorToInt(cursor);
 		return odometer;
+	}
+	
+	public void setMaintDueMileage(int maintId) {
+		//calculate the due mileage
+		int newMileageDue = getOdometer(maintId) + getMileageInterval(maintId) - getMileage();
+		
+		ContentValues values = new ContentValues();
+		values.put(CarMaintTableHelper.MR_MAINT_DUE_MILEAGE, newMileageDue);
+		
+		db.update(CarMaintTableHelper.TABLE_MAINT_RECORDS, values, CarMaintTableHelper.MR_MAINT_RECORD_ID + "=" + maintId, null);
 	}
 
 	//gets the maintenance date completed for the specified maintid

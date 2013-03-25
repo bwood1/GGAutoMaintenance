@@ -61,7 +61,6 @@ public class MIIDActivity extends Activity {
 
 		maintDesc = extras.getString("MaintDesc");
 		maintId = extras.getInt("MaintId");
-		Log.d("Steve Printed This", "" + maintId);
 
 		miid = new MIID(maintId, carMaintDataSource);
 
@@ -139,7 +138,7 @@ public class MIIDActivity extends Activity {
 		Log.d("Brandon wants to know what the date is", dueDate);
 
 		//calculate the due mileage
-		int newMileageDue = miles + carMaintDataSource.getMileageInterval(maintId);
+		int newMileageDue = carMaintDataSource.getOdometer(maintId) + carMaintDataSource.getMileageInterval(maintId) - miles;
 
 		carMaintDataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,
 				dueDate, newMileageDue);
