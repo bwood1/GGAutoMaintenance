@@ -11,19 +11,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="57dp"
+        android:onClick="checkedBox"
         android:text="Use Current Date and Mileage" />
     
     <EditText
         android:id="@+id/inputDateField"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
         android:background="@drawable/roundback"
         android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="YYYY-MM-DD"
         android:inputType="date"
-        android:padding="3dp"
-        android:text="YYYY-MM-DD" />
+        android:padding="3dp" />
 
     <TextView
         android:id="@+id/dateLabel"
@@ -31,19 +33,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="25dp"
-        android:text="Enter Date of Service" />
+        android:text="Enter Date of Service\n ex. 2012-12-31" />
 
     <EditText
         android:id="@+id/inputMileageField"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:padding="3dp"
         android:background="@drawable/roundback"
-        android:text="0"
         android:ems="10"
-        android:inputType="number" >
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="0000"
+        android:inputType="number"
+        android:padding="3dp" >
 
         <requestFocus />
     </EditText>

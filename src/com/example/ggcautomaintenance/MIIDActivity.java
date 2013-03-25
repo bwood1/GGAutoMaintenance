@@ -24,24 +24,24 @@ public class MIIDActivity extends Activity {
 	public static CarMaintDataSource carMaintDataSource;
 	//private String value;
 	OptionSelectionPopup OSPopup;
-	
+
 	MIID miid;
-	
+
 	// Text for the help dialog
 	String helpMain = "* Information is displayed about the specific maintenance item.\n" +
 			"* To record maintenance performed select Record Maintenance.\n" +
 			"* A popup will display.\n" +
 			"* The current date and mileage can be accepted by selecting the Checkbox or a date and mileage can be entered.\n" +
 			"* Select Record Service to save this record.";
-	
+
 	Button helpButton;
 	Button recMaintButton;
 	Button ospRecordButton;
-	
+
 	int maintId;
 	String maintType;
 	String maintDesc;
-	
+
 	EditText inputDateField;
 	EditText inputMileageField;
 
@@ -49,41 +49,41 @@ public class MIIDActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miid);
-		
+
 		carMaintDataSource = new CarMaintDataSource(this);
 		carMaintDataSource.open();
-		
+
 		helpButton = (Button) findViewById(R.id.helpButtonMIID);
 		recMaintButton = (Button) findViewById(R.id.recordMaintButton);
-    	ospRecordButton = (Button) findViewById(R.id.recordMaintOSP);
-		
-    	Bundle extras = getIntent().getExtras();
-		
+		ospRecordButton = (Button) findViewById(R.id.recordMaintOSP);
+
+		Bundle extras = getIntent().getExtras();
+
 		maintDesc = extras.getString("MaintDesc");
 		maintId = extras.getInt("MaintId");
 		Log.d("Steve Printed This", "" + maintId);
-		
+
 		miid = new MIID(maintId, carMaintDataSource);
-		
+
 		TextView textViewMaintName = (TextView)findViewById(R.id.textViewMaintName);
 		textViewMaintName.setText(maintDesc);
-		
+
 		TextView textViewMilesDrivenSinceService = (TextView)findViewById(R.id.textViewMilesDrivenSinceService);
-		textViewMilesDrivenSinceService.setText("Miles Driven Since Service \n" + miid.getMilesSince());
-		
+		textViewMilesDrivenSinceService.setText("Miles Driven Since Service\n" + miid.getMilesSince());
+
 		TextView textViewDateOfNextService = (TextView)findViewById(R.id.textViewDateOfNextService);
-		textViewDateOfNextService.setText("Date of Next Service \n" + miid.getDateNextDue());	//carMaintDataSource.getNextMaintDueDate(maintId));	
-		
+		textViewDateOfNextService.setText("Date of Next Service\n" + miid.getDateNextDue());
+
 		TextView textViewMilesTillNextService = (TextView)findViewById(R.id.textViewMilesTillNextService);
-		textViewMilesTillNextService.setText("Miles Until Next Service \n" + miid.getMilesTill());
-		
+		textViewMilesTillNextService.setText("Miles Until Next Service\n" + miid.getMilesTill());
+
 		TextView textViewDateofLastService = (TextView)findViewById(R.id.textViewDateofLastService);
-		textViewDateofLastService.setText("Date of Last Service \n" + miid.getDateLastServ());
-		
+		textViewDateofLastService.setText("Date of Last Service\n" + miid.getDateLastServ());
+
 		TextView textViewMileageOfLastService = (TextView)findViewById(R.id.textViewMileageOfLastService);
-		textViewMileageOfLastService.setText("Mileage of Last Service \n" + miid.getMilesLast());
+		textViewMileageOfLastService.setText("Mileage of Last Service\n" + miid.getMilesLast());
 	}
-	
+
 	/**
 	 * Method to display help popup
 	 * @param view
@@ -98,61 +98,61 @@ public class MIIDActivity extends Activity {
 		AlertDialog dialog = builder.create();
 		dialog.show(); 
 	} 
-	
-	//Fires the Option Selection Prompt when Record Maintenance Button is pressed
-		public void recordMaintButton(View view)
-		{
-			OSPopup = new OptionSelectionPopup(view.getContext());
-			OSPopup.show(view);
-			OSPopup.update();
-		}
-		
-		/*Listener for record maintenance button on Option Selection Prompt
-		 * 
-		 ****  AS OF 3/18/13  ****
-		 *Only closes prompt window
-		 * 
-		*/
-	    public void record(View view) throws ParseException
-	    {	    	
 
-	    	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-	    	
-	    	inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
-	    	inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
-	    	Integer miles = Integer.valueOf(inputMileageField.getText().toString());
-	    	String maintCompleteDate = inputDateField.getText().toString();
-	    	
-	    	CheckBox useCurrentDateAndMiles = (CheckBox)OSPopup.getContentView().findViewById(R.id.useCurrentBox);
-	    	System.out.println(useCurrentDateAndMiles);
-	    	if(useCurrentDateAndMiles.isChecked()){
-	    		maintCompleteDate = carMaintDataSource.getCurrentDate();
-	    		miles = carMaintDataSource.getMileage();
-	    	}
-	    	
-	    	//calculate the due date
-	    	Date maintLastDoneDate = new Date();
-	    	Calendar cal = Calendar.getInstance(); 
-	    	maintLastDoneDate = dateFormat.parse(maintCompleteDate);	//when the maint was done
-	    	cal.setTime(maintLastDoneDate);
-	    	cal.add(Calendar.MONTH, carMaintDataSource.getTimeInterval(maintId));  //add time interval
-	    	
-	    	String dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
-	    	cal.get(Calendar.DAY_OF_MONTH);															//build string
-	    	Log.d("Brandon wants to know what the date is", dueDate);
-//	    	maintLastDoneDate = cal.getTime();
-//	    	maintLastDoneDate = dateFormat.parse(maintLastDoneDate.toString());
-	    	
-	    	//calculate the due mileage
-	    	int newMileageDue = miles + carMaintDataSource.getMileageInterval(maintId);
-	    	
-	    	carMaintDataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,
-	    			dueDate, newMileageDue);
-	    	//System.out.println(miles);
-	    	//System.out.println(date);
-	    	OSPopup.dismiss();
-	    	view.invalidate();
+	//Fires the Option Selection Prompt when Record Maintenance Button is pressed
+	public void recordMaintButton(View view)
+	{
+		OSPopup = new OptionSelectionPopup(view.getContext());
+		OSPopup.show(view);
+		OSPopup.update();
+	}
+
+	/*
+	 * Listener for record maintenance button on Option Selection Prompt
+	 */
+	public void record(View view) throws ParseException
+	{	    	
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+		inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
+		inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
+		Integer miles = Integer.valueOf(inputMileageField.getText().toString());
+		String maintCompleteDate = inputDateField.getText().toString();
+
+		CheckBox useCurrentDateAndMiles = (CheckBox)OSPopup.getContentView().findViewById(R.id.useCurrentBox);
+		System.out.println(useCurrentDateAndMiles);
+		if(useCurrentDateAndMiles.isChecked()){
+			maintCompleteDate = carMaintDataSource.getCurrentDate();
+			miles = carMaintDataSource.getMileage();
 		}
+
+		//calculate the due date
+		Date maintLastDoneDate = new Date();
+		Calendar cal = Calendar.getInstance(); 
+		maintLastDoneDate = dateFormat.parse(maintCompleteDate);	//when the maint was done
+		cal.setTime(maintLastDoneDate);
+		cal.add(Calendar.MONTH, carMaintDataSource.getTimeInterval(maintId));  //add time interval
+
+		String dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
+				cal.get(Calendar.DAY_OF_MONTH);															//build string
+		Log.d("Brandon wants to know what the date is", dueDate);
+
+		//calculate the due mileage
+		int newMileageDue = miles + carMaintDataSource.getMileageInterval(maintId);
+
+		carMaintDataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,
+				dueDate, newMileageDue);
+		OSPopup.dismiss();
+		view.invalidate();
+	}
+
+	public void checkedBox(View view) {
+		inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
+		inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
+		inputMileageField.setText("" + carMaintDataSource.getMileage());
+		inputDateField.setText(carMaintDataSource.getCurrentDate());
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

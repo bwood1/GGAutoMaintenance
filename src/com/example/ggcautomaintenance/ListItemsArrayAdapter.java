@@ -28,6 +28,6 @@ public class ListItemsArrayAdapter extends TwoLineArrayAdapter<ListItems> {
      */
     @Override
     public String lineTwoText(ListItems mi) {
-        return "Due in " + mi.getMileageNextDue() + " miles or " + mi.getDateNextDue() + " weeks";
+    	return "Due in " + mi.getMileageNextDue() + " miles or on " + mi.getDateNextDue();
     }
 }

@@ -1,6 +1,5 @@
 package com.example.ggcautomaintenance;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.ContentValues;
@@ -120,12 +119,7 @@ public class CarMaintDataSource {
 				"b.MaintDueDate, b.MaintDueMileage " + 
 				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS + " a " + 
 				"INNER JOIN " + CarMaintTableHelper.TABLE_MAINT_RECORDS + " b " +
-				"ON " + "a._id=b._id" + " ORDER BY 2";		
-		
-//		String selectQuery = "SELECT _id, MaintDescription, " +
-//				"MileageInterval, TimeInterval "/*maintrecord.MaintDueDate */ +
-//				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS +
-//				" ORDER BY 2";
+				"ON " + "a._id=b._id" + " ORDER BY 2";
 		
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -160,12 +154,7 @@ public class CarMaintDataSource {
 				"b.MaintDueDate, b.MaintDueMileage " + 
 				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS + " a " + 
 				"INNER JOIN " + CarMaintTableHelper.TABLE_MAINT_RECORDS + " b " +
-				"ON " + "a._id=b._id" + " ORDER BY 3";	
-		/*
-		String selectQuery = "SELECT _id, MaintDescription, " +
-				"MileageInterval, TimeInterval " /*maintrecord.MaintDueDate *//* +
-				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS  +
-				" ORDER BY 4";*/
+				"ON " + "a._id=b._id" + " ORDER BY 3";
 
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -287,7 +276,7 @@ public class CarMaintDataSource {
 	 * @return - a MaintRecord
 	 */
 	public MaintRecords getMaintRecord(String maintId) {
-		List<MaintRecords> maintRecordsList = new ArrayList<MaintRecords>();
+		//List<MaintRecords> maintRecordsList = new ArrayList<MaintRecords>();
 		String[] maintIdArray = new String[1];
 		maintIdArray[0] = maintId.toString();
 		String[] allColumns = {
@@ -532,18 +521,6 @@ public class CarMaintDataSource {
 
 		int mileage = cursorToInt(cursor);
 		return mileage;
-
-		//		//Create a cursor to hold the data 
-		//		//till we can convert to int
-		//		Cursor cursor = db.query(CarMaintTableHelper.TABLE_MPG, 
-		//				columns, CarMaintTableHelper.MPG_FILL_NUMBER + "=1", 
-		//				whereArgs, null, null, null);
-		//
-		//		cursor.moveToFirst();
-		//		int integer = cursorToInt(cursor);
-		//		cursor.close();
-		//
-		//		return integer;
 	}
 
 	/**
@@ -571,9 +548,6 @@ public class CarMaintDataSource {
 
 		String[] whereArgs = new String[1];
 		whereArgs[0] = "2";
-
-		String query = "UPDATE mpg SET " + CarMaintTableHelper.MPG_ODOMETER + "=" + odometer + 
-				" WHERE " + CarMaintTableHelper.MPG_FILL_NUMBER + "=2";
 
 		db.update(CarMaintTableHelper.TABLE_MPG, values, 
 				CarMaintTableHelper.MPG_FILL_NUMBER + "=2", null);

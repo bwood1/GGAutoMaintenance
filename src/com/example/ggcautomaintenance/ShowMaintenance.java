@@ -1,11 +1,6 @@
 package com.example.ggcautomaintenance;
 
-import java.util.ArrayList;
-
 public class ShowMaintenance {
-	
-	private static ArrayList<Object> maintenanceItems = new ArrayList<Object>();
-	private static String[] specificItem;
 	
 	public void sortNext() {
 		

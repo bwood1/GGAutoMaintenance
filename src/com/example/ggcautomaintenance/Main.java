@@ -40,7 +40,6 @@ public class Main extends Activity {
 		setContentView(R.layout.activity_main);
 
 		CarMaintTableHelper myDbHelper = new CarMaintTableHelper(this);
-		//        myDbHelper = new CarMaintTableHelper(this);
 
 		try {
 			myDbHelper.createDataBase();
@@ -48,17 +47,14 @@ public class Main extends Activity {
 		} catch (IOException ioe) {
 
 			throw new Error("Unable to create database");
-
 		}
 
 		try {
-
 			myDbHelper.openDataBase();
 
 		}catch(SQLException sqle){
 
 			throw sqle;
-
 		}
 
 		dataSource = new CarMaintDataSource(this);
@@ -137,7 +133,6 @@ public class Main extends Activity {
 	 * @return - the old mileage
 	 */
 	public static int getOldMileage() {
-		//return mpgDataSource.getOldMileage();
 		return oldOdometer;
 	}
 
@@ -145,7 +140,6 @@ public class Main extends Activity {
 	 * sets the old odometer reading in the mpg table
 	 */
 	public static void setOldMileage()	{
-		//mpgDataSource.setOldMileage(mpgDataSource.getCurrentMileage());
 		oldOdometer = getCurrentMileage();
 	}
 
@@ -169,11 +163,6 @@ public class Main extends Activity {
 	}
 
 	public static int getMilesDriven() {
-		//mpgDataSource = new MPGTableDataSource(this);
-		//mpgDataSource.open();
-		//int milesDriven = mpgDataSource.getCurrentMileage() - 
-		//		mpgDataSource.getOldMileage();
-		//mpgDataSource.close();
 		int milesDriven = getCurrentMileage() - getOldMileage();		
 
 		return milesDriven;

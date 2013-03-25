@@ -35,10 +35,7 @@ public class MilesPerGallonActivity extends Activity {
 		helpButton = (Button) findViewById(R.id.helpButtonMPG);	
 		
 		carMaintDataSource = new CarMaintDataSource(this);
-		carMaintDataSource.open();
-		
-		//mpgDatabaseConnector.setCurrentMileage(main.getCurrentMileage());
-		//System.out.println("The odometer value is: " + main.getCurrentMileage());		
+		carMaintDataSource.open();	
 		
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
 		text.setText("" + getMilesDriven());
