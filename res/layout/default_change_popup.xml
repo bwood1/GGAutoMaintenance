@@ -45,10 +45,11 @@
 
     <TextView
         android:id="@+id/timeIntervalLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="169dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="25dp"
+        android:gravity="center_horizontal"
         android:text="Enter preferred time between service in months" />
 
     <EditText
@@ -69,10 +70,11 @@
 
     <TextView
         android:id="@+id/mileageIntervalLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
+        android:gravity="center_horizontal"
         android:text="Enter preferred number of miles between service" />
 
     <Button
