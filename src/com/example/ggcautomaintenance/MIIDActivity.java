@@ -33,7 +33,9 @@ public class MIIDActivity extends Activity {
 			"* To record maintenance performed select Record Maintenance.\n" +
 			"* A popup will display.\n" +
 			"* The current date and mileage can be accepted by selecting the Checkbox or a date and mileage can be entered.\n" +
-			"* Select Record Service to save this record.";
+			"* Select Record Service to save this record.\n" +
+			"* If you would like to change the mileage or month interval between maintenance press the default Maintenance button.\n" +
+			"* Then fill in number of months, and number of miles and press Set.";
 
 	Button helpButton;
 	Button recMaintButton;
