@@ -87,6 +87,7 @@ public class Main extends Activity {
 			dataSource.setMileage(mOdometer.getValue());
 		}
 		dataSource.maintDueMileageUpdate();
+		dataSource.maintDueDate();
 		dataSource.close();
 	}
 

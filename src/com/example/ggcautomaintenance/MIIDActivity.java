@@ -24,6 +24,7 @@ public class MIIDActivity extends Activity {
 	public static CarMaintDataSource carMaintDataSource;
 	//private String value;
 	OptionSelectionPopup OSPopup;
+	ChangeDefaultPopup CDPopup;
 
 	MIID miid;
 
@@ -37,6 +38,7 @@ public class MIIDActivity extends Activity {
 	Button helpButton;
 	Button recMaintButton;
 	Button ospRecordButton;
+	Button setDefaultButton;
 
 	int maintId;
 	String maintType;
@@ -56,6 +58,7 @@ public class MIIDActivity extends Activity {
 		helpButton = (Button) findViewById(R.id.helpButtonMIID);
 		recMaintButton = (Button) findViewById(R.id.recordMaintButton);
 		ospRecordButton = (Button) findViewById(R.id.recordMaintOSP);
+		setDefaultButton = (Button) findViewById(R.id.setDefaultButton);
 
 		Bundle extras = getIntent().getExtras();
 
@@ -145,7 +148,13 @@ public class MIIDActivity extends Activity {
 		OSPopup.dismiss();
 		view.invalidate();
 	}
-
+	//method to dismiss popup on exit button 
+	public void dismissView (View view) {
+		
+		OSPopup.getContentView().findViewById(R.id.exitButton);
+		OSPopup.dismiss();
+	}
+	//method for autopopulating edittexts in the OSPopup
 	public void checkedBox(View view) {
 		inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
 		inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
@@ -175,5 +184,13 @@ public class MIIDActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	//section for default change popup
+	public void setDefault(View view)
+	{
+		CDPopup = new ChangeDefaultPopup(view.getContext());
+		CDPopup.show(view);
+		CDPopup.update();
 	}
 }

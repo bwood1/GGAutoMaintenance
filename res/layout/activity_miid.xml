@@ -31,26 +31,6 @@
         android:background="@drawable/roundback"
         android:gravity="center"
         android:text="Miles Driven since Service\n888888" />
-    
-    <Button
-        android:id="@+id/recordMaintButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_above="@+id/helpButtonMIID"
-        android:layout_centerHorizontal="true"
-        android:onClick="recordMaintButton"
-        android:text="Record Maintenance" />
-    
-    <Button
-        android:id="@+id/helpButtonMIID"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="helpMessage"
-        android:text="Help" />
 
     <TextView
         android:id="@+id/textViewDateOfNextService"
@@ -119,5 +99,35 @@
         android:layout_above="@+id/recordMaintButton"
         android:layout_centerHorizontal="true"
         android:src="@drawable/wrenchesmedium" />
+
+    <Button
+        android:id="@+id/helpButtonMIID"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="helpMessage"
+        android:text="Help" />
+
+    <Button
+        android:id="@+id/setDefaultButton"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_below="@+id/recordMaintButton"
+        android:layout_centerHorizontal="true"
+        android:text="Set Maintenance Interval"
+        android:onClick="setDefault"
+        android:textSize="12dp" />
+
+    <Button
+        android:id="@+id/recordMaintButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_above="@+id/helpButtonMIID"
+        android:layout_alignLeft="@+id/setDefaultButton"
+        android:onClick="recordMaintButton"
+        android:text="Record Maintenance" />
 
 </RelativeLayout>

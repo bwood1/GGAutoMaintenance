@@ -1,12 +1,20 @@
 package com.example.ggcautomaintenance;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class CarMaintDataSource {
 
@@ -399,6 +407,7 @@ public class CarMaintDataSource {
 		
 		db.update(CarMaintTableHelper.TABLE_MAINT_RECORDS, values, CarMaintTableHelper.MR_MAINT_RECORD_ID + "=" + maintId, null);
 	}
+	
 	//loop through all maintenance items and update their due mileage
 	public void maintDueMileageUpdate()
 	{
@@ -407,6 +416,39 @@ public class CarMaintDataSource {
 		{
 			setMaintDueMileage(i);
 		}
+	}
+	
+	public void maintDueDate()
+	{		
+		int i;
+		for(i = 1; i < 21; i++)
+		{			
+			setMaintDueDate(i);
+		}	
+	}
+	
+	public void setMaintDueDate(int maintId) {
+		//calculate the due date		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);		
+		Date maintLastDoneDate = new Date();		
+		Calendar cal = Calendar.getInstance(); 
+		
+		try {
+			maintLastDoneDate = dateFormat.parse(getMaintCompleteDate(maintId));
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+		}	//when the maint was done
+		cal.setTime(maintLastDoneDate);
+		cal.add(Calendar.MONTH, getTimeInterval(maintId));  //add time interval
+
+		String dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
+				cal.get(Calendar.DAY_OF_MONTH);	
+		
+		ContentValues values = new ContentValues();
+		values.put(CarMaintTableHelper.MR_MAINT_DUE_DATE, dueDate);
+		
+		db.update(CarMaintTableHelper.TABLE_MAINT_RECORDS, values, CarMaintTableHelper.MR_MAINT_RECORD_ID + "=" + maintId, null);
 	}
 
 	//gets the maintenance date completed for the specified maintid

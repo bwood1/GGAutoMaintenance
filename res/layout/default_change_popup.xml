@@ -4,18 +4,34 @@
     android:layout_height="match_parent"
     android:background="@drawable/popupborder"
     android:orientation="vertical" >
-
-    <CheckBox
-        android:id="@+id/useCurrentBox"
+    
+	<TextView
+        android:id="@+id/spaceHolder1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="57dp"
-        android:onClick="checkedBox"
-        android:text="Use Current Date and Mileage" />
+        android:layout_marginBottom="25dp"
+        android:text="" />
+	
+	<TextView
+	    android:id="@+id/defPopupTitle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:layout_marginBottom="25dp"
+	    android:text="Change Maintenance Interval"
+	    android:textSize="18dp" />
+	
+	<TextView
+        android:id="@+id/spaceHolder2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="25dp"
+        android:text="" />
     
     <EditText
-        android:id="@+id/inputDateField"
+        android:id="@+id/inputTimeInterval"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -23,20 +39,20 @@
         android:background="@drawable/roundback"
         android:ems="10"
         android:gravity="center_vertical|center_horizontal"
-        android:hint="YYYY-MM-DD"
-        android:inputType="date"
+        android:hint="# of Months"
+        android:inputType="number"
         android:padding="3dp" />
 
     <TextView
-        android:id="@+id/dateLabel"
+        android:id="@+id/timeIntervalLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="25dp"
-        android:text="Enter Date of Service\n ex. 2012-12-31" />
+        android:text="Enter preferred time between service in months" />
 
     <EditText
-        android:id="@+id/inputMileageField"
+        android:id="@+id/inputMileageInterval"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -52,29 +68,28 @@
     </EditText>
 
     <TextView
-        android:id="@+id/mileageLabel"
+        android:id="@+id/mileageIntervalLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
-        android:text="Enter Mileage of Service" />
+        android:text="Enter preferred number of miles between service" />
 
     <Button
-        android:id="@+id/recordMaintOSP"
+        android:id="@+id/setDefaultButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:onClick="record"
-        android:text="Record Maintenance" />
+        android:onClick="setDefaultButton"
+        android:text="Set Default" />
     
     <Button
-        android:id="@+id/exitButton"
+        android:id="@+id/exitButtonDefChange"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:onClick="dismissView"
         android:text="Exit" />
-
 </LinearLayout>
