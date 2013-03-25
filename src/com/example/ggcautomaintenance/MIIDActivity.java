@@ -46,6 +46,9 @@ public class MIIDActivity extends Activity {
 
 	EditText inputDateField;
 	EditText inputMileageField;
+	
+	EditText inputTimeInterval;
+	EditText inputMileageInterval;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -192,5 +195,27 @@ public class MIIDActivity extends Activity {
 		CDPopup = new ChangeDefaultPopup(view.getContext());
 		CDPopup.show(view);
 		CDPopup.update();
+	}
+	//exit button
+	public void dismissDefView(View view)
+	{
+		CDPopup.getContentView().findViewById(R.id.exitButton);
+		CDPopup.dismiss();
+	}
+	//set default maintenance time and mileage difference
+	public void setDefaultButton(View view)
+	{
+		carMaintDataSource.open();
+		inputTimeInterval = (EditText)CDPopup.getContentView().findViewById(R.id.inputTimeInterval);
+		inputMileageInterval = (EditText)CDPopup.getContentView().findViewById(R.id.inputMileageInterval);
+		
+		Integer timeInterval = Integer.valueOf(inputTimeInterval.getText().toString());
+		Integer mileageInterval = Integer.valueOf(inputMileageInterval.getText().toString());		
+		
+		carMaintDataSource.setTimeInterval(maintId, timeInterval);
+		carMaintDataSource.setMileageInterval(maintId, mileageInterval);
+		carMaintDataSource.close();
+		CDPopup.dismiss();
+		view.invalidate();
 	}
 }

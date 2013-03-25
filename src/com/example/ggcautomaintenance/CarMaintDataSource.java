@@ -196,11 +196,27 @@ public class CarMaintDataSource {
 		return cursorToInt(cursor);
 	}
 	
+	public void setMileageInterval(int maintId, int miles) {
+		
+		ContentValues values = new ContentValues();
+		values.put(CarMaintTableHelper.MI_MILEAGE_INTERVAL, miles);
+		
+		db.update(CarMaintTableHelper.TABLE_MAINT_ITEMS, values, CarMaintTableHelper.MI_MAINT_ID + "=" + maintId, null);
+	}
+	
 	public int getTimeInterval(int maintId) {
 		String query = "SELECT timeinterval FROM maintenanceitems WHERE _id=" +  maintId;
 		Cursor cursor = db.rawQuery(query, null);
 		cursor.moveToFirst();
 		return cursorToInt(cursor);
+	}
+	
+	public void setTimeInterval(int maintId, int timeInterval) {
+		
+		ContentValues values = new ContentValues();
+		values.put(CarMaintTableHelper.MI_TIME_INTERVAL, timeInterval);
+		
+		db.update(CarMaintTableHelper.TABLE_MAINT_ITEMS, values, CarMaintTableHelper.MI_MAINT_ID + "=" + maintId, null);
 	}
 
 	// Getting Maintenance Items Count
