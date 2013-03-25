@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="25dp"
+        android:gravity="center_horizontal"
         android:text="Enter Date of Service\n ex. 2012-12-31" />
 
     <EditText
@@ -57,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
+        android:gravity="center_horizontal"
         android:text="Enter Mileage of Service" />
 
     <Button
