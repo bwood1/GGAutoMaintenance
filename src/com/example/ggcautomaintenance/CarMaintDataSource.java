@@ -580,7 +580,7 @@ public class CarMaintDataSource {
 	}
 	
 	/**
-	 * Row for storing the actual mileage
+	 * Stores the mileage into the database (row 3)
 	 * @param odometer
 	 */
 	public void setMileage(int odometer) {
@@ -590,6 +590,10 @@ public class CarMaintDataSource {
 		db.update(CarMaintTableHelper.TABLE_MPG, values, CarMaintTableHelper.MPG_FILL_NUMBER + "=3", null);
 	}
 	
+	/**
+	 * gets the current mileage from the database (row 3 of mpg table)
+	 * @return
+	 */
 	public int getMileage() {
 		String query = "SELECT odometer FROM mpg WHERE _id IS 3";
 		

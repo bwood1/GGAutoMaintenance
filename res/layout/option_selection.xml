@@ -19,11 +19,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:padding="3dp"
         android:background="@drawable/roundback"
-        android:text="YYYY/MM/DD"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date"
+        android:padding="3dp"
+        android:text="YYYY-MM-DD" />
 
     <TextView
         android:id="@+id/dateLabel"
