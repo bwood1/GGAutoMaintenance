@@ -431,6 +431,20 @@ public class CarMaintDataSource {
 		odometer = cursorToInt(cursor);
 		return odometer;
 	}
+	
+	// Getting Maintenance Record Count
+	/**
+	 * gets the count of the maint items
+	 * @return
+	 */
+	public int getMaintRecordCount() {
+		String countQuery = "SELECT  * FROM " + CarMaintTableHelper.TABLE_MAINT_RECORDS;
+		Cursor cursor = db.rawQuery(countQuery, null);
+		cursor.close();
+
+		// return count
+		return cursor.getCount();
+	}
 
 	/**
 	 * converts a cursor into a maint item
