@@ -292,25 +292,27 @@ public class CarMaintDataSource {
 		List<MaintRecords> maintRecords = new ArrayList();
 		return maintRecords;
 	}
-
+	
 	/**
-	 * Updates the maintenance record of the given recordId
-	 * @param maintRecordId - ID to be updated
-	 * @param maintCompleteDate - date maint was completed (most likely the current day)
-	 * @param carName - Name of the car maint was performed on
-	 * @param maintId - The maintenance ID from the maintID table
-	 * @param odometer - odometer reading from when maint was done
-	 * @param cost - how much the maintenance cost
-	 * @param maintDueDate - maintCompleteDate + MaintItemsTableHelper.COLUMN_TIME_INTERVAL
-	 * @param maintDueMileage - odometer + MaintItemsTableHelper.COLUMN_MILEAGE_INTERVAL
+	 * updates the maint record row based on the record it
+	 * @param maintRecordId
+	 * @param maintCompleteDate
+	 * @param carName
+	 * @param maintId
+	 * @param odometer
+	 * @param cost
+	 * @param maintDueDate
+	 * @param maintDueMileage
 	 */
-	public void updateMaintRecord(int maintRecordId, 
-			String maintCompleteDate, 
-			String carName,	int maintId, 
+	public void updateMaintRecord(int maintRecordId,
+			String maintCompleteDate,
+			String carName, int maintId,
 			int odometer, double cost,
 			String maintDueDate, int maintDueMileage) {
+
 		String[] maintIdArray = new String[1];
 		maintIdArray[0] = String.valueOf(maintId);
+
 
 		//create a content values to hold the information for the updated record
 		ContentValues values = new ContentValues();
@@ -324,8 +326,8 @@ public class CarMaintDataSource {
 		values.put(CarMaintTableHelper.MR_MAINT_DUE_MILEAGE, maintDueMileage);
 
 		//updates the row
-		db.update(CarMaintTableHelper.TABLE_MAINT_RECORDS, 
-				values, CarMaintTableHelper.MR_MAINT_ID, maintIdArray);
+		db.update(CarMaintTableHelper.TABLE_MAINT_RECORDS,
+				values, CarMaintTableHelper.MR_MAINT_ID + "=" + maintRecordId, null);
 	}
 
 	//gets the next maintenance date due for the specified maintid
@@ -482,26 +484,26 @@ public class CarMaintDataSource {
 
 		String[] whereArgs = new String[1];
 		whereArgs[0] = "1";
-		
+
 		String query = "SELECT odometer FROM mpg WHERE _id IS 1";
-		
+
 		Cursor cursor = db.rawQuery(query, null);
 		cursor.moveToFirst();
-		
+
 		int mileage = cursorToInt(cursor);
 		return mileage;
 
-//		//Create a cursor to hold the data 
-//		//till we can convert to int
-//		Cursor cursor = db.query(CarMaintTableHelper.TABLE_MPG, 
-//				columns, CarMaintTableHelper.MPG_FILL_NUMBER + "=1", 
-//				whereArgs, null, null, null);
-//
-//		cursor.moveToFirst();
-//		int integer = cursorToInt(cursor);
-//		cursor.close();
-//
-//		return integer;
+		//		//Create a cursor to hold the data 
+		//		//till we can convert to int
+		//		Cursor cursor = db.query(CarMaintTableHelper.TABLE_MPG, 
+		//				columns, CarMaintTableHelper.MPG_FILL_NUMBER + "=1", 
+		//				whereArgs, null, null, null);
+		//
+		//		cursor.moveToFirst();
+		//		int integer = cursorToInt(cursor);
+		//		cursor.close();
+		//
+		//		return integer;
 	}
 
 	/**
@@ -514,7 +516,7 @@ public class CarMaintDataSource {
 
 		String[] whereArgs = new String[1];
 		whereArgs[0] = "1";
-		
+
 		db.update(CarMaintTableHelper.TABLE_MPG, 
 				values, CarMaintTableHelper.MPG_FILL_NUMBER	+ "=1" ,null);
 	}
@@ -532,7 +534,7 @@ public class CarMaintDataSource {
 
 		String query = "UPDATE mpg SET " + CarMaintTableHelper.MPG_ODOMETER + "=" + odometer + 
 				" WHERE " + CarMaintTableHelper.MPG_FILL_NUMBER + "=2";
-		
+
 		db.update(CarMaintTableHelper.TABLE_MPG, values, 
 				CarMaintTableHelper.MPG_FILL_NUMBER + "=2", null);
 	}
@@ -548,11 +550,11 @@ public class CarMaintDataSource {
 
 		String[] args = new String[1];
 		args[0] = "2";
-		
+
 		String query = "SELECT odometer FROM mpg WHERE _id IS 2";
 
 		Cursor test = db.rawQuery(query, null);
-		
+
 		test.moveToFirst();
 		int testMileage = cursorToInt(test);
 		return testMileage;

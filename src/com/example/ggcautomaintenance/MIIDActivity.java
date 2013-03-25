@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
@@ -32,6 +33,9 @@ public class MIIDActivity extends Activity {
 	int maintId;
 	String maintType;
 	String maintDesc;
+	
+	EditText inputDateField;
+	EditText inputMileageField;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +107,17 @@ public class MIIDActivity extends Activity {
 		*/
 	    public void record(View view)
 	    {
-			OSPopup.dismiss();
+	    	inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
+	    	inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
+	    	int miles = Integer.valueOf(inputMileageField.getText().toString());
+	    	String date = inputDateField.getText().toString();
+	    	carMaintDataSource.updateMaintRecord(maintId, date, "car1", maintId, miles, 0.00,
+	    	carMaintDataSource.getNextMaintDueDate(maintId),
+	    	carMaintDataSource.getMaintDueMileage(maintId));
+	    	//System.out.println(miles);
+	    	//System.out.println(date);
+	    	OSPopup.dismiss();
+	    	view.invalidate();
 		}
 
 	@Override
