@@ -79,7 +79,7 @@ public class Main extends Activity {
 		
 		if (fillup.isChecked()) {
 			
-			dataSource = new CarMaintDataSource(this);			
+			dataSource.setMileage(mOdometer.getValue());		
 			dataSource.setCurrentMileage(mOdometer.getValue());
 		}
 		else{
