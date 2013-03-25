@@ -399,6 +399,15 @@ public class CarMaintDataSource {
 		
 		db.update(CarMaintTableHelper.TABLE_MAINT_RECORDS, values, CarMaintTableHelper.MR_MAINT_RECORD_ID + "=" + maintId, null);
 	}
+	//loop through all maintenance items and update their due mileage
+	public void maintDueMileageUpdate()
+	{
+		int i;
+		for(i = 1; i < 21; i++)
+		{
+			setMaintDueMileage(i);
+		}
+	}
 
 	//gets the maintenance date completed for the specified maintid
 	/**

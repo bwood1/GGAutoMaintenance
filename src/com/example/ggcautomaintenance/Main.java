@@ -73,20 +73,21 @@ public class Main extends Activity {
 
 	public void enterButton(View view)
 	{
+		dataSource = new CarMaintDataSource(this);
+		dataSource.open();
 		fillup = (CheckBox) findViewById(R.id.fillBox);
+		
 		if (fillup.isChecked()) {
-			dataSource = new CarMaintDataSource(this);
-			dataSource.open();
-			dataSource.setCurrentMileage(mOdometer.getValue());	
-			dataSource.close();
 			
+			dataSource = new CarMaintDataSource(this);			
+			dataSource.setCurrentMileage(mOdometer.getValue());
 		}
 		else{
-			dataSource = new CarMaintDataSource(this);
-			dataSource.open();
-			dataSource.setMileage(mOdometer.getValue());	
-			dataSource.close();
+			
+			dataSource.setMileage(mOdometer.getValue());
 		}
+		dataSource.maintDueMileageUpdate();
+		dataSource.close();
 	}
 
 	public void mpgButton(View view)		
