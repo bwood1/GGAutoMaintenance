@@ -1,5 +1,7 @@
 package com.example.ggcautomaintenance;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,11 +32,11 @@ public class ShowMaintenanceActivity extends Activity {
 	ListView listViewNext;
 	ListView listViewAlpha;
 	
-	MaintItems[] alphaItems;
-	MaintItems[] nextItems;
+	ListItems[] alphaItems;
+	ListItems[] nextItems;
 	
-	MaintItemsArrayAdapter nextAdapter;
-	MaintItemsArrayAdapter alphaAdapter;
+	ListItemsArrayAdapter nextAdapter;
+	ListItemsArrayAdapter alphaAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +57,11 @@ public class ShowMaintenanceActivity extends Activity {
 		listViewNext = (ListView) findViewById(R.id.listViewNext);
 		listViewAlpha = (ListView) findViewById(R.id.listViewAlpha);
 		
-		nextAdapter = new MaintItemsArrayAdapter(this, nextItems);
-		alphaAdapter = new MaintItemsArrayAdapter(this, alphaItems);
+		nextAdapter = new ListItemsArrayAdapter(this, nextItems);
+		alphaAdapter = new ListItemsArrayAdapter(this, alphaItems);
 		
 		alphaViewListViewClicker();
-		nextViewListViewClicker();		
+		nextViewListViewClicker();	
 	}
 
 	/**
@@ -110,6 +112,7 @@ public class ShowMaintenanceActivity extends Activity {
 				intent.putExtra("MaintId", alphaItems[position].getMaintId());
 				intent.putExtra("MaintDesc", alphaItems[position].getMaintDescription());
 	            startActivity(intent);
+	            finish();
 			}
 		});
 	}
@@ -130,6 +133,7 @@ public class ShowMaintenanceActivity extends Activity {
 				intent.putExtra("MaintId", nextItems[position].getMaintId());
 				intent.putExtra("MaintDesc", nextItems[position].getMaintDescription());
 	            startActivity(intent);
+	            finish();
 			}
 		});
 	}

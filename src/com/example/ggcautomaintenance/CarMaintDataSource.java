@@ -1,5 +1,6 @@
 package com.example.ggcautomaintenance;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.ContentValues;
@@ -111,34 +112,39 @@ public class CarMaintDataSource {
 	 * gets all maint items sorted alphabetically
 	 * @return
 	 */
-	public MaintItems[] getAllMaintenanceItemsAlphabetical() {
-		MaintItems[] maintItemsArray = new MaintItems[22/*need to make into a variable if scope changes*/];
+	public ListItems[] getAllMaintenanceItemsAlphabetical() {
+		ListItems[] listItemsArray = new ListItems[22];
 
 		// Select All Query
-		String selectQuery = "SELECT _id, MaintDescription, " +
-				"MileageInterval, TimeInterval "/*maintrecord.MaintDueDate */ +
-				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS +
-				" ORDER BY 2";
-
+		String selectQuery = "SELECT a._id, MaintDescription, " +
+				"b.MaintDueDate, b.MaintDueMileage " + 
+				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS + " a " + 
+				"INNER JOIN " + CarMaintTableHelper.TABLE_MAINT_RECORDS + " b " +
+				"ON " + "a._id=b._id" + " ORDER BY 2";		
+		
+//		String selectQuery = "SELECT _id, MaintDescription, " +
+//				"MileageInterval, TimeInterval "/*maintrecord.MaintDueDate */ +
+//				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS +
+//				" ORDER BY 2";
+		
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
 		int i = 0;
-
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				MaintItems maintItem = new MaintItems();
-				maintItem.setMaintId(Integer.parseInt(cursor.getString(0)));
-				maintItem.setMaintDescription(cursor.getString(1));
-				maintItem.setMileageInterval(Integer.parseInt(cursor.getString(2)));
-				maintItem.setTimeInterval(Integer.parseInt(cursor.getString(3)));
-				maintItemsArray[i] = maintItem;
+				ListItems listItem = new ListItems();
+				listItem.setMaintId(Integer.parseInt(cursor.getString(0)));
+				listItem.setMaintDescription(cursor.getString(1));
+				listItem.setDateNextDue(cursor.getString(2));
+				listItem.setMileageNextDue(Integer.parseInt(cursor.getString(3)));
+				listItemsArray[i] = listItem;
 				i++;
 			} while (cursor.moveToNext());
 		}
 
 		// return Maintenance Items Array
-		return maintItemsArray;
+		return listItemsArray;
 	}
 
 	// Getting All Maintenance Items sorted by due date
@@ -146,34 +152,39 @@ public class CarMaintDataSource {
 	 * gets all maint items sorted by due date
 	 * @return
 	 */
-	public MaintItems[] getAllMaintenanceItemsDueDate() {
-		MaintItems[] maintItemsArray = new MaintItems[22/*need to make into a variable if scope changes*/];
+	public ListItems[] getAllMaintenanceItemsDueDate() {
+		ListItems[] listItemsArray = new ListItems[22];
 
 		// Select All Query
+		String selectQuery = "SELECT a._id, MaintDescription, " +
+				"b.MaintDueDate, b.MaintDueMileage " + 
+				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS + " a " + 
+				"INNER JOIN " + CarMaintTableHelper.TABLE_MAINT_RECORDS + " b " +
+				"ON " + "a._id=b._id" + " ORDER BY 3";	
+		/*
 		String selectQuery = "SELECT _id, MaintDescription, " +
-				"MileageInterval, TimeInterval " /*maintrecord.MaintDueDate */ +
+				"MileageInterval, TimeInterval " /*maintrecord.MaintDueDate *//* +
 				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS  +
-				" ORDER BY 4";
+				" ORDER BY 4";*/
 
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
 		int i = 0;
-
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				MaintItems maintItem = new MaintItems();
-				maintItem.setMaintId(Integer.parseInt(cursor.getString(0)));
-				maintItem.setMaintDescription(cursor.getString(1));
-				maintItem.setMileageInterval(Integer.parseInt(cursor.getString(2)));
-				maintItem.setTimeInterval(Integer.parseInt(cursor.getString(3)));
-				maintItemsArray[i] = maintItem;
+				ListItems listItem = new ListItems();
+				listItem.setMaintId(Integer.parseInt(cursor.getString(0)));
+				listItem.setMaintDescription(cursor.getString(1));
+				listItem.setDateNextDue(cursor.getString(2));
+				listItem.setMileageNextDue(Integer.parseInt(cursor.getString(3)));
+				listItemsArray[i] = listItem;
 				i++;
 			} while (cursor.moveToNext());
 		}
 
 		// return Maintenance Items Array
-		return maintItemsArray;
+		return listItemsArray;
 	}
 
 	// Getting Maintenance Items Count
