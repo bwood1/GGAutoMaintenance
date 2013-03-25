@@ -33,6 +33,7 @@ public class Main extends Activity {
 	Button showMButton;
 	Button helpButton;
 	Button enterButton;
+	CheckBox fillup;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +73,13 @@ public class Main extends Activity {
 
 	public void enterButton(View view)
 	{
-		CheckBox fillup = (CheckBox) findViewById(R.id.fillBox);
+		fillup = (CheckBox) findViewById(R.id.fillBox);
 		if (fillup.isChecked()) {
 			dataSource = new CarMaintDataSource(this);
 			dataSource.open();
 			dataSource.setCurrentMileage(mOdometer.getValue());	
 			dataSource.close();
+			
 		}
 		else{
 			dataSource = new CarMaintDataSource(this);
@@ -89,6 +91,7 @@ public class Main extends Activity {
 
 	public void mpgButton(View view)		
 	{
+		fillup.setChecked(false);
 		Intent intent = new Intent(view.getContext(), MilesPerGallonActivity.class);
 		startActivity(intent);            
 	}
