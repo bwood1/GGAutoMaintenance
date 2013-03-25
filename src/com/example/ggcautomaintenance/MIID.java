@@ -16,7 +16,7 @@ public class MIID{
 	}
 	
 	public void setCurrentOdometer() { 
-		currentOdometer = dataSource.getOldMileage();
+		currentOdometer = dataSource.getMileage();
 	}
 	
 	
@@ -40,7 +40,7 @@ public class MIID{
 	
 	public String getDateLastServ () {
 		String dateLast;
-		dateLast = dataSource.getNextMaintCompleteDate(maintId);
+		dateLast = dataSource.getMaintCompleteDate(maintId);
 		return dateLast;	
 	}
 	
@@ -61,7 +61,7 @@ public class MIID{
 	public int getMilesSince(){
 		int milesReturn;
 		Log.d("Brandon made this", "" + dataSource.getOdometer(maintId));
-		milesReturn = currentOdometer - (dataSource.getOdometer(maintId));
+		milesReturn = dataSource.getMileage() - (dataSource.getOdometer(maintId));
 		return milesReturn;		
 	}
 	

@@ -43,17 +43,13 @@ public class MilesPerGallonActivity extends Activity {
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
 		text.setText("" + getMilesDriven());
 		
-		carMaintDataSource.setOldMileage(carMaintDataSource.getCurrentMileage());
-		
-		Main.setOldMileage();
-		//mpgDatabaseConnector.setOldMileage(mpgDatabaseConnector.getCurrentMileage());
-		
-		//mpgDatabaseConnector.close();
+		carMaintDataSource.setFillupMileage(carMaintDataSource.getCurrentMileage());
+		carMaintDataSource.setMileage(carMaintDataSource.getCurrentMileage());
 	}
 	
 	private int getMilesDriven() {
 		int milesDriven;
-		milesDriven = carMaintDataSource.getCurrentMileage() - carMaintDataSource.getOldMileage();
+		milesDriven = carMaintDataSource.getCurrentMileage() - carMaintDataSource.getFillupMileage();
 		return milesDriven;
 	}
 

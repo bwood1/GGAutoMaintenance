@@ -175,6 +175,25 @@ public class CarMaintDataSource {
 		// return Maintenance Items Array
 		return maintItemsArray;
 	}
+	
+	/**
+	 * returns the mileage interval of the maint id provided
+	 * @param maintId
+	 * @return - mileageinterval
+	 */
+	public int getMileageInterval(int maintId) {
+		String query = "SELECT mileageinterval FROM maintenanceitems WHERE _id=" + maintId;
+		Cursor cursor = db.rawQuery(query, null);
+		cursor.moveToFirst();
+		return cursorToInt(cursor);
+	}
+	
+	public int getTimeInterval(int maintId) {
+		String query = "SELECT timeinterval FROM maintenanceitems WHERE _id=" +  maintId;
+		Cursor cursor = db.rawQuery(query, null);
+		cursor.moveToFirst();
+		return cursorToInt(cursor);
+	}
 
 	// Getting Maintenance Items Count
 	/**
@@ -293,6 +312,16 @@ public class CarMaintDataSource {
 		return maintRecords;
 	}
 	
+	public String getCurrentDate() {
+		String query = "SELECT date('now')";
+		Cursor cursor = db.rawQuery(query, null);
+		cursor.moveToFirst();
+		
+		String currentDate;
+		currentDate = cursorToString(cursor);
+		return currentDate;
+	}
+	
 	/**
 	 * updates the maint record row based on the record it
 	 * @param maintRecordId
@@ -368,7 +397,7 @@ public class CarMaintDataSource {
 	 * @param maintId
 	 * @return
 	 */
-	public String getNextMaintCompleteDate (int maintId) {
+	public String getMaintCompleteDate (int maintId) {
 		String query = "SELECT maintCompleteDate FROM maintrecord WHERE _id IS " + maintId;
 
 		Cursor test = db.rawQuery(query, null);
@@ -477,7 +506,7 @@ public class CarMaintDataSource {
 	 * gets the old mileage (from the last fill up or row 1 on the table)
 	 * @return
 	 */
-	public int getOldMileage() {
+	public int getFillupMileage() {
 
 		String[] columns = new String[1];
 		columns[0] = CarMaintTableHelper.MPG_ODOMETER;
@@ -510,7 +539,7 @@ public class CarMaintDataSource {
 	 * sets the old odomter (ie current fill up or row 1 on the table
 	 * @param oldOdometer
 	 */
-	public void setOldMileage(int oldOdometer) {
+	public void setFillupMileage(int oldOdometer) {
 		ContentValues values = new ContentValues();
 		values.put(CarMaintTableHelper.MPG_ODOMETER, oldOdometer);
 
@@ -538,6 +567,26 @@ public class CarMaintDataSource {
 		db.update(CarMaintTableHelper.TABLE_MPG, values, 
 				CarMaintTableHelper.MPG_FILL_NUMBER + "=2", null);
 	}
+	
+	/**
+	 * Row for storing the actual mileage
+	 * @param odometer
+	 */
+	public void setMileage(int odometer) {
+		ContentValues values = new ContentValues();
+		values.put(CarMaintTableHelper.MPG_ODOMETER, odometer);
+		
+		db.update(CarMaintTableHelper.TABLE_MPG, values, CarMaintTableHelper.MPG_FILL_NUMBER + "=3", null);
+	}
+	
+	public int getMileage() {
+		String query = "SELECT odometer FROM mpg WHERE _id IS 3";
+		
+		Cursor cursor = db.rawQuery(query, null);
+		cursor.moveToFirst();
+		
+		return cursorToInt(cursor);
+	}
 
 	//Get current mileage
 	/**
@@ -554,10 +603,9 @@ public class CarMaintDataSource {
 		String query = "SELECT odometer FROM mpg WHERE _id IS 2";
 
 		Cursor test = db.rawQuery(query, null);
-
 		test.moveToFirst();
-		int testMileage = cursorToInt(test);
-		return testMileage;
+		
+		return cursorToInt(test);
 	}
 
 	//will update the old MPG with the new data

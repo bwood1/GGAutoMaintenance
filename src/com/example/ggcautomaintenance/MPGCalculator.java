@@ -49,18 +49,18 @@ public class MPGCalculator {
 	}
 	
 	/**
-	 * Gets the old mileage from the mpg table
+	 * Gets the last fillup mileage from the mpg table
 	 * @return - the old mileage
 	 */
-	public int getOldMileage() {
-		return dataSource.getOldMileage();
+	public int getFillupMileage() {
+		return dataSource.getFillupMileage();
 	}
 	
 	/**
-	 * sets the old odometer reading in the mpg table
+	 * sets the last fillup odometer reading in the mpg table
 	 */
-	public void setOldMileage()	{
-		dataSource.setOldMileage(dataSource.getCurrentMileage());
+	public void setFillupMileage()	{
+		dataSource.setFillupMileage(dataSource.getCurrentMileage());
 	}		
 
 	/**
@@ -80,7 +80,7 @@ public class MPGCalculator {
 	}
 
 	public int getMilesDriven() {
-		int milesDriven = getCurrentMileage() - getOldMileage();		
+		int milesDriven = getCurrentMileage() - getFillupMileage();		
 
 		return milesDriven;
 	}

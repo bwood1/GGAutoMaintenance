@@ -71,7 +71,7 @@ public class Main extends Activity {
 
 		mOdometer = (Odometer) findViewById(R.id.odometer);
 
-		mOdometer.setValue(dataSource.getOldMileage());
+		mOdometer.setValue(dataSource.getMileage());
 	}	
 
 	public void enterButton(View view)
@@ -81,6 +81,12 @@ public class Main extends Activity {
 			dataSource = new CarMaintDataSource(this);
 			dataSource.open();
 			dataSource.setCurrentMileage(mOdometer.getValue());	
+			dataSource.close();
+		}
+		else{
+			dataSource = new CarMaintDataSource(this);
+			dataSource.open();
+			dataSource.setMileage(mOdometer.getValue());	
 			dataSource.close();
 		}
 	}

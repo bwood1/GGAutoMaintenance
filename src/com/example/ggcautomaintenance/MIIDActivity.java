@@ -1,5 +1,12 @@
 package com.example.ggcautomaintenance;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
@@ -105,15 +113,41 @@ public class MIIDActivity extends Activity {
 		 *Only closes prompt window
 		 * 
 		*/
-	    public void record(View view)
-	    {
+	    public void record(View view) throws ParseException
+	    {	    	
+
+	    	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+	    	
 	    	inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
 	    	inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
-	    	int miles = Integer.valueOf(inputMileageField.getText().toString());
-	    	String date = inputDateField.getText().toString();
-	    	carMaintDataSource.updateMaintRecord(maintId, date, "car1", maintId, miles, 0.00,
-	    	carMaintDataSource.getNextMaintDueDate(maintId),
-	    	carMaintDataSource.getMaintDueMileage(maintId));
+	    	Integer miles = Integer.valueOf(inputMileageField.getText().toString());
+	    	String maintCompleteDate = inputDateField.getText().toString();
+	    	
+	    	CheckBox useCurrentDateAndMiles = (CheckBox)OSPopup.getContentView().findViewById(R.id.useCurrentBox);
+	    	System.out.println(useCurrentDateAndMiles);
+	    	if(useCurrentDateAndMiles.isChecked()){
+	    		maintCompleteDate = carMaintDataSource.getCurrentDate();
+	    		miles = carMaintDataSource.getMileage();
+	    	}
+	    	
+	    	//calculate the due date
+	    	Date maintLastDoneDate = new Date();
+	    	Calendar cal = Calendar.getInstance(); 
+	    	maintLastDoneDate = dateFormat.parse(maintCompleteDate);	//when the maint was done
+	    	cal.setTime(maintLastDoneDate);
+	    	cal.add(Calendar.MONTH, carMaintDataSource.getTimeInterval(maintId));  //add time interval
+	    	
+	    	String dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
+	    	cal.get(Calendar.DAY_OF_MONTH);															//build string
+	    	Log.d("Brandon wants to know what the date is", dueDate);
+//	    	maintLastDoneDate = cal.getTime();
+//	    	maintLastDoneDate = dateFormat.parse(maintLastDoneDate.toString());
+	    	
+	    	//calculate the due mileage
+	    	int newMileageDue = miles + carMaintDataSource.getMileageInterval(maintId);
+	    	
+	    	carMaintDataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,
+	    			dueDate, newMileageDue);
 	    	//System.out.println(miles);
 	    	//System.out.println(date);
 	    	OSPopup.dismiss();
