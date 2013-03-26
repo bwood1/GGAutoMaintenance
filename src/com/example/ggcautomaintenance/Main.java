@@ -93,6 +93,7 @@ public class Main extends Activity {
 
 	public void mpgButton(View view)		
 	{
+		fillup = (CheckBox) findViewById(R.id.fillBox);
 		fillup.setChecked(false);
 		Intent intent = new Intent(view.getContext(), MilesPerGallonActivity.class);
 		startActivity(intent);            
