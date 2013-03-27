@@ -34,7 +34,10 @@ public class Main extends Activity {
 	Button helpButton;
 	Button enterButton;
 	CheckBox fillup;
-
+	
+	/**
+	 * onCreate method
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,7 +73,11 @@ public class Main extends Activity {
 
 		mOdometer.setValue(dataSource.getMileage());
 	}	
-
+	
+	/**
+	 * enterButton Action Method
+	 * @param view
+	 */
 	public void enterButton(View view)
 	{
 		dataSource = new CarMaintDataSource(this);
@@ -90,7 +97,11 @@ public class Main extends Activity {
 		dataSource.maintDueDate();
 		dataSource.close();
 	}
-
+	
+	/**
+	 * mpgButton Action Method
+	 * @param view
+	 */
 	public void mpgButton(View view)		
 	{
 		fillup = (CheckBox) findViewById(R.id.fillBox);
@@ -98,7 +109,11 @@ public class Main extends Activity {
 		Intent intent = new Intent(view.getContext(), MilesPerGallonActivity.class);
 		startActivity(intent);            
 	}
-
+	
+	/**
+	 * showMaintButton Action Method
+	 * @param view
+	 */
 	public void showMaintButton(View view)		
 	{
 		Intent intent = new Intent(view.getContext(), ShowMaintenanceActivity.class);
@@ -119,14 +134,20 @@ public class Main extends Activity {
 		AlertDialog dialog = builder.create();
 		dialog.show();  
 	} 
-
+	
+	/**
+	 * onCreateOptionsMenu method
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
+	/**
+	 * onSaveInstanceState method
+	 */
 	protected void onSaveInstanceState(Bundle outState)
 	{
 		super.onSaveInstanceState(outState);
@@ -167,20 +188,14 @@ public class Main extends Activity {
 
 		currentOdometer = mOdometer.getValue();
 	}
-
+	
+	/**
+	 * Returns miles driven
+	 * @return milesDriven
+	 */
 	public static int getMilesDriven() {
 		int milesDriven = getCurrentMileage() - getOldMileage();		
 
 		return milesDriven;
 	}
-
-	public void setFillupMileage() {
-
-	}
-
-	public void getNextMaintenance() {
-
-	}
-
-
 }

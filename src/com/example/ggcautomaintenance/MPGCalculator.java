@@ -78,7 +78,11 @@ public class MPGCalculator {
 	public void setCurrentMileage() {
 		dataSource.setCurrentMileage(currentOdometer);
 	}
-
+	
+	/**
+	 * Returns the miles driven
+	 * @return milesDriven
+	 */
 	public int getMilesDriven() {
 		int milesDriven = getCurrentMileage() - getFillupMileage();		
 

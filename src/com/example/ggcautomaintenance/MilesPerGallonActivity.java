@@ -26,9 +26,10 @@ public class MilesPerGallonActivity extends Activity {
 	
 	Button mpgCalcButton;
 	Button helpButton;
-	//Main main = new Main();
 	
-
+	/**
+	 * onCreate method
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +48,10 @@ public class MilesPerGallonActivity extends Activity {
 		carMaintDataSource.setMileage(carMaintDataSource.getCurrentMileage());
 	}
 	
+	/**
+	 * Return miles driven
+	 * @return milesDriven 
+	 */
 	private int getMilesDriven() {
 		int milesDriven;
 		milesDriven = carMaintDataSource.getCurrentMileage() - carMaintDataSource.getFillupMileage();
@@ -109,14 +114,20 @@ public class MilesPerGallonActivity extends Activity {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	} 
-
+	
+	/**
+	 * onCreateOptionsMenu method
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.miles_per_gallon, menu);
 		return true;
 	}
-
+	
+	/**
+	 * onOptionsItemsSelected method
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

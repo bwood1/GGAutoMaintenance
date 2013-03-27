@@ -15,20 +15,32 @@ public class Odometer extends TableLayout
 	
 	private OnValueChangeListener mValueChangeListener;
 	
+	/**
+	 * Constructor
+	 * @param context
+	 */
 	public Odometer(Context context)
 	{
 		super(context);
 
 		initialize();
 	}
-
+	
+	/**
+	 * Constructor
+	 * @param context
+	 * @param attrs
+	 */
 	public Odometer(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 
 		initialize();
 	}
-
+	
+	/**
+	 * initializes spinner on odometer
+	 */
 	private void initialize()
 	{
 		mDigitSpinners = new OdometerSpinner[NUM_DIGITS];
@@ -58,6 +70,9 @@ public class Odometer extends TableLayout
 		}
 	}
 	
+	/**
+	 * updates the value on the odometer
+	 */
 	private void updateValue()
 	{
 		int tempValue = 0;
@@ -76,6 +91,10 @@ public class Odometer extends TableLayout
 			mValueChangeListener.onValueChange(this, mCurrentValue);
 	}
 	
+	/**
+	 * Sets the value on the odometer
+	 * @param value
+	 */
 	public void setValue(int value)
 	{
 		int old = mCurrentValue;
@@ -96,16 +115,27 @@ public class Odometer extends TableLayout
 			mValueChangeListener.onValueChange(this, mCurrentValue);
 	}
 	
+	/**
+	 * Returns the value of the odometer
+	 * @return mCurrentValue
+	 */
 	public int getValue()
 	{	
 		return mCurrentValue;
 	}
 	
+	/**
+	 * Sets the value to the changed odometer reading
+	 * @param listener
+	 */
 	public void setOnValueChangeListener(OnValueChangeListener listener)
 	{
 		mValueChangeListener = listener;
 	}
 	
+	/**
+	 * onMeasure method
+	 */
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
 	{
@@ -134,6 +164,11 @@ public class Odometer extends TableLayout
 		setMeasuredDimension(width, height);
 	}
 	
+	/**
+	 * Interface listener
+	 * @author Nick
+	 * sends value to changed readings from the odometer
+	 */
 	public interface OnValueChangeListener
 	{
 		abstract void onValueChange(Odometer sender, int newValue);

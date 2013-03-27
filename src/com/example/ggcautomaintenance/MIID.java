@@ -8,64 +8,70 @@ public class MIID{
 
 	public int maintId;
 	int currentOdometer = Main.getCurrentMileage();
-
+	
+	/**
+	 * Constructor
+	 * @param maintId
+	 * @param dataSourceConstructor
+	 */
 	public MIID(int maintId, CarMaintDataSource dataSourceConstructor) {
 		super();
 		this.maintId = maintId;
 		this.dataSource = dataSourceConstructor;
 	}
-
+	
+	/**
+	 * Sets the current odometer reading
+	 */
 	public void setCurrentOdometer() { 
 		currentOdometer = dataSource.getMileage();
 	}
 
-
+	/**
+	 * Returns next due date as string
+	 * @return 
+	 */
 	public String getDateNextDue() {
 		return dataSource.getNextMaintDueDate(maintId);
-	}
-
-	public void setDateNextDue(){
-
-	}
-
+	}	
+	
+	/**
+	 * Returns mileage till next maintenance requirement
+	 * @return milesReturn
+	 */
 	public int getMilesTill () {
 		int milesReturn;
 		milesReturn = (dataSource.getMaintDueMileage(maintId) - currentOdometer);
 		return milesReturn;
 	}
-
-	public void setMilesTill(){
-
-	}
-
+	
+	/**
+	 * Returns date of last service
+	 * @return dateLast
+	 */
 	public String getDateLastServ () {
 		String dateLast;
 		dateLast = dataSource.getMaintCompleteDate(maintId);
 		return dateLast;	
 	}
-
-	public void setDateLastServ(){
-
-	}
-
+	
+	/**
+	 * Returns last mileage returned
+	 * @return milesReturn
+	 */
 	public int getMilesLast () {
 		int milesReturn;
 		milesReturn = (dataSource.getOdometer(maintId));
 		return milesReturn;
 	}
-
-	public void setMilesLast(){
-
-	}
-
+	
+	/**
+	 * Returns miles since last service
+	 * @return milesReturn
+	 */
 	public int getMilesSince(){
 		int milesReturn;
 		milesReturn = dataSource.getMileage() - (dataSource.getOdometer(maintId));
 		return milesReturn;		
 	}
-
-	public void setMilesSince(){
-
-	}
-
 }

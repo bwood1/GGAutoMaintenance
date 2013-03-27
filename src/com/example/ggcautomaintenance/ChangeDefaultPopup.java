@@ -15,7 +15,8 @@ public class ChangeDefaultPopup extends PopupWindow {
  */		
 	
 	Context		m_context;
-
+	
+	// Constructor
     public ChangeDefaultPopup(Context context)
     {
         super(context);
@@ -28,7 +29,11 @@ public class ChangeDefaultPopup extends PopupWindow {
         setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
     }
-
+    
+    /**
+     * Anchors the popup screen
+     * @param anchor
+     */
     public void show(View anchor)
     {
         showAtLocation(anchor, Gravity.CENTER, 0, 0);

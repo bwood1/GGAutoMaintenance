@@ -24,11 +24,14 @@ public class CarTableHelper extends SQLiteOpenHelper {
 														COLUMN_MODEL + " TEXT(20), " +
 														COLUMN_ODOMETER + " INTEGER, " +
 														"PRIMARY KEY(CarName));";
-
+	// Constructor
 	public CarTableHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
-
+	
+	/**
+	 * onCreate method
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_CAR_TABLE);
@@ -47,10 +50,13 @@ public class CarTableHelper extends SQLiteOpenHelper {
 		// insert values into table
 //		db.insert(this.TABLE_CAR, null, values);
 	}
-
+	
+	/**
+	 * onUpgrade method
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
+		
 		Log.w(CarTableHelper.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
             + newVersion + ", which will destroy all old data");

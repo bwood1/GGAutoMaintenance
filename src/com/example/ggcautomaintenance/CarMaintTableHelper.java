@@ -139,14 +139,21 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 		myOutput.close();
 		myInput.close();
 	}
-
+	
+	/**
+	 * Opens path to database
+	 * @throws SQLException
+	 */
 	public void openDataBase() throws SQLException{
 
 		//Open the database
 		String myPath = DB_PATH + DB_NAME;
 		myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 	}
-
+	
+	/**
+	 * Closes the database
+	 */
 	@Override
 	public synchronized void close() {
 
@@ -155,12 +162,18 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 
 		super.close();
 	}
-
+	
+	/**
+	 * OnCreate method
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 
 	}
-
+	
+	/**
+	 * onUpgrade method
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

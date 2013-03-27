@@ -22,7 +22,11 @@ public class OptionSelectionPopup extends PopupWindow {
 	
 	
 	Context		m_context;
-
+	
+	/**
+	 * Constructor
+	 * @param context
+	 */
     public OptionSelectionPopup(Context context)
     {
         super(context);
@@ -35,7 +39,11 @@ public class OptionSelectionPopup extends PopupWindow {
         setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
     }
-
+    
+    /**
+     * Anchors the view
+     * @param anchor
+     */
     public void show(View anchor)
     {
         showAtLocation(anchor, Gravity.CENTER, 0, 0);

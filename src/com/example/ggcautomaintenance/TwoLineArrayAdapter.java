@@ -13,11 +13,22 @@ import android.widget.TextView;
 
 public abstract class TwoLineArrayAdapter<T> extends ArrayAdapter<T> {
     private int mListItemLayoutResId;
-
+    
+    /**
+     * Constructor
+     * @param context
+     * @param ts
+     */
     public TwoLineArrayAdapter(Context context, T[] ts) {
         this(context, android.R.layout.two_line_list_item, ts);
     }
-
+    
+    /**
+     * Constructor
+     * @param context
+     * @param listItemLayoutResourceId
+     * @param ts
+     */
     public TwoLineArrayAdapter(
             Context context, 
             int listItemLayoutResourceId,
@@ -25,7 +36,10 @@ public abstract class TwoLineArrayAdapter<T> extends ArrayAdapter<T> {
         super(context, listItemLayoutResourceId, ts);
         mListItemLayoutResId = listItemLayoutResourceId;
     }
-
+    
+    /**
+     * Switch view method
+     */
     @Override
     public android.view.View getView(
             int position, 

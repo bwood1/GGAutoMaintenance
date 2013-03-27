@@ -100,12 +100,20 @@ public class OdometerSpinner extends View
 		
 		setCurrentDigit(0);
 	}
-
+	
+	/**
+	 * Returns the current digit
+	 * @return mCurrentDigit
+	 */
 	public int getCurrentDigit()
 	{
 		return mCurrentDigit;
 	}
 	
+	/**
+	 * Sets the current digit
+	 * @param digit
+	 */
 	public void setCurrentDigit(int digit)
 	{
 		/*
@@ -144,6 +152,9 @@ public class OdometerSpinner extends View
 		invalidate();
 	}
 	
+	/**
+	 * Sets the y digit values
+	 */
 	private void setDigitYValues()
 	{
 		mDigitY = findCenterY(mCurrentDigit);
@@ -151,6 +162,11 @@ public class OdometerSpinner extends View
 		mDigitBelowY = mHeight + findCenterY(mDigitBelow);
 	}
 	
+	/**
+	 * Returns the resulting center
+	 * @param digit
+	 * @return result
+	 */
 	private float findCenterY(int digit)
 	{
 		String text = String.valueOf(digit);
@@ -163,7 +179,10 @@ public class OdometerSpinner extends View
 		
 		return result;
 	}
-
+	/**
+	 * Listener to changes
+	 * @param listener
+	 */
 	public void setOnDigitChangeListener(OnDigitChangeListener listener)
 	{
 		mDigitChangeListener = listener;
@@ -238,7 +257,10 @@ public class OdometerSpinner extends View
 		
 		setDigitYValues();
 	}
-
+	
+	/**
+	 * onTouchEvent method
+	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
@@ -328,7 +350,12 @@ public class OdometerSpinner extends View
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Interface onDigitChangeListener
+	 * @author Nick
+	 * Listener for changes in odometer
+	 */
 	public interface OnDigitChangeListener
 	{
 		abstract void onDigitChange(OdometerSpinner sender, int newDigit);

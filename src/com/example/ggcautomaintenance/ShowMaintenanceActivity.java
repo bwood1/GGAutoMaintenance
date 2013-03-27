@@ -35,7 +35,10 @@ public class ShowMaintenanceActivity extends Activity {
 	
 	ListItemsArrayAdapter nextAdapter;
 	ListItemsArrayAdapter alphaAdapter;
-
+	
+	/**
+	 * onCreate
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,6 +80,10 @@ public class ShowMaintenanceActivity extends Activity {
 		dialog.show();
 	}
 	
+	/**
+	 * alphaButton Action Method
+	 * @param view
+	 */
 	public void alphaButton(View view)
 	{
 		//alphaButton sort code goes here.
@@ -87,6 +94,10 @@ public class ShowMaintenanceActivity extends Activity {
 		listViewAlpha.refreshDrawableState();
 	}
 	
+	/**
+	 * nextDueButton Action Method
+	 * @param view
+	 */
 	public void nextDueButton(View view)
 	{
 		//nextDueButton sort code goes here.
@@ -97,6 +108,9 @@ public class ShowMaintenanceActivity extends Activity {
 		listViewNext.refreshDrawableState();
 	}
 	
+	/**
+	 * alphViewListClicker Action Method
+	 */
 	void alphaViewListViewClicker()
 	{
 		listViewAlpha.setAdapter(alphaAdapter);
@@ -135,14 +149,20 @@ public class ShowMaintenanceActivity extends Activity {
 			}
 		});
 	}
-
+	
+	/**
+	 * onCreateOptionsMenu method
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.show_maintenance, menu);
 		return true;
 	}
-
+	
+	/**
+	 * onOptionsItemsSelected method
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

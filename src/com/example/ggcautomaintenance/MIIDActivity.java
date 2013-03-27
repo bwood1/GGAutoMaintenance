@@ -51,7 +51,10 @@ public class MIIDActivity extends Activity {
 	
 	EditText inputTimeInterval;
 	EditText inputMileageInterval;
-
+	
+	/**
+	 * onCreate
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -153,12 +156,14 @@ public class MIIDActivity extends Activity {
 		OSPopup.dismiss();
 		view.invalidate();
 	}
+	
 	//method to dismiss popup on exit button 
 	public void dismissView (View view) {
 		
 		OSPopup.getContentView().findViewById(R.id.exitButton);
 		OSPopup.dismiss();
 	}
+	
 	//method for autopopulating edittexts in the OSPopup
 	public void checkedBox(View view) {
 		inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
@@ -166,14 +171,20 @@ public class MIIDActivity extends Activity {
 		inputMileageField.setText("" + carMaintDataSource.getMileage());
 		inputDateField.setText(carMaintDataSource.getCurrentDate());
 	}
-
+	
+	/**
+	 * onCreateOptionsMenu method
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.miid, menu);
 		return true;
 	}
-
+	
+	/**
+	 * onOptionsItemsSelected method
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -198,12 +209,14 @@ public class MIIDActivity extends Activity {
 		CDPopup.show(view);
 		CDPopup.update();
 	}
+	
 	//exit button
 	public void dismissDefView(View view)
 	{
 		CDPopup.getContentView().findViewById(R.id.exitButton);
 		CDPopup.dismiss();
 	}
+	
 	//set default maintenance time and mileage difference
 	public void setDefaultButton(View view)
 	{

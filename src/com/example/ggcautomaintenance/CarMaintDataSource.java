@@ -414,6 +414,11 @@ public class CarMaintDataSource {
 		return odometer;
 	}
 	
+	
+	/**
+	 * Sets the mileage for when maintenance is due
+	 * @param maintId
+	 */
 	public void setMaintDueMileage(int maintId) {
 		//calculate the due mileage
 		int newMileageDue = getOdometer(maintId) + getMileageInterval(maintId) - getMileage();
@@ -428,21 +433,28 @@ public class CarMaintDataSource {
 	public void maintDueMileageUpdate()
 	{
 		int i;
-		for(i = 1; i < 21; i++)
+		for(i = 1; i < 23; i++)
 		{
 			setMaintDueMileage(i);
 		}
 	}
 	
+	/**
+	 * Loops through all of the items in the list and sets the due date
+	 */
 	public void maintDueDate()
 	{		
 		int i;
-		for(i = 1; i < 21; i++)
+		for(i = 1; i < 23; i++)
 		{			
 			setMaintDueDate(i);
 		}	
 	}
 	
+	/**
+	 * Sets the due date for the maintenance item
+	 * @param maintId
+	 */
 	public void setMaintDueDate(int maintId) {
 		//calculate the due date		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);		
