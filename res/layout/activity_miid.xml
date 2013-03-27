@@ -92,14 +92,6 @@
         android:padding="3dp"
         android:text="Maintenance Item \nName" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/recordMaintButton"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/wrenchesmedium" />
-
     <Button
         android:id="@+id/helpButtonMIID"
         style="?android:attr/buttonStyleSmall"
@@ -107,6 +99,7 @@
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:background="#E9E9E9"
         android:onClick="helpMessage"
         android:text="Help" />
 
@@ -114,20 +107,31 @@
         android:id="@+id/setDefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_below="@+id/recordMaintButton"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Set Maintenance Interval"
+        android:background="#E9E9E9"
         android:onClick="setDefault"
+        android:text="Set Maintenance Interval"
         android:textSize="12dp" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/recordMaintButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:src="@drawable/wrenchesmedium" />
 
     <Button
         android:id="@+id/recordMaintButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_above="@+id/helpButtonMIID"
-        android:layout_alignLeft="@+id/setDefaultButton"
-        android:layout_alignRight="@+id/setDefaultButton"
+        android:layout_above="@+id/setDefaultButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
+        android:background="#E9E9E9"
         android:onClick="recordMaintButton"
         android:text="Record Maintenance" />
 
