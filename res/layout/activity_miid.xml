@@ -127,6 +127,7 @@
         android:layout_height="35dp"
         android:layout_above="@+id/helpButtonMIID"
         android:layout_alignLeft="@+id/setDefaultButton"
+        android:layout_alignRight="@+id/setDefaultButton"
         android:onClick="recordMaintButton"
         android:text="Record Maintenance" />
 

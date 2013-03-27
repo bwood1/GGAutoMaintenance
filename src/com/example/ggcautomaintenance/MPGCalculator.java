@@ -43,7 +43,7 @@ public class MPGCalculator {
 	 */
 	public float getMPG() {
 		float milesPerGallon = 0;
-		milesPerGallon = totalMilesDriven / numberOfGallons;
+		milesPerGallon = (totalMilesDriven / numberOfGallons);
 		
 		return milesPerGallon;
 	}

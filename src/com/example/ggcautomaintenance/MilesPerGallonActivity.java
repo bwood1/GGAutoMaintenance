@@ -1,5 +1,7 @@
 package com.example.ggcautomaintenance;
 
+import java.text.DecimalFormat;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 public class MilesPerGallonActivity extends Activity {	
 	public static CarMaintDataSource carMaintDataSource;
+	public static DecimalFormat df = new DecimalFormat("#.00");
 
 	// Text for the help dialog
 	String helpMain = 	"* For accurate MPG calculations, mileage must be enter when filling up and the gas tank must be completely filled.\n" +
@@ -65,7 +68,7 @@ public class MilesPerGallonActivity extends Activity {
 			mpgDisplay.setText("Enter Gallons Filled");
 		}
 		else {
-			mpgDisplay.setText("" + mpg + " MPG");
+			mpgDisplay.setText("" + df.format(mpg) + " MPG");
 		}		
 	}
 
