@@ -30,7 +30,7 @@
         android:background="@drawable/roundback"
         android:ems="10"
         android:gravity="center"
-        android:hint="000000"
+        android:text="0"
         android:padding="3dp"
         android:textAppearance="?android:attr/textAppearanceLarge" >
 
@@ -68,7 +68,7 @@
         android:background="@drawable/roundback"
         android:ems="10"
         android:gravity="center"
-        android:hint="0"
+        android:text="0.0"
         android:padding="3dp"
         android:textAppearance="?android:attr/textAppearanceLarge" >
         
