@@ -2,7 +2,7 @@
  * MaintItemsArrayAdapter is used to build a listView item which contains two lines.
  */
 
-package com.ggcautomaintenance;
+package com.ggcautomaintenance2;
 
 import android.content.Context;
 

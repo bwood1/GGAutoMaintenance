@@ -1,4 +1,4 @@
-package com.ggcautomaintenance;
+package com.ggcautomaintenance2;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 
 	//The Android's default system path of your application database.
 	@SuppressLint("SdCardPath")
-	private static String DB_PATH = "/data/data/com.ggcautomaintenance/databases/";
+	private static String DB_PATH = "/data/data/com.ggcautomaintenance2/databases/";
 
 	private static String DB_NAME = "carDatabase.db";
 

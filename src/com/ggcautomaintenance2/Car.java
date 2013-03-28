@@ -1,4 +1,4 @@
-package com.ggcautomaintenance;
+package com.ggcautomaintenance2;
 
 public class Car {
 	private String carName;
