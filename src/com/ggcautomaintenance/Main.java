@@ -1,4 +1,4 @@
-package com.example.ggcautomaintenance;
+package com.ggcautomaintenance;
 
 import java.io.IOException;
 

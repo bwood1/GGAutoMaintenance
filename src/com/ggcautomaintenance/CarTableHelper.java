@@ -1,4 +1,4 @@
-package com.example.ggcautomaintenance;
+package com.ggcautomaintenance;
 
 import android.content.ContentValues;
 import android.content.Context;

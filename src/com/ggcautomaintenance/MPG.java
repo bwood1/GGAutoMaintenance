@@ -1,4 +1,4 @@
-package com.example.ggcautomaintenance;
+package com.ggcautomaintenance;
 
 public class MPG {
 	private int fillNumber;

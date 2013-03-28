@@ -2,7 +2,7 @@
  *  TwoLineArrayAdapter is used to build the two line ListView item.
  */
 
-package com.example.ggcautomaintenance;
+package com.ggcautomaintenance;
 
 import android.content.Context;
 import android.view.LayoutInflater;

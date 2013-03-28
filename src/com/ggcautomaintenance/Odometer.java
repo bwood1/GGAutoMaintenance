@@ -1,5 +1,4 @@
-package com.example.ggcautomaintenance;
-
+package com.ggcautomaintenance;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

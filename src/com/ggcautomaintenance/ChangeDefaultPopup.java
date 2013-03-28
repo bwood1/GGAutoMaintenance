@@ -1,47 +1,37 @@
-/**
- * 
- */
-package com.example.ggcautomaintenance;
+package com.ggcautomaintenance;
 
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 
+public class ChangeDefaultPopup extends PopupWindow {
 
 /**
  * @author Nicholas
- * Class for Option Selection Prompt creation
- */
-public class OptionSelectionPopup extends PopupWindow {
-	
+ * Class for Change Default Prompt creation
+ */		
 	
 	Context		m_context;
 	
-	/**
-	 * Constructor
-	 * @param context
-	 */
-    public OptionSelectionPopup(Context context)
+	// Constructor
+    public ChangeDefaultPopup(Context context)
     {
         super(context);
 
         m_context = context;
 
         setContentView(LayoutInflater.from(context).
-             inflate(R.layout.option_selection, null));
+             inflate(R.layout.default_change_popup, null));
 
         setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
     }
     
     /**
-     * Anchors the view
+     * Anchors the popup screen
      * @param anchor
      */
     public void show(View anchor)
@@ -51,4 +41,5 @@ public class OptionSelectionPopup extends PopupWindow {
 		setFocusable(true);    
 		setOutsideTouchable(false);
     }
-}
+}	
+

@@ -1,4 +1,4 @@
-package com.example.ggcautomaintenance;
+package com.ggcautomaintenance;
 
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -1,4 +1,4 @@
-package com.example.ggcautomaintenance;
+package com.ggcautomaintenance;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

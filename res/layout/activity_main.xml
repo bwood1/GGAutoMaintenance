@@ -9,7 +9,7 @@
     android:background="#E9E9E9"
     tools:context=".MainActivity" >
     
-    <com.example.ggcautomaintenance.Odometer
+    <com.ggcautomaintenance.Odometer
         android:id="@+id/odometer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
