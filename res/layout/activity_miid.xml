@@ -99,7 +99,7 @@
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="#E9E9E9"
+        android:background="#BABABA"
         android:onClick="helpMessage"
         android:text="Help" />
 
@@ -109,7 +109,7 @@
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="#E9E9E9"
+        android:background="#BABABA"
         android:onClick="setDefault"
         android:text="Set Maintenance Interval"
         android:textSize="12dp" />
@@ -121,6 +121,7 @@
         android:layout_above="@+id/recordMaintButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="19dp"
+        android:background="#BABABA"
         android:src="@drawable/wrenchesmedium" />
 
     <Button
@@ -131,7 +132,7 @@
         android:layout_above="@+id/setDefaultButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="17dp"
-        android:background="#E9E9E9"
+        android:background="#BABABA"
         android:onClick="recordMaintButton"
         android:text="Record Maintenance" />
 

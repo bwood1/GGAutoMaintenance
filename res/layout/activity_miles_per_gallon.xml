@@ -46,7 +46,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
         android:onClick="mpgCalcButton"
-        android:background="#E9E9E9"
+        android:background="#BABABA"
         android:padding="3dp"
         android:text="Calculate MPG" />
 
@@ -87,7 +87,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="27dp"
-        android:background="#E9E9E9"
+        android:background="#BABABA"
         android:padding="3dp"
         android:onClick="helpMessage"
         android:text="Help" />
