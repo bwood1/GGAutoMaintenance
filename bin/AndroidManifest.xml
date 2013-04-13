@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ggcautomaintenance"
+    package="com.ggcautomaintenance2"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -10,12 +10,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/carmaintenanceicon"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen" >
         <activity
-            android:name="com.example.ggcautomaintenance.Main"
+            android:name="com.ggcautomaintenance2.Main"
             android:label="@string/app_name" 
             android:screenOrientation="portrait">
             <intent-filter>
@@ -25,27 +25,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.ggcautomaintenance.MilesPerGallonActivity"
+            android:name="com.ggcautomaintenance2.MilesPerGallonActivity"
             android:label="@string/title_activity_miles_per_gallon"
-            android:parentActivityName="com.example.ggcautomaintenance.Main" 
+            android:parentActivityName="com.ggcautomaintenance2.Main" 
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ggcautomaintenance.Main" />
         </activity>
         <activity
-            android:name="com.example.ggcautomaintenance.ShowMaintenanceActivity"
+            android:name="com.ggcautomaintenance2.ShowMaintenanceActivity"
             android:label="@string/title_activity_show_maintenance"
-            android:parentActivityName="com.example.ggcautomaintenance.Main" 
+            android:parentActivityName="com.ggcautomaintenance2.Main" 
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ggcautomaintenance.Main" />
         </activity>
         <activity
-            android:name="com.example.ggcautomaintenance.MIIDActivity"
+            android:name="com.ggcautomaintenance2.MIIDActivity"
             android:label="@string/title_activity_miid"
-            android:parentActivityName="com.example.ggcautomaintenance.ShowMaintenanceActivity" 
+            android:parentActivityName="com.ggcautomaintenance2.ShowMaintenanceActivity" 
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
