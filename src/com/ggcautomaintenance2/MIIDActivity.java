@@ -145,8 +145,7 @@ public class MIIDActivity extends Activity {
 		cal.add(Calendar.MONTH, carMaintDataSource.getTimeInterval(maintId));  //add time interval
 
 		String dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
-				cal.get(Calendar.DAY_OF_MONTH);															//build string
-		Log.d("Brandon wants to know what the date is", dueDate);
+				cal.get(Calendar.DAY_OF_MONTH);													//build string
 
 		//calculate the due mileage
 		int newMileageDue = carMaintDataSource.getOdometer(maintId) + carMaintDataSource.getMileageInterval(maintId) - miles;
