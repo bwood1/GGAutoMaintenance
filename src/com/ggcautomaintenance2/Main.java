@@ -158,18 +158,13 @@ public class Main extends Activity {
 	 */
 	public void helpMessage(View view)
 	{
-		Fpup = new FirstTimeHelperPageOne(view.getContext());
-		Fpup.show(view);
-		Fpup.update();
-		/*
 		AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
 		builder.setIcon(R.drawable.helpicon)
 		.setTitle("Help!")
 		.setMessage(helpMain)
 		.setNeutralButton("OK", null);
 		AlertDialog dialog = builder.create();
-		dialog.show();  
-		*/
+		dialog.show();
 	} 
 	
 	/**
