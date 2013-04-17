@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:text="To begin using car maintenance, to get the most accurate notifications on maintenance that is due you will need to set mileage and date of the last maintenance performed for each item.  If you want to do this press Enter Info to begin entering each item. (Recommended)"
+        android:text="To get the most accurate notifications on maintenance that is due you will need to set mileage and date of the last maintenance performed for each item.  If you want to do this press Enter Info to begin entering each item. (Recommended)"
         android:textSize="17dp" />
     
     <TextView
