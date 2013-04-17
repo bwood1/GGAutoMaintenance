@@ -62,15 +62,15 @@
         android:fadeScrollbars="false"
         android:visibility="gone"
         android:padding="3dp" />
-        
 
     <Button
         android:id="@+id/helpButtonShowMaint"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/listViewNext"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:onClick="helpMessage"
         android:text="Help"
         android:textSize="12sp" />
