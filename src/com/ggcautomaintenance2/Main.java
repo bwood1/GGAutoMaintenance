@@ -19,11 +19,16 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 
 public class Main extends Activity {
 	private CarMaintDataSource dataSource;
-	private CarMaintTableHelper maintHelper;
+	private CarMaintTableHelper maintHelper;	
+	
+	ListView listViewNext;
+	ListItems[] nextItems;
+	ListItemsArrayAdapter nextAdapter;
 
 	// Text for the help dialog
 	String helpMain = "* Enter the Current Date in the Odometer.\n" +
@@ -92,6 +97,12 @@ public class Main extends Activity {
 		mOdometer = (Odometer) findViewById(R.id.odometer);
 
 		mOdometer.setValue(dataSource.getMileage());
+		
+		//parts for the upcoming list
+		nextItems =  dataSource.getAllMaintenanceItemsDueDate();
+		listViewNext = (ListView) findViewById(R.id.listUpcoming);
+		nextAdapter = new ListItemsArrayAdapter(this, nextItems);
+		listViewNext.setAdapter(nextAdapter);
 		
 		
 		if(isFirstTime())

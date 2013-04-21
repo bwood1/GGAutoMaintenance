@@ -20,14 +20,28 @@
         android:text="Maintenance Item Setup"
         android:textSize="18dp"
         android:textStyle="bold" />
+    <RelativeLayout 
+      android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	
+	    <TextView
+	        android:id="@+id/firstHelpText2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="18dp"
+	        android:text="                                  To get the most accurate notifications on maintenance that is due you will need to set mileage and date of the last maintenance performed for each item.  If you want to do this press Enter Info to begin entering each item."
+	        android:textSize="17dp" />
+	    
+	    <TextView
+	        android:id="@+id/recText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="18dp"
+	        android:text="(Recommended)"
+	        android:textSize="17dp" 
+	        android:textStyle="bold"/>
     
-    <TextView
-        android:id="@+id/firstHelpText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="To get the most accurate notifications on maintenance that is due you will need to set mileage and date of the last maintenance performed for each item.  If you want to do this press Enter Info to begin entering each item. (Recommended)"
-        android:textSize="17dp" />
+    </RelativeLayout>
     
     <TextView
         android:id="@+id/firstHelpText3"

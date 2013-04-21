@@ -16,7 +16,7 @@
         android:id="@+id/firstHelpText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:text="Welcome to Car Maintenance!"
         android:textSize="18dp"
         android:textStyle="bold" />
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="To begin using car maintenance, you need match the app odometer to the mileage on your car odometer."
-        android:textSize="18dp" />
+        android:textSize="17sp" />
     
     <TextView
         android:id="@+id/firstHelpText3"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="To change the odometer slide your finger up or down on a number."
-        android:textSize="18dp" />
+        android:textSize="17sp" />
 
     <com.ggcautomaintenance2.Odometer
         android:id="@+id/firstOdometer"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="Once your odometer is correct, press the enter button to save your mileage.  Check the fill-up box if you are getting gas, and want to calculate the miles per gallon for your next fill-up."
-        android:textSize="18dp" />
+        android:textSize="17sp" />
     
     <RelativeLayout 
       android:layout_width="match_parent"
