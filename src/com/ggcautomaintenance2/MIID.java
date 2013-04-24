@@ -39,9 +39,12 @@ public class MIID{
 	 * Returns mileage till next maintenance requirement
 	 * @return milesReturn
 	 */
-	public int getMilesTill () {
+	public int getMilesTill (int maintId) {
 		int milesReturn;
-		milesReturn = (dataSource.getMaintDueMileage(maintId) - currentOdometer);
+		milesReturn = (dataSource.getMaintDueMileage(maintId) - dataSource.getMileage());
+		System.out.println("maint due mileage: " + dataSource.getMaintDueMileage(maintId));
+		System.out.println("current mileage: " + dataSource.getMileage());
+		System.out.println("miles till: " + milesReturn);
 		return milesReturn;
 	}
 	

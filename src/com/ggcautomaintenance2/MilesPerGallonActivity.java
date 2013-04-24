@@ -48,6 +48,18 @@ public class MilesPerGallonActivity extends Activity {
 		carMaintDataSource.setMileage(carMaintDataSource.getCurrentMileage());
 	}
 	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		carMaintDataSource.close();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		carMaintDataSource.open();
+	}
+	
 	/**
 	 * Return miles driven
 	 * @return milesDriven 

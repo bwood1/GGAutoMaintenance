@@ -51,7 +51,9 @@ public class ShowMaintenanceActivity extends Activity {
 		datasource = new CarMaintDataSource(this);
 		datasource.open();
 		
-		alphaItems = datasource.getAllMaintenanceItemsAlphabetical();
+		alphaItems = datasource.getUpcomingMaintenance();
+		
+//		alphaItems = datasource.getAllMaintenanceItemsAlphabetical();
 		nextItems =  datasource.getAllMaintenanceItemsDueDate();
 		
 		//initialize both sorted views
@@ -63,6 +65,18 @@ public class ShowMaintenanceActivity extends Activity {
 		
 		alphaViewListViewClicker();
 		nextViewListViewClicker();	
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		datasource.close();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		datasource.open();
 	}
 
 	/**

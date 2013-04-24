@@ -85,13 +85,27 @@ public class MIIDActivity extends Activity {
 		textViewDateOfNextService.setText("Date of Next Service\n" + miid.getDateNextDue());
 
 		TextView textViewMilesTillNextService = (TextView)findViewById(R.id.textViewMilesTillNextService);
-		textViewMilesTillNextService.setText("Miles Until Next Service\n" + miid.getMilesTill());
+		textViewMilesTillNextService.setText("Miles Until Next Service\n" + miid.getMilesTill(maintId));
+		
+		System.out.println("Miles till = " + miid.getMilesTill(maintId));
 
 		TextView textViewDateofLastService = (TextView)findViewById(R.id.textViewDateofLastService);
 		textViewDateofLastService.setText("Date of Last Service\n" + miid.getDateLastServ());
 
 		TextView textViewMileageOfLastService = (TextView)findViewById(R.id.textViewMileageOfLastService);
 		textViewMileageOfLastService.setText("Mileage of Last Service\n" + miid.getMilesLast());
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		carMaintDataSource.close();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		carMaintDataSource.open();
 	}
 
 	/**
@@ -148,10 +162,18 @@ public class MIIDActivity extends Activity {
 				cal.get(Calendar.DAY_OF_MONTH);													//build string
 
 		//calculate the due mileage
-		int newMileageDue = carMaintDataSource.getOdometer(maintId) + carMaintDataSource.getMileageInterval(maintId) - miles;
+		System.out.println("current miles: " + carMaintDataSource.getMileage());
+		System.out.println("mileage interval: " + carMaintDataSource.getMileageInterval(maintId));
+		int newMileageDue = carMaintDataSource.getMileage() + 
+				carMaintDataSource.getMileageInterval(maintId);
+		System.out.println("calculated due milage: " + newMileageDue);
 
 		carMaintDataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,
 				dueDate, newMileageDue);
+		
+		carMaintDataSource.maintDueMileageUpdate();
+		carMaintDataSource.maintDueDate();
+		
 		OSPopup.dismiss();
 		view.invalidate();
 	}

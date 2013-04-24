@@ -21,6 +21,9 @@ public class CarMaintDataSource {
 	// Database fields
 	private SQLiteDatabase db;
 	private CarMaintTableHelper carMaintTblHelper;
+	
+	//veriables
+	private int notificationMileage = 500;
 
 	// Constructor
 	public CarMaintDataSource (Context context) {
@@ -45,6 +48,44 @@ public class CarMaintDataSource {
 		db.delete(CarMaintTableHelper.TABLE_MAINT_ITEMS, null, null);
 		db.delete(CarMaintTableHelper.TABLE_MAINT_RECORDS, null, null);
 		db.delete(CarMaintTableHelper.TABLE_MPG, null, null);
+	}
+	
+	/***************************************************************************************************************
+	 ******************************** begin Maintenance Items Notification SECTION **********************************/
+	
+	/**
+	 * Method to select the maintenance items 
+	 * that are coming up within 500 miles
+	 */
+	public ListItems[] getUpcomingMaintenance() {
+		ListItems[] listItemsArray = new ListItems[22];
+		
+		String selectQuery = "SELECT a._id, MaintDescription, " +
+				"b.MaintDueDate, b.MaintDueMileage " + 
+				"FROM " + CarMaintTableHelper.TABLE_MAINT_ITEMS + " a " + 
+				"INNER JOIN " + CarMaintTableHelper.TABLE_MAINT_RECORDS + " b " +
+				"ON " + "a._id=b._id" + " WHERE b.MaintDueMileage < " + 
+				notificationMileage + " ORDER BY 4";
+		
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		int i = 0;
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				ListItems listItem = new ListItems();
+				listItem.setMaintId(Integer.parseInt(cursor.getString(0)));
+				listItem.setMaintDescription(cursor.getString(1));
+				listItem.setDateNextDue(cursor.getString(2));
+				listItem.setMileageNextDue(Integer.parseInt(cursor.getString(3)));
+				listItemsArray[i] = listItem;
+				i++;
+			} while (cursor.moveToNext());
+		}
+
+		// return Maintenance Items Array
+		return listItemsArray;
+		
 	}
 
 	/***************************************************************************************************************
@@ -99,7 +140,6 @@ public class CarMaintDataSource {
 				CarMaintTableHelper.MI_MAINT_DESCRIPTION, 
 				CarMaintTableHelper.MI_MILEAGE_INTERVAL, 
 				CarMaintTableHelper.MI_TIME_INTERVAL},
-
 				CarMaintTableHelper.MI_MAINT_ID + "=?",
 				new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null)
@@ -377,6 +417,7 @@ public class CarMaintDataSource {
 		values.put(CarMaintTableHelper.MR_COST, cost);
 		values.put(CarMaintTableHelper.MR_MAINT_DUE_DATE, maintDueDate);
 		values.put(CarMaintTableHelper.MR_MAINT_DUE_MILEAGE, maintDueMileage);
+		
 
 		//updates the row
 		db.update(CarMaintTableHelper.TABLE_MAINT_RECORDS,
@@ -429,7 +470,9 @@ public class CarMaintDataSource {
 		db.update(CarMaintTableHelper.TABLE_MAINT_RECORDS, values, CarMaintTableHelper.MR_MAINT_RECORD_ID + "=" + maintId, null);
 	}
 	
-	//loop through all maintenance items and update their due mileage
+	/**
+	 * loop through all maintenance items and update their due mileage
+	 */
 	public void maintDueMileageUpdate()
 	{
 		int i;
@@ -648,9 +691,6 @@ public class CarMaintDataSource {
 		ContentValues values = new ContentValues();
 		values.put(CarMaintTableHelper.MPG_ODOMETER, odometer);
 
-		String[] whereArgs = new String[1];
-		whereArgs[0] = "2";
-
 		db.update(CarMaintTableHelper.TABLE_MPG, values, 
 				CarMaintTableHelper.MPG_FILL_NUMBER + "=2", null);
 	}
@@ -663,7 +703,8 @@ public class CarMaintDataSource {
 		ContentValues values = new ContentValues();
 		values.put(CarMaintTableHelper.MPG_ODOMETER, odometer);
 		
-		db.update(CarMaintTableHelper.TABLE_MPG, values, CarMaintTableHelper.MPG_FILL_NUMBER + "=3", null);
+		db.update(CarMaintTableHelper.TABLE_MPG, values, 
+				CarMaintTableHelper.MPG_FILL_NUMBER + "=3", null);
 	}
 	
 	/**
