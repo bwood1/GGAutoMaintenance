@@ -159,7 +159,6 @@ public class Main extends Activity {
 		fillup = (CheckBox) findViewById(R.id.fillBox);
 
 		if (fillup.isChecked()) {
-
 			dataSource.setMileage(mOdometer.getValue());		
 			dataSource.setCurrentMileage(mOdometer.getValue());
 		}
@@ -186,6 +185,7 @@ public class Main extends Activity {
 	{
 		fillup = (CheckBox) findViewById(R.id.fillBox);
 		fillup.setChecked(false);
+		onPause();
 		Intent intent = new Intent(view.getContext(), MilesPerGallonActivity.class);
 		startActivity(intent);            
 	}

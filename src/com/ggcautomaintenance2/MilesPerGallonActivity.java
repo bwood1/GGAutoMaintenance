@@ -45,7 +45,9 @@ public class MilesPerGallonActivity extends Activity {
 		text.setText("" + getMilesDriven());
 		
 		carMaintDataSource.setFillupMileage(carMaintDataSource.getCurrentMileage());
-		carMaintDataSource.setMileage(carMaintDataSource.getCurrentMileage());
+//		carMaintDataSource.setMileage(carMaintDataSource.getCurrentMileage());
+		
+		carMaintDataSource.close();  //dont forget to close
 	}
 	
 	@Override
