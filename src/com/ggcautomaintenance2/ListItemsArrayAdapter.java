@@ -8,9 +8,11 @@ import android.content.Context;
 
 public class ListItemsArrayAdapter extends TwoLineArrayAdapter<ListItems> {
 	
+	private int mileage;
 	
-    public ListItemsArrayAdapter(Context context, ListItems[] items) {
+    public ListItemsArrayAdapter(Context context, ListItems[] items, int odometer) {
         super(context, items);
+        mileage = odometer;
     }
 
     /**
@@ -28,6 +30,6 @@ public class ListItemsArrayAdapter extends TwoLineArrayAdapter<ListItems> {
      */
     @Override
     public String lineTwoText(ListItems mi) {
-    	return "Due in " + mi.getMileageNextDue() + " miles or on " + mi.getDateNextDue();
+    	return "Due in " + (mi.getMileageNextDue() - mileage) + " miles or on " + mi.getDateNextDue();
     }
 }

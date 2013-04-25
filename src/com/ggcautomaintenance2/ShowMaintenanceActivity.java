@@ -60,8 +60,8 @@ public class ShowMaintenanceActivity extends Activity {
 		listViewNext = (ListView) findViewById(R.id.listViewNext);
 		listViewAlpha = (ListView) findViewById(R.id.listViewAlpha);
 		
-		nextAdapter = new ListItemsArrayAdapter(this, nextItems);
-		alphaAdapter = new ListItemsArrayAdapter(this, alphaItems);
+		nextAdapter = new ListItemsArrayAdapter(this, nextItems, datasource.getMileage());
+		alphaAdapter = new ListItemsArrayAdapter(this, alphaItems, datasource.getMileage());
 		
 		alphaViewListViewClicker();
 		nextViewListViewClicker();	

@@ -102,7 +102,7 @@ public class Main extends Activity {
 		//parts for the upcoming list
 		nextItems =  dataSource.getAllMaintenanceItemsDueDate();
 		listViewNext = (ListView) findViewById(R.id.listUpcoming);
-		nextAdapter = new ListItemsArrayAdapter(this, nextItems);
+		nextAdapter = new ListItemsArrayAdapter(this, nextItems, dataSource.getMileage());
 		listViewNext.setAdapter(nextAdapter);
 
 		if(isFirstTime())
@@ -113,6 +113,7 @@ public class Main extends Activity {
 				}
 			}, 100);
 		}
+		dataSource.close();
 	}
 
 	/**
@@ -142,7 +143,7 @@ public class Main extends Activity {
 		//parts for the upcoming list
 		nextItems =  dataSource.getAllMaintenanceItemsDueDate();
 		listViewNext = (ListView) findViewById(R.id.listUpcoming);
-		nextAdapter = new ListItemsArrayAdapter(this, nextItems);
+		nextAdapter = new ListItemsArrayAdapter(this, nextItems, dataSource.getMileage());
 		listViewNext.setAdapter(nextAdapter);
 	}
 
@@ -151,10 +152,10 @@ public class Main extends Activity {
 	 * enterButton Action Method
 	 * @param view
 	 */
-	public void enterButton(View view)
-	{
+	public void enterButton(View view) {
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
+
 		fillup = (CheckBox) findViewById(R.id.fillBox);
 
 		if (fillup.isChecked()) {
@@ -170,11 +171,11 @@ public class Main extends Activity {
 		}
 
 		//update the due mileage and date
-		dataSource.maintDueMileageUpdate();
-		dataSource.maintDueDate();
+		//		dataSource.maintDueMileageUpdate();
+		//		dataSource.maintDueDate();
 
 		reloadUpcomingList(); //reload the upcoming maintenance items
-		//		dataSource.close();
+		dataSource.close();
 	}
 
 	/**
