@@ -53,7 +53,7 @@ public class ShowMaintenanceActivity extends Activity {
 		
 		alphaItems = datasource.getUpcomingMaintenance();
 		
-//		alphaItems = datasource.getAllMaintenanceItemsAlphabetical();
+		alphaItems = datasource.getAllMaintenanceItemsAlphabetical();
 		nextItems =  datasource.getAllMaintenanceItemsDueDate();
 		
 		//initialize both sorted views
