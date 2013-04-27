@@ -368,8 +368,8 @@ public class Main extends Activity {
 			dataSource.updateMaintRecord(i, maintCompleteDate, "car1", i, miles, 0.00,
 					dueDate, newMileageDue);
 		}
+		reloadUpcomingList();
 		dataSource.close();
 		Spup.dismiss();
-		view.invalidate();
 	}
 }
