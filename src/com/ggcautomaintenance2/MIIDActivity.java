@@ -54,9 +54,9 @@ public class MIIDActivity extends Activity {
 
 	Integer miles;
 	String maintCompleteDate;
-	String dueDate;
 	DateFormat dateFormat;
-	int newMileageDue;
+	Date maintLastDoneDate = new Date();
+	Calendar cal = Calendar.getInstance();
 
 	/**
 	 * onCreate
@@ -74,8 +74,28 @@ public class MIIDActivity extends Activity {
 		ospRecordButton = (Button) findViewById(R.id.recordMaintOSP);
 		setDefaultButton = (Button) findViewById(R.id.setDefaultButton);
 
-		Bundle extras = getIntent().getExtras();
+		loadText();
+	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		dataSource.close();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		loadText();
+		dataSource.open();
+	}
+	
+	/**
+	 * loads the text on the screen
+	 */
+	private void loadText() {
+		Bundle extras = getIntent().getExtras();
+		
 		maintDesc = extras.getString("MaintDesc");
 		maintId = extras.getInt("MaintId");
 
@@ -95,25 +115,11 @@ public class MIIDActivity extends Activity {
 		TextView textViewMilesTillNextService = (TextView)findViewById(R.id.textViewMilesTillNextService);
 		textViewMilesTillNextService.setText("Miles Until Next Service\n" + miid.getMilesTill(maintId));
 
-		System.out.println("Miles till = " + miid.getMilesTill(maintId));
-
 		TextView textViewDateofLastService = (TextView)findViewById(R.id.textViewDateofLastService);
 		textViewDateofLastService.setText("Date of Last Service\n" + miid.getDateLastServ());
 
 		TextView textViewMileageOfLastService = (TextView)findViewById(R.id.textViewMileageOfLastService);
 		textViewMileageOfLastService.setText("Mileage of Last Service\n" + miid.getMilesLast());
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		dataSource.close();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		dataSource.open();
 	}
 
 	/**
@@ -146,8 +152,6 @@ public class MIIDActivity extends Activity {
 	 * Listener for record maintenance button on Option Selection Prompt
 	 */
 	public void record(View view) throws ParseException {
-		dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
 		getTextFromFields();
 
 		CheckBox useCurrentDateAndMiles = (CheckBox)OSPopup.getContentView().findViewById(R.id.useCurrentBox);
@@ -158,13 +162,14 @@ public class MIIDActivity extends Activity {
 		}
 
 		//calculate new due date and miles
-		calculateNewDueDate();
-		calculateNewDueMiles();
+//		calculateNewDueDate(maintCompleteDate);
+//		calculateNewDueMiles(miles, dataSource.getMileageInterval(maintId));
 
 		//update the database
 		dataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,
-				dueDate, newMileageDue);
+				calculateNewDueDate(maintCompleteDate), calculateNewDueMiles(miles, dataSource.getMileageInterval(maintId)));
 
+		loadText();
 		OSPopup.dismiss();
 		view.invalidate();
 	}
@@ -181,26 +186,32 @@ public class MIIDActivity extends Activity {
 
 	/**
 	 * Takes the date entered and adds the correct number of weeks to it
+	 * @param completedDate - date the maintenance was completed
+	 * @return - next due date
 	 * @throws ParseException
 	 */
-	private void calculateNewDueDate() throws ParseException {
-		//calculate the due date
-		Date maintLastDoneDate = new Date();
-		Calendar cal = Calendar.getInstance(); 
-		maintLastDoneDate = dateFormat.parse(maintCompleteDate);	//when the maint was done
+	private String calculateNewDueDate(String completedDate) throws ParseException {
+		dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		
+		maintLastDoneDate = dateFormat.parse(completedDate);	//when the maint was done
 		cal.setTime(maintLastDoneDate);
-		cal.add(Calendar.MONTH, dataSource.getTimeInterval(maintId));  //add time interval
+		cal.add(Calendar.MONTH, (dataSource.getTimeInterval(maintId) + 1));  //add time interval
 
-		dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
+		String dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
 				cal.get(Calendar.DAY_OF_MONTH);	//build string
+		return dueDate;
 	}
 
 	/**
 	 * takes the miles entered and adds the correct mileage interval to calculate new new mileage due
+	 * @param milesEntered - the mileage entered in the record
+	 * @param mileageInterval - the interval between maintenance
+	 * @return
 	 */
-	private void calculateNewDueMiles() {
-		//calculate the due mileage
-		newMileageDue = miles +	dataSource.getMileageInterval(maintId);
+	private int calculateNewDueMiles(int milesEntered, int mileageInterval) {
+		int newMileageDue = milesEntered + mileageInterval;
+		
+		return newMileageDue;
 	}
 
 	/**
@@ -275,8 +286,9 @@ public class MIIDActivity extends Activity {
 	/**
 	 * set default maintenance time and mileage difference
 	 * @param view
+	 * @throws ParseException 
 	 */
-	public void setDefaultButton(View view) {
+	public void setDefaultButton(View view) throws ParseException {
 		inputTimeInterval = (EditText)CDPopup.getContentView().findViewById(R.id.inputTimeInterval);
 		inputMileageInterval = (EditText)CDPopup.getContentView().findViewById(R.id.inputMileageInterval);
 
@@ -285,7 +297,13 @@ public class MIIDActivity extends Activity {
 
 		dataSource.setTimeInterval(maintId, timeInterval);
 		dataSource.setMileageInterval(maintId, mileageInterval);
+		
+		dataSource.updateMaintRecord(maintId, dataSource.getMaintCompleteDate(maintId), "car1", maintId, 
+				dataSource.getMaintCompleteOdometer(maintId), 0.00, calculateNewDueDate(dataSource.getMaintCompleteDate(maintId)),
+				calculateNewDueMiles(dataSource.getMaintCompleteOdometer(maintId), dataSource.getMileageInterval(maintId)));
 
+		loadText();
+		
 		CDPopup.dismiss();
 		view.invalidate();
 	}
