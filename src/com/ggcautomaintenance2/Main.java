@@ -325,22 +325,19 @@ public class Main extends Activity {
 		fOdometer = (Odometer) Fpup.getContentView().findViewById(R.id.firstOdometer);
 
 		if (ffillup.isChecked()) {
-
 			dataSource.setMileage(fOdometer.getValue());
 			dataSource.setCurrentMileage(fOdometer.getValue());
 		}
 		else{
-
 			dataSource.setMileage(fOdometer.getValue());
 		}
-		dataSource.maintDueMileageUpdate();
-		dataSource.maintDueDate();
+//		dataSource.maintDueMileageUpdate();
+//		dataSource.maintDueDate();
 		dataSource.close();
 		mOdometer.setValue(fOdometer.getValue());
 	}
 
-	public void enterInfoButton(View view)
-	{
+	public void enterInfoButton(View view) {
 		Spup.getContentView().findViewById(R.id.enterInfoButton);
 		Spup.dismiss();
 
@@ -348,16 +345,14 @@ public class Main extends Activity {
 		startActivity(intent);
 	}
 
-	public void setDefaultButton(View view) throws ParseException
-	{
+	public void setDefaultButton(View view) throws ParseException {
 		dataSource.open();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 		String maintCompleteDate = dataSource.getCurrentDate();
 		int miles = dataSource.getMileage();
 
-		for(int i = 1; i < 23; i++)
-		{
+		for(int i = 1; i < 23; i++) {
 			Date maintLastDoneDate = new Date();
 			Calendar cal = Calendar.getInstance(); 
 			maintLastDoneDate = dateFormat.parse(maintCompleteDate);	//when the maint was done
@@ -368,7 +363,7 @@ public class Main extends Activity {
 					cal.get(Calendar.DAY_OF_MONTH);													//build string
 
 			//calculate the due mileage
-			int newMileageDue = dataSource.getOdometer(i) + dataSource.getMileageInterval(i) - miles;
+			int newMileageDue = dataSource.getOdometer(i) + dataSource.getMileageInterval(i);
 
 			dataSource.updateMaintRecord(i, maintCompleteDate, "car1", i, miles, 0.00,
 					dueDate, newMileageDue);
