@@ -450,8 +450,18 @@ public class CarMaintDataSource {
 		Cursor cursor = db.rawQuery(query, null);
 		cursor.moveToFirst();
 
-		int odometer;
-		odometer = cursorToInt(cursor);
+		int odometer = cursorToInt(cursor);
+		return odometer;
+	}
+	
+	public int getMaintCompleteOdometer(int maintId) {
+		String query = "SELECT odometer FROM maintrecord WHERE _id IS " + 
+				maintId;
+		
+		Cursor cursor = db.rawQuery(query, null);
+		cursor.moveToFirst();
+		
+		int odometer = cursorToInt(cursor);
 		return odometer;
 	}
 	
