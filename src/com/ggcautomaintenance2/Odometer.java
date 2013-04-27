@@ -5,8 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TableLayout;
 
-public class Odometer extends TableLayout
-{
+public class Odometer extends TableLayout {
 	private static final int NUM_DIGITS = 6;
 	
 	private int mCurrentValue;
@@ -19,8 +18,7 @@ public class Odometer extends TableLayout
 	 * Constructor
 	 * @param context
 	 */
-	public Odometer(Context context)
-	{
+	public Odometer(Context context) {
 		super(context);
 
 		initialize();
@@ -31,8 +29,7 @@ public class Odometer extends TableLayout
 	 * @param context
 	 * @param attrs
 	 */
-	public Odometer(Context context, AttributeSet attrs)
-	{
+	public Odometer(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
 		initialize();
@@ -41,8 +38,7 @@ public class Odometer extends TableLayout
 	/**
 	 * initializes spinner on odometer
 	 */
-	private void initialize()
-	{
+	private void initialize() {
 		mDigitSpinners = new OdometerSpinner[NUM_DIGITS];
 		
 		// Inflate the view from the layout resource.
@@ -73,13 +69,11 @@ public class Odometer extends TableLayout
 	/**
 	 * updates the value on the odometer
 	 */
-	private void updateValue()
-	{
+	private void updateValue() {
 		int tempValue = 0;
 		int factor = 1;
 		
-		for(OdometerSpinner s : mDigitSpinners)
-		{
+		for(OdometerSpinner s : mDigitSpinners) {
 			tempValue += (s.getCurrentDigit() * factor);
 			factor *= 10;
 		}
@@ -95,14 +89,12 @@ public class Odometer extends TableLayout
 	 * Sets the value on the odometer
 	 * @param value
 	 */
-	public void setValue(int value)
-	{
+	public void setValue(int value)	{
 		int old = mCurrentValue;
 		mCurrentValue = value;
 		int tempValue = value;
 		
-		for(int i = 5; i > 0; --i)
-		{
+		for(int i = 5; i > 0; --i) {
 			int factor = (int)Math.pow(10, i);
 			
 			int digitVal = (int) Math.floor(tempValue / factor);
@@ -119,8 +111,7 @@ public class Odometer extends TableLayout
 	 * Returns the value of the odometer
 	 * @return mCurrentValue
 	 */
-	public int getValue()
-	{	
+	public int getValue() {	
 		return mCurrentValue;
 	}
 	
@@ -128,8 +119,7 @@ public class Odometer extends TableLayout
 	 * Sets the value to the changed odometer reading
 	 * @param listener
 	 */
-	public void setOnValueChangeListener(OnValueChangeListener listener)
-	{
+	public void setOnValueChangeListener(OnValueChangeListener listener) {
 		mValueChangeListener = listener;
 	}
 	
@@ -137,8 +127,7 @@ public class Odometer extends TableLayout
 	 * onMeasure method
 	 */
 	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-	{
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		
 		// get width and height size and mode
@@ -157,9 +146,7 @@ public class Odometer extends TableLayout
 		int height = hSpec;
 		
 		if(maxHeight < hSpec)
-		{
 			height = maxHeight;
-		}
 		
 		setMeasuredDimension(width, height);
 	}
@@ -169,34 +156,7 @@ public class Odometer extends TableLayout
 	 * @author Nick
 	 * sends value to changed readings from the odometer
 	 */
-	public interface OnValueChangeListener
-	{
+	public interface OnValueChangeListener {
 		abstract void onValueChange(Odometer sender, int newValue);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

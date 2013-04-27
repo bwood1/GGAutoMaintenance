@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 
 public class ShowMaintenanceActivity extends Activity {
-	private CarMaintDataSource datasource;
+	private CarMaintDataSource dataSource;
 
 	// Text for the help dialog
 	String helpMain = 	"* A list of Maintenance Items are displayed. By default the list is sorted by maintenance due next.\n" +
@@ -48,43 +48,48 @@ public class ShowMaintenanceActivity extends Activity {
 		alphaButton = (Button) findViewById(R.id.alphaButton);
 		nextDueButton = (Button) findViewById(R.id.nextDueButton);
 		
-		datasource = new CarMaintDataSource(this);
-		datasource.open();
+		dataSource = new CarMaintDataSource(this);
+		dataSource.open();
 		
-		alphaItems = datasource.getUpcomingMaintenance();
+		alphaItems = dataSource.getUpcomingMaintenance();
 		
-		alphaItems = datasource.getAllMaintenanceItemsAlphabetical();
-		nextItems =  datasource.getAllMaintenanceItemsDueDate();
+		alphaItems = dataSource.getAllMaintenanceItemsAlphabetical();
+		nextItems =  dataSource.getAllMaintenanceItemsDueDate();
 		
 		//initialize both sorted views
 		listViewNext = (ListView) findViewById(R.id.listViewNext);
 		listViewAlpha = (ListView) findViewById(R.id.listViewAlpha);
 		
-		nextAdapter = new ListItemsArrayAdapter(this, nextItems, datasource.getMileage());
-		alphaAdapter = new ListItemsArrayAdapter(this, alphaItems, datasource.getMileage());
+		nextAdapter = new ListItemsArrayAdapter(this, nextItems, dataSource.getMileage());
+		alphaAdapter = new ListItemsArrayAdapter(this, alphaItems, dataSource.getMileage());
 		
 		alphaViewListViewClicker();
 		nextViewListViewClicker();	
 	}
 	
+	/**
+	 * Called when the user leaves this activity
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
-		datasource.close();
+		dataSource.close();
 	}
 	
+	/**
+	 * called when the user returns to this actiity after its been created
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
-		datasource.open();
+		dataSource.open();
 	}
 
 	/**
 	 * Method to display help popup
 	 * @param view
 	 */
-	public void helpMessage(View view)
-	{
+	public void helpMessage(View view) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ShowMaintenanceActivity.this);
 		builder.setIcon(R.drawable.helpicon)
 		.setTitle("Help!")
@@ -98,9 +103,7 @@ public class ShowMaintenanceActivity extends Activity {
 	 * alphaButton Action Method
 	 * @param view
 	 */
-	public void alphaButton(View view)
-	{
-		//alphaButton sort code goes here.
+	public void alphaButton(View view) {
 		//visibility value "0" is visible view and value "2" is invisible and takes no space		
 		listViewNext.setVisibility(View.GONE);
 		listViewNext.refreshDrawableState();
@@ -112,9 +115,7 @@ public class ShowMaintenanceActivity extends Activity {
 	 * nextDueButton Action Method
 	 * @param view
 	 */
-	public void nextDueButton(View view)
-	{
-		//nextDueButton sort code goes here.
+	public void nextDueButton(View view)	{
 		//visibility value "0" is visible view and value "2" is invisible and takes no space		
 		listViewAlpha.setVisibility(View.GONE);
 		listViewAlpha.refreshDrawableState();
@@ -125,8 +126,7 @@ public class ShowMaintenanceActivity extends Activity {
 	/**
 	 * alphViewListClicker Action Method
 	 */
-	void alphaViewListViewClicker()
-	{
+	void alphaViewListViewClicker()	{
 		listViewAlpha.setAdapter(alphaAdapter);
 		listViewAlpha.setOnItemClickListener(new OnItemClickListener() {
 			
@@ -146,8 +146,7 @@ public class ShowMaintenanceActivity extends Activity {
 	/**
 	 * listener for the click
 	 */
-	void nextViewListViewClicker()
-	{
+	void nextViewListViewClicker() {
 		listViewNext.setAdapter(nextAdapter);
 		listViewNext.setOnItemClickListener(new OnItemClickListener() {
 			

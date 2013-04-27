@@ -15,17 +15,14 @@ import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 
 public class Main extends Activity {
 	private CarMaintDataSource dataSource;
-	private CarMaintTableHelper maintHelper;	
 
 	ListView listViewNext;
 	ListItems[] nextItems;
@@ -45,7 +42,6 @@ public class Main extends Activity {
 	private static int currentOdometer;
 
 	private static Odometer fOdometer;
-	private int fOdometerValue;
 
 	Button mpgButton;
 	Button showMButton;
@@ -53,7 +49,7 @@ public class Main extends Activity {
 	Button enterButton;
 	
 	CheckBox fillup;
-	CheckBox ffillup;
+	CheckBox firstFillup;
 
 	FirstTimeHelperPageOne Fpup;
 	FirstTimeHelperPageTwo Spup;
@@ -76,29 +72,27 @@ public class Main extends Activity {
 			myDbHelper.createDataBase();
 
 		} catch (IOException ioe) {
-
 			throw new Error("Unable to create database");
 		}
 
 		try {
 			myDbHelper.openDataBase();
 
-		}catch(SQLException sqle){
-
+		} catch(SQLException sqle) {
 			throw sqle;
 		}
 
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
 
+		//Set the views for the buttons
 		mpgButton = (Button) findViewById(R.id.buttonCalcMPG);
 		showMButton = (Button) findViewById(R.id.buttonShowMaint);
 		helpButton = (Button) findViewById(R.id.helpButton);
 		enterButton = (Button) findViewById(R.id.enterButton);
 
 		mOdometer = (Odometer) findViewById(R.id.odometer);
-
-		mOdometer.setValue(dataSource.getMileage());
+		mOdometer.setValue(dataSource.getMileage()); //Sets the value of the odometer
 
 		//parts for the upcoming list
 		nextItems =  dataSource.getAllMaintenanceItemsDueDate();
@@ -106,9 +100,10 @@ public class Main extends Activity {
 		nextAdapter = new ListItemsArrayAdapter(this, nextItems, dataSource.getMileage());
 		listViewNext.setAdapter(nextAdapter);
 
+		// Checks to see if this is the first time the app has been run
 		if(isFirstTime())
 		{
-			new Handler().postDelayed(new Runnable() {
+			new Handler().postDelayed(new Runnable() { //If it is the first time run the first time setup
 				public void run() {
 					displayFirstTimeSetup(popView);
 				}
@@ -118,7 +113,7 @@ public class Main extends Activity {
 	}
 
 	/**
-	 * onResume method
+	 * onPause method
 	 */
 	@Override
 	protected void onPause() {
@@ -137,6 +132,7 @@ public class Main extends Activity {
 		dataSource.open();
 		reloadUpcomingList();
 	}
+	
 	/**
 	 * Clears the upcoming maintenance items list and re-populates it.
 	 */
@@ -149,7 +145,6 @@ public class Main extends Activity {
 		nextAdapter = new ListItemsArrayAdapter(this, nextItems, dataSource.getMileage());
 		listViewNext.setAdapter(nextAdapter);
 	}
-
 
 	/**
 	 * enterButton Action Method
@@ -171,11 +166,7 @@ public class Main extends Activity {
 		}
 		else{
 		}
-
-		//update the due mileage and date
-		//		dataSource.maintDueMileageUpdate();
-		//		dataSource.maintDueDate();
-
+		
 		reloadUpcomingList(); //reload the upcoming maintenance items
 		dataSource.close();
 	}
@@ -194,8 +185,7 @@ public class Main extends Activity {
 	 * showMaintButton Action Method
 	 * @param view
 	 */
-	public void showMaintButton(View view)		
-	{
+	public void showMaintButton(View view) {
 		Intent intent = new Intent(view.getContext(), ShowMaintenanceActivity.class);
 		onPause();
 		startActivity(intent);
@@ -205,8 +195,7 @@ public class Main extends Activity {
 	 * Method to display help popup
 	 * @param view
 	 */
-	public void helpMessage(View view)
-	{
+	public void helpMessage(View view) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
 		builder.setIcon(R.drawable.helpicon)
 		.setTitle("Help!")
@@ -229,13 +218,13 @@ public class Main extends Activity {
 	/**
 	 * onSaveInstanceState method
 	 */
-	protected void onSaveInstanceState(Bundle outState)
-	{
+	protected void onSaveInstanceState(Bundle outState)	{
 		super.onSaveInstanceState(outState);
 
 		mOdometerValue = mOdometer.getValue();	
 		outState.putInt(KEY_VALUE, mOdometerValue);
 	}
+	
 	/**
 	 * Gets the old mileage from the mpg table
 	 * @return - the old mileage
@@ -280,11 +269,10 @@ public class Main extends Activity {
 		return milesDriven;
 	}
 
-	/*
-	 * First Time startup method and tutorial listener section 
-	 * 
+	/**
+	 * Checks to see if this is the first time the app has been run
+	 * @return - true is first time, false if not
 	 */
-
 	private boolean isFirstTime()
 	{
 		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
@@ -298,6 +286,10 @@ public class Main extends Activity {
 		return !ranBefore;
 	}
 
+	/**
+	 * Shows the first time setup in a popup window
+	 * @param view
+	 */
 	public void displayFirstTimeSetup(View view)
 	{
 		Fpup = new FirstTimeHelperPageOne(view.getContext());
@@ -305,6 +297,11 @@ public class Main extends Activity {
 		Fpup.update();
 	}
 
+	/**
+	 * closes the first screen of the first time setup 
+	 * and opens the second screen
+	 * @param view
+	 */
 	public void nextStepButton(View view)
 	{
 		//closes popup1 first
@@ -317,26 +314,32 @@ public class Main extends Activity {
 		Spup.update();
 	}
 
+	/**
+	 * Enter button for the odometer on the first time setup
+	 * @param view
+	 */
 	public void firstEnterButton(View view)
 	{
 		dataSource = new CarMaintDataSource(this);
 		dataSource.open();
-		ffillup = (CheckBox) Fpup.getContentView().findViewById(R.id.firstFillBox);
+		firstFillup = (CheckBox) Fpup.getContentView().findViewById(R.id.firstFillBox);
 		fOdometer = (Odometer) Fpup.getContentView().findViewById(R.id.firstOdometer);
 
-		if (ffillup.isChecked()) {
+		if (firstFillup.isChecked()) {
 			dataSource.setMileage(fOdometer.getValue());
 			dataSource.setCurrentMileage(fOdometer.getValue());
 		}
 		else{
 			dataSource.setMileage(fOdometer.getValue());
 		}
-//		dataSource.maintDueMileageUpdate();
-//		dataSource.maintDueDate();
 		dataSource.close();
 		mOdometer.setValue(fOdometer.getValue());
 	}
 
+	/**
+	 * Enter maintenance info button for the first time setup
+	 * @param view
+	 */
 	public void enterInfoButton(View view) {
 		Spup.getContentView().findViewById(R.id.enterInfoButton);
 		Spup.dismiss();
@@ -345,6 +348,11 @@ public class Main extends Activity {
 		startActivity(intent);
 	}
 
+	/**
+	 * Use default values button for the first time setup
+	 * @param view
+	 * @throws ParseException
+	 */
 	public void setDefaultButton(View view) throws ParseException {
 		dataSource.open();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -368,8 +376,8 @@ public class Main extends Activity {
 			dataSource.updateMaintRecord(i, maintCompleteDate, "car1", i, miles, 0.00,
 					dueDate, newMileageDue);
 		}
+		reloadUpcomingList();
 		dataSource.close();
 		Spup.dismiss();
-		view.invalidate();
 	}
 }

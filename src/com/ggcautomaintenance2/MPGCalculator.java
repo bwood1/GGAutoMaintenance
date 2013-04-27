@@ -36,7 +36,6 @@ public class MPGCalculator {
 		this.dataSource = dataSourceConstructor;
 	}
 	
-	
 	/**
 	 * getMPG method returns Miles Per Gallon
 	 * @return milesPerGallon - the miles per gallon

@@ -10,7 +10,6 @@ import java.util.Locale;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +21,6 @@ import android.support.v4.app.NavUtils;
 
 public class MIIDActivity extends Activity {
 	public static CarMaintDataSource dataSource;
-	//private String value;
 	OptionSelectionPopup OSPopup;
 	ChangeDefaultPopup CDPopup;
 
@@ -77,12 +75,18 @@ public class MIIDActivity extends Activity {
 		loadText();
 	}
 
+	/**
+	 * Called when the user leaves this activity
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
 		dataSource.close();
 	}
 
+	/**
+	 * Called when the user returns to this activity after it has been created
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -126,8 +130,7 @@ public class MIIDActivity extends Activity {
 	 * Method to display help popup
 	 * @param view
 	 */
-	public void helpMessage(View view)
-	{
+	public void helpMessage(View view) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(MIIDActivity.this);
 		builder.setIcon(R.drawable.helpicon)
 		.setTitle("Help!")
@@ -141,15 +144,17 @@ public class MIIDActivity extends Activity {
 	 * Fires the Option Selection Prompt when Record Maintenance Button is pressed
 	 * @param view
 	 */
-	public void recordMaintButton(View view)
-	{
+	public void recordMaintButton(View view) {
 		OSPopup = new OptionSelectionPopup(view.getContext());
 		OSPopup.show(view);
 		OSPopup.update();
 	}
 
-	/*
-	 * Listener for record maintenance button on Option Selection Prompt
+	
+	/**
+	 * Writes the data entered into the database
+	 * @param view
+	 * @throws ParseException
 	 */
 	public void record(View view) throws ParseException {
 		getTextFromFields();
@@ -160,10 +165,6 @@ public class MIIDActivity extends Activity {
 			maintCompleteDate = dataSource.getCurrentDate();
 			miles = dataSource.getMileage();
 		}
-
-		//calculate new due date and miles
-//		calculateNewDueDate(maintCompleteDate);
-//		calculateNewDueMiles(miles, dataSource.getMileageInterval(maintId));
 
 		//update the database
 		dataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,

@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MilesPerGallonActivity extends Activity {	
-	public static CarMaintDataSource carMaintDataSource;
+	public static CarMaintDataSource dataSource;
 	public static DecimalFormat df = new DecimalFormat("#.00");
 
 	// Text for the help dialog
@@ -38,25 +38,31 @@ public class MilesPerGallonActivity extends Activity {
 		mpgCalcButton = (Button) findViewById(R.id.calcMPGButton);
 		helpButton = (Button) findViewById(R.id.helpButtonMPG);
 		
-		carMaintDataSource = new CarMaintDataSource(this);
-		carMaintDataSource.open();	
+		dataSource = new CarMaintDataSource(this);
+		dataSource.open();	
 		
 		TextView text = (TextView) findViewById(R.id.currentMileageTF);		
 		text.setText("" + getMilesDriven());
 		
-		carMaintDataSource.setFillupMileage(carMaintDataSource.getCurrentMileage());
+		dataSource.setFillupMileage(dataSource.getCurrentMileage());
 	}
 	
+	/**
+	 * Called when the user leaves this activity but doesnt close it
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
-		carMaintDataSource.close();  //close when leaving the activity
+		dataSource.close();  //close when leaving the activity
 	}
 	
+	/**
+	 * Called when the user returns to this screen after its already been created
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
-		carMaintDataSource.open();
+		dataSource.open();
 	}
 	
 	/**
@@ -65,7 +71,7 @@ public class MilesPerGallonActivity extends Activity {
 	 */
 	private int getMilesDriven() {
 		int milesDriven;
-		milesDriven = carMaintDataSource.getCurrentMileage() - carMaintDataSource.getFillupMileage();
+		milesDriven = dataSource.getCurrentMileage() - dataSource.getFillupMileage();
 		return milesDriven;
 	}
 
@@ -89,7 +95,8 @@ public class MilesPerGallonActivity extends Activity {
 	}
 
 	/**
-	 * Method used to ..........
+	 * takes the data entered into the text fields and parses to float. Then calculates
+	 * the MPG and returns the value
 	 * @return mpg (miles per gallon)
 	 */
 	public float getMPG() {
@@ -105,7 +112,7 @@ public class MilesPerGallonActivity extends Activity {
 			return mpg;
 		}
 		else {
-			MPGCalculator mpgCalc = new MPGCalculator(milesDriven, gallonsFilled, carMaintDataSource);		
+			MPGCalculator mpgCalc = new MPGCalculator(milesDriven, gallonsFilled, dataSource);		
 			mpg = mpgCalc.getMPG();
 			return mpg;
 		}		
@@ -115,8 +122,7 @@ public class MilesPerGallonActivity extends Activity {
 	 * Method to display help popup
 	 * @param view
 	 */
-	public void helpMessage(View view)
-	{
+	public void helpMessage(View view)	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(MilesPerGallonActivity.this);
 		builder.setIcon(R.drawable.helpicon)
 		.setTitle("Help!")

@@ -1,7 +1,5 @@
 package com.ggcautomaintenance2;
 
-import android.util.Log;
-
 public class MIID{
 
 	public CarMaintDataSource dataSource;

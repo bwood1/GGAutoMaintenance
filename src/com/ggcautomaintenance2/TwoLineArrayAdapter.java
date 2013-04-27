@@ -46,7 +46,6 @@ public abstract class TwoLineArrayAdapter<T> extends ArrayAdapter<T> {
             View convertView,
             ViewGroup parent) {
 
-
         LayoutInflater inflater = (LayoutInflater)getContext()
             .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

@@ -18,8 +18,7 @@ public class FirstTimeHelperPageOne extends PopupWindow {
 	Context		m_context;
 	
 	// Constructor
-    public FirstTimeHelperPageOne(Context context)
-    {
+    public FirstTimeHelperPageOne(Context context) {
         super(context);
 
         m_context = context;
@@ -35,12 +34,10 @@ public class FirstTimeHelperPageOne extends PopupWindow {
      * Anchors the popup screen
      * @param anchor
      */
-    public void show(View anchor)
-    {
+    public void show(View anchor) {
         showAtLocation(anchor, Gravity.CENTER, 0, 0);
         setTouchable(true);    
 		setFocusable(true);    
 		setOutsideTouchable(false);
     }
-
 }

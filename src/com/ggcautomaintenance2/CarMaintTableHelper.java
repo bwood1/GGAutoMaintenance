@@ -40,7 +40,7 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 	public static final String MPG_GALLONS = "Gallons";
 	public static final String MPG_COST_PER_GALLON = "CostPerGallon";
 
-	//The Android's default system path of your application database.
+	//The Android's default system path of the application database.
 	@SuppressLint("SdCardPath")
 	private static String DB_PATH = "/data/data/com.ggcautomaintenance2/databases/";
 
@@ -64,23 +64,23 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 	/**
 	 * Creates a empty database on the system and rewrites it with your own database.
 	 * */
-	public void createDataBase() throws IOException{
+	public void createDataBase() throws IOException {
 
 		boolean dbExist = checkDataBase();
 
 		if(dbExist){
 			//do nothing - database already exist
-		}else{
+		}
+		else{
 
 			//By calling this method and empty database will be created into the default system path
-			//of your application so we are gonna be able to overwrite that database with our database.
+			//of the application so we are going be able to overwrite that database with our database.
 			this.getReadableDatabase();
 
 			try {
 				copyDataBase();
 
 			} catch (IOException e) {
-
 				throw new Error("Error copying database");
 			}
 		}
@@ -91,7 +91,6 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 	 * @return true if it exists, false if it doesn't
 	 */
 	private boolean checkDataBase(){
-
 		SQLiteDatabase checkDB = null;
 
 		try{
@@ -99,12 +98,10 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 			checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
 		}catch(SQLiteException e){
-
 			//database does't exist yet.
 		}
 
 		if(checkDB != null){
-
 			checkDB.close();
 		}
 
@@ -112,13 +109,13 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 	}
 
 	/**
-	 * Copies your database from your local assets-folder to the just created empty database in the
+	 * Copies the database from your local assets-folder to the just created empty database in the
 	 * system folder, from where it can be accessed and handled.
 	 * This is done by transfering bytestream.
 	 * */
 	private void copyDataBase() throws IOException{
 
-		//Open your local db as the input stream
+		//Open the local db as the input stream
 		InputStream myInput = myContext.getAssets().open(DB_NAME);
 
 		// Path to the just created empty db
@@ -139,30 +136,28 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 		myOutput.close();
 		myInput.close();
 	}
-	
+
 	/**
 	 * Opens path to database
 	 * @throws SQLException
 	 */
 	public void openDataBase() throws SQLException{
-
 		//Open the database
 		String myPath = DB_PATH + DB_NAME;
 		myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 	}
-	
+
 	/**
 	 * Closes the database
 	 */
 	@Override
 	public synchronized void close() {
-
 		if(myDataBase != null)
 			myDataBase.close();
 
 		super.close();
 	}
-	
+
 	/**
 	 * OnCreate method
 	 */
@@ -170,7 +165,7 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 
 	}
-	
+
 	/**
 	 * onUpgrade method
 	 */
@@ -178,9 +173,7 @@ public class CarMaintTableHelper extends SQLiteOpenHelper{
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
 	}
-
 	// Add your public helper methods to access and get content from the database.
 	// You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
 	// to you to create adapters for your views.
-
 }

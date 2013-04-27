@@ -14,7 +14,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class CarMaintDataSource {
 
@@ -340,7 +339,6 @@ public class CarMaintDataSource {
 	 * @return - a MaintRecord
 	 */
 	public MaintRecords getMaintRecord(String maintId) {
-		//List<MaintRecords> maintRecordsList = new ArrayList<MaintRecords>();
 		String[] maintIdArray = new String[1];
 		maintIdArray[0] = maintId.toString();
 		String[] allColumns = {
@@ -406,7 +404,6 @@ public class CarMaintDataSource {
 		String[] maintIdArray = new String[1];
 		maintIdArray[0] = String.valueOf(maintId);
 
-
 		//create a content values to hold the information for the updated record
 		ContentValues values = new ContentValues();
 		values.put(CarMaintTableHelper.MR_MAINT_RECORD_ID, maintRecordId);
@@ -454,6 +451,12 @@ public class CarMaintDataSource {
 		return odometer;
 	}
 	
+	/**
+	 * Gets the odometer from the last time the specified maintenence item
+	 * was performed 
+	 * @param maintId
+	 * @return
+	 */
 	public int getMaintCompleteOdometer(int maintId) {
 		String query = "SELECT odometer FROM maintrecord WHERE _id IS " + 
 				maintId;
@@ -483,8 +486,7 @@ public class CarMaintDataSource {
 	/**
 	 * loop through all maintenance items and update their due mileage
 	 */
-	public void maintDueMileageUpdate()
-	{
+	public void maintDueMileageUpdate()	{
 		int i;
 		for(i = 1; i < 23; i++)
 		{
@@ -495,8 +497,7 @@ public class CarMaintDataSource {
 	/**
 	 * Loops through all of the items in the list and sets the due date
 	 */
-	public void maintDueDate()
-	{		
+	public void maintDueDate() {		
 		int i;
 		for(i = 1; i < 23; i++)
 		{			
@@ -552,8 +553,7 @@ public class CarMaintDataSource {
 	/**
 	 * gets the odometer reading from when the maintenance was completed
 	 */
-	public int getOdometer(int maintId)
-	{
+	public int getOdometer(int maintId)	{
 		String query = "SELECT odometer FROM maintrecord WHERE _id IS " + maintId;
 
 		Cursor cursor = db.rawQuery(query, null);
@@ -761,7 +761,6 @@ public class CarMaintDataSource {
 	 */
 	public void updateMPG(int fillNumber, String carName, int oldOdometer,
 			int gallons, double costPerGallon) {
-
 		ContentValues values = new ContentValues();
 		values.put(CarMaintTableHelper.MPG_FILL_NUMBER, fillNumber);
 		values.put(CarMaintTableHelper.MPG_CAR_NAME, carName);
@@ -785,5 +784,4 @@ public class CarMaintDataSource {
 		outputString = cursor.getString(0);
 		return outputString;
 	}
-
 }

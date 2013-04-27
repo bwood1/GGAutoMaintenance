@@ -3,8 +3,6 @@ package com.ggcautomaintenance2;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.w3c.dom.Comment;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -56,14 +54,6 @@ public class CarTableDataSource {
 	//Delete the car table (shouldn't need to use this but creating
 	//stub anyways for testing purposes)
 	public void deleteCarTable(String tableName) {
-//		/*this way sucks
-//		String carName = car.getCarName();
-//		System.out.println("Car deleted with name: " + carName);
-//		database.delete(CarTableHelper.TABLE_CAR, 
-//				CarTableHelper.COLUMN_CAR_NAME + " = " + carName, 
-//				null);
-//		 */
- 
 		//this is much better
 		database.delete("car", null, null);
 	}
@@ -72,8 +62,7 @@ public class CarTableDataSource {
 	//(Dont think this will be needed either)
 	public List<Car> getAllCars() {
 		List<Car> cars = new ArrayList<Car>();
-		//TODO stuff to get all cars from table
-
+		
 		//Have to create a cursor because SQLite is weird
 		Cursor cursor = database.query(CarTableHelper.TABLE_CAR, 
 				allColumns, null, null, null, null, null);
@@ -94,7 +83,6 @@ public class CarTableDataSource {
 	 * @return the odomter reading
 	 */
 	public int getOdometer() {
-		//TODO stuff to get the odometer reading
 		String[] temp = new String[1];
 		temp[0] = CarTableHelper.COLUMN_ODOMETER;
 
