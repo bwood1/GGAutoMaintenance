@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
 public class MIIDActivity extends Activity {
-	public static CarMaintDataSource carMaintDataSource;
+	public static CarMaintDataSource dataSource;
 	//private String value;
 	OptionSelectionPopup OSPopup;
 	ChangeDefaultPopup CDPopup;
@@ -48,10 +48,16 @@ public class MIIDActivity extends Activity {
 
 	EditText inputDateField;
 	EditText inputMileageField;
-	
+
 	EditText inputTimeInterval;
 	EditText inputMileageInterval;
-	
+
+	Integer miles;
+	String maintCompleteDate;
+	String dueDate;
+	DateFormat dateFormat;
+	int newMileageDue;
+
 	/**
 	 * onCreate
 	 */
@@ -60,8 +66,8 @@ public class MIIDActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miid);
 
-		carMaintDataSource = new CarMaintDataSource(this);
-		carMaintDataSource.open();
+		dataSource = new CarMaintDataSource(this);
+		dataSource.open();
 
 		helpButton = (Button) findViewById(R.id.helpButtonMIID);
 		recMaintButton = (Button) findViewById(R.id.recordMaintButton);
@@ -73,11 +79,11 @@ public class MIIDActivity extends Activity {
 		maintDesc = extras.getString("MaintDesc");
 		maintId = extras.getInt("MaintId");
 
-		miid = new MIID(maintId, carMaintDataSource);
+		miid = new MIID(maintId, dataSource);
 
 		TextView textViewMaintName = (TextView)findViewById(R.id.textViewMaintName);
 		textViewMaintName.setText(maintDesc);
-		
+
 		miid.setCurrentOdometer();
 
 		TextView textViewMilesDrivenSinceService = (TextView)findViewById(R.id.textViewMilesDrivenSinceService);
@@ -88,7 +94,7 @@ public class MIIDActivity extends Activity {
 
 		TextView textViewMilesTillNextService = (TextView)findViewById(R.id.textViewMilesTillNextService);
 		textViewMilesTillNextService.setText("Miles Until Next Service\n" + miid.getMilesTill(maintId));
-		
+
 		System.out.println("Miles till = " + miid.getMilesTill(maintId));
 
 		TextView textViewDateofLastService = (TextView)findViewById(R.id.textViewDateofLastService);
@@ -97,17 +103,17 @@ public class MIIDActivity extends Activity {
 		TextView textViewMileageOfLastService = (TextView)findViewById(R.id.textViewMileageOfLastService);
 		textViewMileageOfLastService.setText("Mileage of Last Service\n" + miid.getMilesLast());
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
-		carMaintDataSource.close();
+		dataSource.close();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		carMaintDataSource.open();
+		dataSource.open();
 	}
 
 	/**
@@ -125,7 +131,10 @@ public class MIIDActivity extends Activity {
 		dialog.show(); 
 	} 
 
-	//Fires the Option Selection Prompt when Record Maintenance Button is pressed
+	/**
+	 * Fires the Option Selection Prompt when Record Maintenance Button is pressed
+	 * @param view
+	 */
 	public void recordMaintButton(View view)
 	{
 		OSPopup = new OptionSelectionPopup(view.getContext());
@@ -136,61 +145,84 @@ public class MIIDActivity extends Activity {
 	/*
 	 * Listener for record maintenance button on Option Selection Prompt
 	 */
-	public void record(View view) throws ParseException
-	{	    	
+	public void record(View view) throws ParseException {
+		dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-		inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
-		inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
-		Integer miles = Integer.valueOf(inputMileageField.getText().toString());
-		String maintCompleteDate = inputDateField.getText().toString();
+		getTextFromFields();
 
 		CheckBox useCurrentDateAndMiles = (CheckBox)OSPopup.getContentView().findViewById(R.id.useCurrentBox);
-		System.out.println(useCurrentDateAndMiles);
+
 		if(useCurrentDateAndMiles.isChecked()){
-			maintCompleteDate = carMaintDataSource.getCurrentDate();
-			miles = carMaintDataSource.getMileage();
+			maintCompleteDate = dataSource.getCurrentDate();
+			miles = dataSource.getMileage();
 		}
 
+		//calculate new due date and miles
+		calculateNewDueDate();
+		calculateNewDueMiles();
+
+		//update the database
+		dataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,
+				dueDate, newMileageDue);
+
+		OSPopup.dismiss();
+		view.invalidate();
+	}
+
+	/**
+	 * Gets the values from the text fields and stores them as the variable miles, and maintCompleteDate
+	 */
+	private void getTextFromFields() {
+		inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
+		inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
+		miles = Integer.valueOf(inputMileageField.getText().toString());
+		maintCompleteDate = inputDateField.getText().toString();
+	}
+
+	/**
+	 * Takes the date entered and adds the correct number of weeks to it
+	 * @throws ParseException
+	 */
+	private void calculateNewDueDate() throws ParseException {
 		//calculate the due date
 		Date maintLastDoneDate = new Date();
 		Calendar cal = Calendar.getInstance(); 
 		maintLastDoneDate = dateFormat.parse(maintCompleteDate);	//when the maint was done
 		cal.setTime(maintLastDoneDate);
-		cal.add(Calendar.MONTH, carMaintDataSource.getTimeInterval(maintId));  //add time interval
+		cal.add(Calendar.MONTH, dataSource.getTimeInterval(maintId));  //add time interval
 
-		String dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
-				cal.get(Calendar.DAY_OF_MONTH);													//build string
-
-		//calculate the due mileage
-		int newMileageDue = miles +	carMaintDataSource.getMileageInterval(maintId);
-
-		carMaintDataSource.updateMaintRecord(maintId, maintCompleteDate, "car1", maintId, miles, 0.00,
-				dueDate, newMileageDue);
-		
-//		carMaintDataSource.maintDueMileageUpdate();
-//		carMaintDataSource.maintDueDate();
-		
-		OSPopup.dismiss();
-		view.invalidate();
+		dueDate = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + 
+				cal.get(Calendar.DAY_OF_MONTH);	//build string
 	}
-	
-	//method to dismiss popup on exit button 
+
+	/**
+	 * takes the miles entered and adds the correct mileage interval to calculate new new mileage due
+	 */
+	private void calculateNewDueMiles() {
+		//calculate the due mileage
+		newMileageDue = miles +	dataSource.getMileageInterval(maintId);
+	}
+
+	/**
+	 * method to dismiss popup on exit button 
+	 * @param view
+	 */
 	public void dismissView (View view) {
-		
 		OSPopup.getContentView().findViewById(R.id.exitButton);
 		OSPopup.dismiss();
 	}
-	
-	//method for autopopulating edittexts in the OSPopup
+
+	/**
+	 * method for autopopulating edittexts in the OSPopup
+	 * @param view
+	 */
 	public void checkedBox(View view) {
 		inputDateField = (EditText)OSPopup.getContentView().findViewById(R.id.inputDateField);
 		inputMileageField = (EditText)OSPopup.getContentView().findViewById(R.id.inputMileageField);
-		inputMileageField.setText("" + carMaintDataSource.getMileage());
-		inputDateField.setText(carMaintDataSource.getCurrentDate());
+		inputMileageField.setText("" + dataSource.getMileage());
+		inputDateField.setText(dataSource.getCurrentDate());
 	}
-	
+
 	/**
 	 * onCreateOptionsMenu method
 	 */
@@ -200,7 +232,7 @@ public class MIIDActivity extends Activity {
 		getMenuInflater().inflate(R.menu.miid, menu);
 		return true;
 	}
-	
+
 	/**
 	 * onOptionsItemsSelected method
 	 */
@@ -220,35 +252,40 @@ public class MIIDActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	//section for default change popup
-	public void setDefault(View view)
-	{
+
+	/**
+	 * section for default change popup
+	 * @param view
+	 */
+	public void setDefault(View view) {
 		CDPopup = new ChangeDefaultPopup(view.getContext());
 		CDPopup.show(view);
 		CDPopup.update();
 	}
-	
-	//exit button
-	public void dismissDefView(View view)
-	{
+
+	/**
+	 * exit button
+	 * @param view
+	 */
+	public void dismissDefView(View view) {
 		CDPopup.getContentView().findViewById(R.id.exitButton);
 		CDPopup.dismiss();
 	}
-	
-	//set default maintenance time and mileage difference
-	public void setDefaultButton(View view)
-	{
-		carMaintDataSource.open();
+
+	/**
+	 * set default maintenance time and mileage difference
+	 * @param view
+	 */
+	public void setDefaultButton(View view) {
 		inputTimeInterval = (EditText)CDPopup.getContentView().findViewById(R.id.inputTimeInterval);
 		inputMileageInterval = (EditText)CDPopup.getContentView().findViewById(R.id.inputMileageInterval);
-		
+
 		Integer timeInterval = Integer.valueOf(inputTimeInterval.getText().toString());
 		Integer mileageInterval = Integer.valueOf(inputMileageInterval.getText().toString());		
-		
-		carMaintDataSource.setTimeInterval(maintId, timeInterval);
-		carMaintDataSource.setMileageInterval(maintId, mileageInterval);
-		carMaintDataSource.close();
+
+		dataSource.setTimeInterval(maintId, timeInterval);
+		dataSource.setMileageInterval(maintId, mileageInterval);
+
 		CDPopup.dismiss();
 		view.invalidate();
 	}

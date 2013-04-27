@@ -36,7 +36,7 @@ public class MilesPerGallonActivity extends Activity {
 		setContentView(R.layout.activity_miles_per_gallon);
 		
 		mpgCalcButton = (Button) findViewById(R.id.calcMPGButton);
-		helpButton = (Button) findViewById(R.id.helpButtonMPG);	
+		helpButton = (Button) findViewById(R.id.helpButtonMPG);
 		
 		carMaintDataSource = new CarMaintDataSource(this);
 		carMaintDataSource.open();	
@@ -45,15 +45,12 @@ public class MilesPerGallonActivity extends Activity {
 		text.setText("" + getMilesDriven());
 		
 		carMaintDataSource.setFillupMileage(carMaintDataSource.getCurrentMileage());
-//		carMaintDataSource.setMileage(carMaintDataSource.getCurrentMileage());
-		
-		carMaintDataSource.close();  //dont forget to close
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
-		carMaintDataSource.close();
+		carMaintDataSource.close();  //close when leaving the activity
 	}
 	
 	@Override

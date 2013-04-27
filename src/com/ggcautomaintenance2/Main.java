@@ -51,6 +51,7 @@ public class Main extends Activity {
 	Button showMButton;
 	Button helpButton;
 	Button enterButton;
+	
 	CheckBox fillup;
 	CheckBox ffillup;
 
@@ -122,6 +123,8 @@ public class Main extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		fillup = (CheckBox) findViewById(R.id.fillBox);
+		fillup.setChecked(false);
 		dataSource.close();
 	}
 
@@ -181,10 +184,7 @@ public class Main extends Activity {
 	 * mpgButton Action Method
 	 * @param view
 	 */
-	public void mpgButton(View view)		
-	{
-		fillup = (CheckBox) findViewById(R.id.fillBox);
-		fillup.setChecked(false);
+	public void mpgButton(View view) {
 		onPause();
 		Intent intent = new Intent(view.getContext(), MilesPerGallonActivity.class);
 		startActivity(intent);            
