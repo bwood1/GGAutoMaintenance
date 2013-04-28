@@ -20,57 +20,31 @@
         android:gravity="center"
         android:text="Maintenance Item Description"
         android:textAppearance="?android:attr/textAppearanceLarge"
-         />
+        android:textSize="30dp" />
 
     <Button
         android:id="@+id/setDefaultButton"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:padding="3dp"
+        android:padding="10dp"
         android:background="#BABABA"
         android:onClick="setDefault"
         android:text="Set Maintenance Interval"
-        android:textSize="12dp" />
-
-    <Button
-        android:id="@+id/recordMaintButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_above="@+id/setDefaultButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp"
-        android:padding="3dp"
-        android:background="#BABABA"
-        android:onClick="recordMaintButton"
-        android:text="Record Maintenance" />
+        android:textSize="30dp" />
 
     <Button
         android:id="@+id/helpButtonMIID"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:background="#BABABA"
         android:onClick="helpMessage"
-        android:padding="3dp"
-        android:text="Help" />
-
-    <TextView
-        android:id="@+id/textViewMilesDrivenSinceService"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/recordMaintButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="93dp"
-        android:background="@drawable/roundback"
-        android:gravity="center"
-        android:padding="3dp"
-        android:text="Miles Driven since Service\n888888"
-        android:textSize="24dp" />
+        android:text="Help"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/textViewMileageOfLastService"
@@ -112,29 +86,56 @@
         android:textSize="24dp" />
 
     <TextView
+        android:id="@+id/textViewMaintName"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewDateOfNextService"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="Maintenance Item \nName"
+        android:textSize="24dp" />
+
+    <TextView
         android:id="@+id/textViewDateOfNextService"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewMilesTillNextService"
         android:layout_alignLeft="@+id/textViewMilesTillNextService"
-        android:layout_marginBottom="53dp"
+        android:layout_below="@+id/textViewMaintName"
+        android:layout_marginTop="39dp"
         android:background="@drawable/roundback"
         android:gravity="center"
         android:padding="3dp"
         android:text="Date of Next Service\n11/11/1111"
         android:textSize="24dp" />
 
+    <Button
+        android:id="@+id/recordMaintButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/setDefaultButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:background="#BABABA"
+        android:onClick="recordMaintButton"
+        android:padding="10dp"
+        android:text="Record Maintenance"
+        android:textSize="30dp" />
+
     <TextView
-        android:id="@+id/textViewMaintName"
+        android:id="@+id/textViewMilesDrivenSinceService"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewDateOfNextService"
-        android:layout_alignLeft="@+id/textViewDateOfNextService"
-        android:layout_marginBottom="38dp"
+        android:layout_above="@+id/recordMaintButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="58dp"
         android:background="@drawable/roundback"
         android:gravity="center"
         android:padding="3dp"
-        android:text="Maintenance Item \nName"
+        android:text="Miles Driven since Service\n888888"
         android:textSize="24dp" />
 
 </RelativeLayout>

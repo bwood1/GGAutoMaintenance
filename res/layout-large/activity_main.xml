@@ -86,8 +86,7 @@
         android:listSelector="@drawable/row_background"
         android:background="@drawable/roundback"
         android:fadeScrollbars="false"
-        android:padding="3dp" 
-        android:textSize="40dp"/>
+        android:padding="3dp" />
 
     <TextView
         android:id="@+id/textUpcoming"

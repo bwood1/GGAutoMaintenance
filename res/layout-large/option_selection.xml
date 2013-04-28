@@ -12,7 +12,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="57dp"
         android:onClick="checkedBox"
-        android:text="Use Current Date and Mileage" />
+        android:text="Use Current Date and Mileage"
+        android:textSize="30dp" />
     
     <EditText
         android:id="@+id/inputDateField"
@@ -25,7 +26,8 @@
         android:gravity="center_vertical|center_horizontal"
         android:hint="YYYY-MM-DD"
         android:inputType="date"
-        android:padding="3dp" />
+        android:padding="3dp"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/dateLabel"
@@ -34,7 +36,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="25dp"
         android:gravity="center_horizontal"
-        android:text="Enter Date of Service\n ex. 2012-12-31" />
+        android:text="Enter Date of Service\n ex. 2012-12-31"
+        android:textSize="30dp" />
 
     <EditText
         android:id="@+id/inputMileageField"
@@ -47,7 +50,8 @@
         android:gravity="center_vertical|center_horizontal"
         android:hint="0000"
         android:inputType="number"
-        android:padding="3dp" >
+        android:padding="3dp"
+        android:textSize="30dp" >
 
         <requestFocus />
     </EditText>
@@ -59,7 +63,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
         android:gravity="center_horizontal"
-        android:text="Enter Mileage of Service" />
+        android:text="Enter Mileage of Service"
+        android:textSize="30dp" />
 
     <Button
         android:id="@+id/recordMaintOSP"
@@ -68,7 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:onClick="record"
-        android:text="Record Maintenance" />
+        android:text="Record Maintenance"
+        android:textSize="30dp" />
     
     <Button
         android:id="@+id/exitButton"
@@ -77,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:onClick="dismissView"
-        android:text="Exit" />
+        android:text="Exit"
+        android:textSize="30dp" />
 
 </LinearLayout>

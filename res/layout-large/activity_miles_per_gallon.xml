@@ -24,8 +24,8 @@
         android:id="@+id/currentMileageTF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/numGallonsFilled"
-        android:layout_alignRight="@+id/numGallonsFilled"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="41dp"
         android:background="@drawable/roundback"
@@ -40,52 +40,23 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/calcMPGButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/numGallonsFilled"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:background="#BABABA"
-        android:onClick="mpgCalcButton"
-        android:padding="3dp"
-        android:text="Calculate MPG"
-        android:textSize="30dp" />
-
-    <Button
-        android:id="@+id/helpButtonMPG"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="27dp"
-        android:background="#BABABA"
-        android:onClick="helpMessage"
-        android:padding="3dp"
-        android:text="Help" />
-
     <TextView
-        android:id="@+id/MPGDisplay"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/calcMPGButton"
+        android:layout_below="@+id/currentMileageTF"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/roundback"
-        android:gravity="center"
-        android:hint="0 MPG"
-        android:padding="3dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="30dp"
+        android:text="Miles Driven"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/numGallonsFilled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/calcMPGButton"
-        android:layout_below="@+id/currentMileageTF"
-        android:layout_marginTop="102dp"
+        android:layout_below="@+id/numGallonsFilledDisplay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
         android:text="Gallons of Fuel"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30dp" />
@@ -94,9 +65,10 @@
         android:id="@+id/numGallonsFilledDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/currentMileageTF"
-        android:layout_marginTop="41dp"
+        android:layout_alignLeft="@+id/currentMileageTF"
+        android:layout_alignRight="@+id/currentMileageTF"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="53dp"
         android:background="@drawable/roundback"
         android:ems="10"
         android:gravity="center"
@@ -104,6 +76,45 @@
         android:inputType="number|numberDecimal"
         android:padding="3dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/MPGDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calcMPGButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/roundback"
+        android:gravity="center"
+        android:hint="0 MPG"
+        android:padding="3dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/helpButtonMPG"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#BABABA"
+        android:onClick="helpMessage"
+        android:text="Help"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/calcMPGButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/numGallonsFilled"
+        android:layout_below="@+id/numGallonsFilled"
+        android:layout_marginTop="93dp"
+        android:background="#BABABA"
+        android:onClick="mpgCalcButton"
+        android:padding="5dp"
+        android:text="Calculate MPG"
         android:textSize="30dp" />
 
 </RelativeLayout>
