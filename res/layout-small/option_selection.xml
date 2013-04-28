@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/popupborder"
+    android:orientation="vertical" >
+
+    <CheckBox
+        android:id="@+id/useCurrentBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="57dp"
+        android:onClick="checkedBox"
+        android:text="Use Current Date and Mileage" />
+    
+    <EditText
+        android:id="@+id/inputDateField"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="YYYY-MM-DD"
+        android:inputType="date"
+        android:padding="3dp" />
+
+    <TextView
+        android:id="@+id/dateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="25dp"
+        android:gravity="center_horizontal"
+        android:text="Enter Date of Service\n ex. 2012-12-31" />
+
+    <EditText
+        android:id="@+id/inputMileageField"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="0000"
+        android:inputType="number"
+        android:padding="3dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/mileageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:gravity="center_horizontal"
+        android:text="Enter Mileage of Service" />
+
+    <Button
+        android:id="@+id/recordMaintOSP"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="record"
+        android:text="Record Maintenance" />
+    
+    <Button
+        android:id="@+id/exitButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="dismissView"
+        android:text="Exit" />
+
+</LinearLayout>

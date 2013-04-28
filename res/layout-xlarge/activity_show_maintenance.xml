@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#E9E9E9"
+    tools:context=".ShowMaintenanceActivity" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Maintenance Items"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/alphaButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/nextDueButton"
+        android:layout_toRightOf="@+id/helpButtonShowMaint"
+        android:text="Sort Alpha"
+        android:onClick="alphaButton"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/nextDueButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/textView1"
+        android:layout_toLeftOf="@+id/helpButtonShowMaint"
+        android:text="Sort Next Due"
+        android:onClick="nextDueButton"
+        android:textSize="12sp" />
+    
+    <ListView
+        android:id="@+id/listViewNext"
+        android:layout_width="300dp"
+        android:layout_height="360dp"
+        android:layout_above="@+id/helpButtonShowMaint"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/nextDueButton"
+        android:background="@drawable/roundback"
+        android:fadeScrollbars="false"
+        android:listSelector="@drawable/row_background"
+        android:padding="3dp"
+        android:visibility="visible" />
+    
+    <ListView 
+        android:id="@+id/listViewAlpha"
+        android:layout_width="300dp"
+        android:layout_height="360dp"
+        android:layout_below="@+id/nextDueButton"
+        android:listSelector="@drawable/row_background"
+        android:background="@drawable/roundback"
+        android:fadeScrollbars="false"
+        android:visibility="gone"
+        android:padding="3dp" />
+
+    <Button
+        android:id="@+id/helpButtonShowMaint"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="helpMessage"
+        android:text="Help"
+        android:textSize="12sp" />
+
+</RelativeLayout>

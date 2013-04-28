@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/popupborder"
+    android:orientation="vertical" >
+    
+	<TextView
+        android:id="@+id/spaceHolder1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="25dp"
+        android:text="" />
+	
+	<TextView
+	    android:id="@+id/defPopupTitle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:layout_marginBottom="25dp"
+	    android:text="Change Maintenance Interval"
+	    android:textSize="18dp" />
+	
+	<TextView
+        android:id="@+id/spaceHolder2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="25dp"
+        android:text="" />
+    
+    <EditText
+        android:id="@+id/inputTimeInterval"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="# of Months"
+        android:inputType="number"
+        android:padding="3dp" />
+
+    <TextView
+        android:id="@+id/timeIntervalLabel"
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="25dp"
+        android:gravity="center_horizontal"
+        android:text="Enter preferred time between service in months" />
+
+    <EditText
+        android:id="@+id/inputMileageInterval"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/roundback"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="0000"
+        android:inputType="number"
+        android:padding="3dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/mileageIntervalLabel"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:gravity="center_horizontal"
+        android:text="Enter preferred number of miles between service" />
+
+    <Button
+        android:id="@+id/setDefaultButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="setDefaultButton"
+        android:text="Set Default" />
+    
+    <Button
+        android:id="@+id/exitButtonDefChange"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="dismissDefView"
+        android:text="Exit" />
+</LinearLayout>
